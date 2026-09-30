@@ -1,0 +1,315 @@
+BAB 3 – SPESIFIKASI KEBUTUHAN SPESIFIK
+
+3.1 Kebutuhan Antarmuka Eksternal
+
+3.1.1 Antarmuka Pengguna (User Interface)
+
+Antarmuka utama SIP-BRIDA adalah Dasbor Verifikasi Evaluasi yang digunakan reviewer untuk memeriksa dan mengonfirmasi hasil evaluasi. Dasbor ini terdiri dari beberapa bagian utama, yaitu:
+
+Panel Daftar Indikator (kiri): Menampilkan seluruh indikator penilaian, misalnya 20 indikator. Daftar dapat digulir dan setiap indikator dapat dipilih untuk melihat detailnya. Setiap item menampilkan nomor urut dan nama singkat indikator.
+
+Header Status: Berisi judul dasbor, keterangan tahapan yaitu “Tahap 2: Konfirmasi Manusia dari Hasil Review AI”, jumlah indikator yang sudah selesai dalam format “X / 20 Indikator Selesai”, serta tombol “Konfirmasi Final”.
+
+Panel Detail Indikator (utama): Menampilkan informasi indikator yang sedang dipilih. Bagian ini berisi judul indikator, deskripsi singkat, status konfirmasi seperti “Menunggu Konfirmasi”, serta tiga parameter yang digunakan dalam penilaian. Setiap parameter menampilkan:
+
+Nama parameter.
+
+Rekomendasi AI berupa Lolos, Perlu Revisi, atau Tidak Lolos, beserta confidence score dalam bentuk persentase.
+
+AI Catatan yang berisi ringkasan alasan atau hasil analisis dari AI.
+
+Keputusan Reviewer Manusia berupa pilihan Lolos, Revisi, atau Tolak. Pilihan yang sedang digunakan akan ditampilkan dengan tanda visual atau highlight.
+
+Kolom Catatan Tambahan Indikator (opsional): Digunakan reviewer untuk menambahkan catatan atau keterangan tambahan terkait indikator yang sedang diperiksa.
+
+Tombol “Konfirmasi Indikator Ini”: Digunakan untuk mengonfirmasi seluruh keputusan pada parameter indikator yang sedang dipilih. Setelah dikonfirmasi, keputusan tersebut dianggap final untuk indikator tersebut.
+
+Banner Petunjuk Review Manusia: Menampilkan informasi bahwa analisis awal telah dilakukan oleh AI. Reviewer tetap perlu memeriksa hasil tersebut, terutama pada parameter dengan hasil “Perlu Revisi” atau “Tidak Lolos”. Reviewer dapat menyetujui rekomendasi AI atau mengubah keputusan sesuai hasil pemeriksaan.
+
+3.1.2 Antarmuka Perangkat Lunak (Software Interface)
+
+Antarmuka Basis Data: Sistem terhubung dengan basis data relasional seperti PostgreSQL atau MySQL menggunakan Object-Relational Mapping (Eloquent ORM) pada Laravel 11.
+
+Antarmuka Pemuatan Data: Sistem menyediakan modul untuk memasukkan data evaluasi melalui berkas JSON yang mengikuti struktur indikator dan parameter. Modul ini digunakan sebagai pengganti proses unggah berkas mentah.
+
+Antarmuka AI Evaluation Engine: Sistem terhubung dengan layanan AI/LLM melalui API. Data yang dikirim dan diterima menggunakan format JSON terstruktur, dengan hasil berupa rekomendasi, confidence score, dan catatan analisis untuk setiap parameter.
+
+Antarmuka Job Queue: Laravel Queue Worker digunakan untuk menjalankan proses komunikasi antara bagian backend dan AI Evaluation Engine secara asinkron. Komponen ini digunakan saat sistem menjalankan proses analisis pada Tahap 1.
+
+3.1.3 Antarmuka Komunikasi
+
+Sistem menggunakan protokol HTTPS dengan enkripsi TLS 1.3 untuk mengamankan pertukaran data antara browser pengguna dan server.
+
+Pertukaran data antarbagian dalam sistem menggunakan format JSON yang dikirim secara aman dan terenkripsi.
+
+3.2 Kebutuhan Fungsional (Use Cases)
+
+Berikut merupakan pemetaan kebutuhan fungsional SIP-BRIDA yang telah disusun dan disederhanakan berdasarkan fungsi utama sistem:
+
+ID Use Case
+
+Nama Use Case
+
+Aktor Utama
+
+Deskripsi RIngkas
+
+UC-01
+
+Autentikasi Pengguna
+
+Semua Aktor
+
+Pengguna masuk ke dalam sistem dengan kredensial aman sesuai hak akses.
+
+UC-02
+
+Memuat Data Evaluasi (Impor JSON)
+
+Administrator
+
+Memuat berkas JSON dummy berisi data indikator-parameter suatu usulan inovasi ke dalam sistem.
+
+UC-03
+
+Evaluasi Otomatis oleh AI (Tahap 1)
+
+Sistem (AI Evaluation Engine)
+
+Menganalisis seluruh parameter pada setiap indikator dan menghasilkan rekomendasi, confidence score, serta AI Catatan.
+
+UC-04
+
+Meninjau dan Menetapkan Keputusan per Parameter
+
+Verifikator BRIDA
+
+Meninjau rekomendasi AI per parameter pada Dasbor Verifikasi Evaluasi dan menetapkan Keputusan Reviewer Manusia (Lolos/Revisi/Tolak)
+
+UC-05
+
+Mengonfirmasi Indikator
+
+Verifikator BRIDA
+
+Mengunci keputusan seluruh parameter dalam satu indikator sebagai final untuk indikator tersebut.
+
+UC-06
+
+Mengonfirmasi Final Evaluasi
+
+Verifikator BRIDA
+
+Mengesahkan hasil evaluasi keseluruhan usulan setelah seluruh indikator (mis. 20/20) selesai dikonfirmasi.
+
+UC-07
+
+Pembuatan Rekapitulasi & Laporan
+
+Administrator
+
+Menghasilkan laporan rekapitulasi hasil evaluasi dalam format PDF/Excel.
+
+Rincian Spesifikasi Use Case Inti
+
+Use Case UC-02: Memuat Data Evaluasi (Impor JSON)
+
+Aktor: Administrator
+
+Kondisi Awal (Precondition): Administrator sudah login ke dalam sistem dan berkas JSON dummy yang berisi data usulan, indikator, serta parameter sudah tersedia.
+
+Pemicu (Trigger): Administrator memilih menu “Muat Data Evaluasi”.
+
+Alur Utama (Basic Flow):
+
+Administrator memilih dan mengunggah berkas JSON dummy melalui halaman pemuatan data.
+
+Sistem memeriksa struktur dan isi JSON untuk memastikan sudah sesuai dengan skema indikator dan parameter yang telah ditentukan.
+
+Jika data valid, sistem menyimpan data usulan, indikator, dan parameter ke dalam basis data dengan status “Menunggu Evaluasi AI”.
+
+Setelah data berhasil disimpan, sistem memasukkan usulan ke dalam antrean untuk diproses oleh AI Evaluation Engine. Proses ini secara otomatis menjalankan UC-03 (include).
+
+Alur Alternatif (Alternative Flow):
+
+2a. Struktur JSON tidak valid: Jika format atau struktur JSON tidak sesuai, sistem menolak data dan menampilkan informasi mengenai kesalahan yang ditemukan, seperti indikator atau parameter yang belum tersedia maupun format data yang tidak sesuai.
+
+Kondisi Akhir (Postcondition): Data usulan beserta indikator dan parameternya berhasil tersimpan di dalam sistem dan siap untuk diproses oleh AI Evaluation Engine.
+
+Use Case UC-03: Evaluasi Otomatis oleh AI (Tahap 1)
+
+Aktor: Sistem (AI Evaluation Engine)
+
+Kondisi Awal (Precondition): Data usulan sudah tersimpan dengan status “Menunggu Evaluasi AI” setelah proses pada UC-02 selesai.
+
+Pemicu (Trigger): Job evaluasi diambil oleh Laravel Queue Worker dari antrean yang tersedia.
+
+Alur Utama (Basic Flow):
+
+Queue Worker mengambil job evaluasi yang ada di dalam antrean.
+
+Sistem mengirimkan data dari setiap parameter pada masing-masing indikator ke AI Evaluation Engine untuk dianalisis.
+
+AI Evaluation Engine melakukan analisis dan memberikan hasil berupa rekomendasi Lolos, Perlu Revisi, atau Tidak Lolos, confidence score dalam persen, serta AI Catatan yang berisi ringkasan alasan dari hasil analisis.
+
+Sistem menyimpan seluruh hasil analisis dan rekomendasi AI untuk setiap parameter ke dalam basis data.
+
+Setelah proses evaluasi selesai, status usulan diubah menjadi “Menunggu Konfirmasi Manusia — Tahap 2”.
+
+Alur Alternatif (Alternative Flow):
+
+3a. AI Evaluation Engine gagal dipanggil: Queue Worker akan mencoba menjalankan kembali proses tersebut secara otomatis maksimal 3 kali. Jika masih gagal, parameter yang bermasalah diberi status “Evaluasi AI Gagal” dan selanjutnya diserahkan kepada reviewer untuk dinilai secara manual tanpa menggunakan rekomendasi AI.
+
+Kondisi Akhir (Postcondition): Seluruh indikator dan parameter sudah memiliki hasil rekomendasi AI atau tanda bahwa proses AI gagal. Data tersebut kemudian siap ditampilkan pada Dasbor Verifikasi Evaluasi untuk diperiksa oleh reviewer.
+
+Use Case UC-04: Meninjau dan Menetapkan Keputusan per Parameter (Human-in-the-Loop)
+
+Aktor: Verifikator BRIDA
+
+Kondisi Awal (Precondition): Usulan sudah memiliki status “Menunggu Konfirmasi Manusia,  Tahap 2” setelah proses UC-03 selesai.
+
+Pemicu (Trigger): Verifikator membuka Dasbor Verifikasi Evaluasi, kemudian memilih salah satu indikator dari daftar yang tersedia.
+
+Alur Utama (Basic Flow):
+
+Sistem menampilkan detail indikator yang dipilih beserta tiga parameter evaluasinya.
+
+Pada setiap parameter, sistem menampilkan Rekomendasi AI, confidence score, dan AI Catatan.
+
+Verifikator memeriksa hasil pada setiap parameter, terutama parameter yang memiliki hasil “Perlu Revisi” atau “Tidak Lolos” sesuai petunjuk pada banner review.
+
+Verifikator menentukan keputusan untuk setiap parameter dengan memilih Lolos, Revisi, atau Tolak. Keputusan dapat mengikuti rekomendasi AI atau diubah berdasarkan hasil pemeriksaan verifikator.
+
+Sistem menyimpan atau memperbarui keputusan verifikator pada setiap parameter secara langsung.
+
+Alur Alternatif (Alternative Flow):
+
+4a. Parameter mengalami “Evaluasi AI Gagal”: Sistem tidak menampilkan rekomendasi AI maupun confidence score. Verifikator harus menentukan keputusan parameter tersebut secara manual.
+
+Kondisi Akhir (Postcondition): Sebagian atau seluruh parameter pada indikator telah memiliki keputusan dari verifikator dan tersimpan di sistem. Data tersebut selanjutnya dapat digunakan untuk proses konfirmasi indikator secara keseluruhan pada UC-05.
+
+Use Case UC-05: Mengonfirmasi Indikator
+
+Aktor: Verifikator BRIDA
+
+Kondisi Awal (Precondition): Verifikator telah menetapkan Keputusan Reviewer Manusia untuk seluruh parameter pada indikator terpilih (hasil UC-04).
+
+Pemicu (Trigger): Verifikator menekan tombol "Konfirmasi Indikator Ini".
+
+Alur Utama (Basic Flow):
+
+Verifikator (opsional) mengisi kolom "Catatan tambahan reviewer untuk indikator ini".
+
+Verifikator menekan tombol "Konfirmasi Indikator Ini".
+
+Sistem memvalidasi bahwa seluruh parameter pada indikator telah memiliki Keputusan Reviewer Manusia.
+
+Sistem menyimpan seluruh hasil analisis dan rekomendasi AI untuk setiap parameter ke dalam basis data.
+
+Sistem mengunci keputusan indikator tersebut sebagai final, mengubah status indikator dari "Menunggu Konfirmasi" menjadi "Selesai", dan memperbarui penghitung status ("X / 20 Indikator Selesai") pada header dasbor.
+
+Alur Alternatif (Alternative Flow):
+
+3a. Terdapat parameter yang belum diputuskan: Sistem menolak konfirmasi dan menyoroti parameter yang belum memiliki Keputusan Reviewer Manusia.
+
+Kondisi Akhir (Postcondition): Seluruh indikator dan parameter sudah memiliki hasil rekomendasi AI atau tanda bahwa proses AI gagal. Data tersebut kemudian siap ditampilkan pada Dasbor Verifikasi Evaluasi untuk diperiksa oleh reviewer.
+
+Use Case UC-06: Mengonfirmasi Final Evaluasi
+
+Aktor: Verifikator BRIDA
+
+Kondisi Awal (Precondition): Seluruh indikator (mis. 20 dari 20) telah berstatus "Selesai" (hasil UC-05 berulang untuk setiap indikator).
+
+Pemicu (Trigger): Verifikator menekan tombol "Konfirmasi Final" pada header dasbor.
+
+Alur Utama (Basic Flow):
+
+Sistem memvalidasi bahwa seluruh indikator berstatus "Selesai".
+
+Sistem menampilkan ringkasan akhir hasil evaluasi (jumlah parameter Lolos/Revisi/Tolak) untuk ditinjau sekali lagi oleh Verifikator.
+
+Verifikator mengonfirmasi persetujuan akhir.
+
+Sistem mengunci seluruh hasil evaluasi sebagai catatan resmi, merekam identitas verifikator dan stempel waktu pengesahan, dan mengubah status usulan menjadi "Terverifikasi Final".
+
+Alur Alternatif (Alternative Flow):
+
+1a. Masih ada indikator berstatus belum selesai: Sistem menonaktifkan tombol "Konfirmasi Final" dan menampilkan jumlah indikator yang masih tersisa.
+
+Kondisi Akhir (Postcondition): Hasil evaluasi usulan bersifat final dan tidak dapat diubah kembali oleh sistem AI; data siap masuk ke rekapitulasi laporan (UC-07).
+
+Use Case UC-07: Pembuatan Rekapitulasi & Laporan
+
+Aktor: Administrator
+
+Kondisi Awal (Precondition): Terdapat minimal satu usulan berstatus "Terverifikasi Final" (hasil UC-06).
+
+Pemicu (Trigger): Administrator membuka menu "Rekapitulasi Laporan".
+
+Alur Utama (Basic Flow):
+
+Administrator memilih usulan atau periode evaluasi yang ingin direkap.
+
+Sistem menampilkan ringkasan hasil evaluasi (jumlah indikator/parameter per kategori Lolos/Revisi/Tolak).
+
+Administrator menekan tombol "Unduh Laporan".
+
+Sistem men-generate berkas PDF/Excel dan menyediakan tautan unduhan.
+
+Alur Alternatif (Alternative Flow):
+
+2a. Belum ada usulan berstatus "Terverifikasi Final" pada periode terpilih: Sistem menampilkan pesan bahwa data belum tersedia.
+
+Kondisi Akhir (Postcondition): Berkas laporan rekapitulasi berhasil diunduh oleh Administrator.
+
+3.3 Kebutuhan Non-Fungsional
+
+3.3.1 Performance
+
+Proses evaluasi otomatis menggunakan AI untuk seluruh indikator dan parameter pada suatu usulan, dengan jumlah indikator yang dapat menyesuaikan kebutuhan (N-indikator adaptif), dilakukan secara asinkron melalui Laravel Queue Worker. Proses ini ditargetkan selesai dalam waktu maksimal 60 detik dan tidak mengganggu penggunaan dashboard oleh pengguna.
+
+Dasbor Verifikasi Evaluasi harus dapat dimuat dalam waktu maksimal 2 detik pada kondisi koneksi internet normal dengan kecepatan minimal 10 Mbps.
+
+Perubahan Keputusan Reviewer Manusia pada setiap parameter, baik Lolos, Revisi, maupun Tolak, harus tersimpan secara otomatis (real-time auto-save) dalam waktu kurang dari 1 detik. Proses penyimpanan dilakukan menggunakan komponen reaktif sehingga tidak perlu melakukan reload halaman secara keseluruhan.
+
+3.3.2 Security
+
+Mekanisme otentikasi wajib menggunakan enkripsi kata sandi standar industri (bcrypt / Argon2).
+
+Setiap akses data dibatasi menggunakan Role-Based Access Control (RBAC) yang ketat pada sisi peladen.
+
+Berkas dokumen yang diunggah disimpan dengan nama acak (hashed filename) dan diproteksi dari akses langsung publik (direct public URL access blocked).
+
+Sistem memiliki pencatatan audit (audit log) yang mencatat setiap aktivitas verifikator, terutama aksi pengubahan nilai draf AI (score override).
+
+3.3.3 Reliability & Availability
+
+Ketersediaan sistem operasional (uptime) ditargetkan minimal 99% selama masa aktif periode pelaporan inovasi daerah.
+
+Tersedia mekanisme pencadangan (backup) basis data secara otomatis setiap 24 jam sekali.
+
+Apabila layanan API OCR atau AI eksternal mengalami gangguan (downtime), sistem harus beralih ke mode manual (fallback mode) sehingga verifikator tetap dapat menginput nilai secara mandiri dari awal.
+
+3.3.4 Usability
+
+Antarmuka dirancang responsif dan memprioritaskan tata letak dokumen berdampingan (dual-pane) pada resolusi layar minimal 1366x768 piksel.
+
+Formulir pengisian memiliki validasi langsung (client-side validation) untuk mencegah kesalahan format sebelum berkas dikirim.
+
+3.4 Kebutuhan Logical Data Structure
+
+Struktur data logis dirancang untuk memisahkan hasil ekstraksi otomatis dengan data pengesahan akhir manusia.
+
+3.4.1 Rincian Kamus Data Entitas Kunci:
+
+User: Menyimpan identitas akun, hak akses sistem (role), dan asal instansi kedinasan.
+
+Inovasi_Usulan: Menyimpan identitas profil program inovasi yang diajukan oleh OPD.
+
+Berkas: Menyimpan tautan penyimpanan fisik berkas bukti dukung (SK, SOP, laporan rancang bangun).
+
+Hasil_OCR: Menyimpan hasil konversi citra menjadi teks mentah serta entitas metadata surat yang berhasil dipilah.
+
+Draft_Skor_AI: Menyimpan nilai awal rekomendasi hasil kalkulasi kecerdasan buatan beserta log penalaran (reasoning).
+
+Verifikasi_Final: Menyimpan nilai hukum yang sah hasil tinjauan Verifikator BRIDA, status apakah nilai AI disesuaikan (override), dan catatan evaluasi resmi.

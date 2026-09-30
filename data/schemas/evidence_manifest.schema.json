@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sip-brida/schemas/evidence_manifest.schema.json",
+  "title": "Evidence Manifest - daftar berkas bukti per usulan inovasi",
+  "description": "Dipetakan dari formulir submission SIGAP. Satu berkas PDF = satu entri. Field indicator_id mengikat bukti ke indikator yang dinilai.",
+  "type": "object",
+  "required": ["inovasi_id", "manifest_version", "evidences"],
+  "additionalProperties": false,
+  "properties": {
+    "inovasi_id": { "type": "string", "description": "ID unik usulan inovasi" },
+    "manifest_version": { "type": "string", "default": "1.0" },
+    "dibuat_pada": { "type": "string", "format": "date-time" },
+    "evidences": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["evidence_id", "filename", "indicator_id"],
+        "additionalProperties": false,
+        "properties": {
+          "evidence_id": { "type": "string", "description": "Contoh: EVD-0001" },
+          "filename": { "type": "string", "description": "Nama berkas di data/raw/evidence/" },
+          "indicator_id": {
+            "type": "string",
+            "pattern": "^IND-[0-9]{2}$",
+            "description": "Indikator yang dinilai dengan bukti ini (lihat data/reference/indikator_2026.json)"
+          },
+          "evidence_tag": {
+            "type": "string",
+            "description": "Tag jenis bukti, harus cocok dengan evidence_tags pada katalog indikator"
+          },
+          "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "page_start": { "type": "integer", "minimum": 1, "description": "Halaman awal bagian yang relevan (opsional)" },
+          "page_end": { "type": "integer", "minimum": 1 },
+          "catatan_pengaju": { "type": "string" },
+          "url_verifikasi_tte": { "type": "string", "format": "uri" }
+        }
+      }
+    }
+  }
+}

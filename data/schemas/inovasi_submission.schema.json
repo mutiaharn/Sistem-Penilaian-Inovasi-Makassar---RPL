@@ -1,0 +1,41 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sip-brida/schemas/inovasi_submission.schema.json",
+  "title": "Inovasi Submission - data usulan inovasi dari formulir SIGAP",
+  "description": "Representasi satu usulan inovasi daerah. Ini pengganti 'JSON dummy' yang disebut SRS: struktur final yang akan diimpor Administrator pada UC-02.",
+  "type": "object",
+  "required": ["inovasi_id", "nama_inovasi", "opd", "tahun", "indikator"],
+  "additionalProperties": false,
+  "properties": {
+    "inovasi_id": { "type": "string" },
+    "nama_inovasi": { "type": "string" },
+    "opd": { "type": "string", "description": "Organisasi Perangkat Daerah pengusul" },
+    "jenis": { "type": "string", "enum": ["Digital", "Non Digital", "Tata Kelola", "Pelayanan Publik", "Lainnya"] },
+    "tahun": { "type": "integer", "minimum": 2015, "maximum": 2100 },
+    "status": {
+      "type": "string",
+      "enum": ["MENUNGGU_EVALUASI_AI", "MENUNGGU_KONFIRMASI_MANUSIA", "TERVERIFIKASI_FINAL", "DITOLAK"],
+      "default": "MENUNGGU_EVALUASI_AI"
+    },
+    "deskripsi": { "type": "string" },
+    "indikator": {
+      "type": "array",
+      "description": "Satu entri per indikator yang diajukan (biasanya 19 pada Tahap 1)",
+      "items": {
+        "type": "object",
+        "required": ["indicator_id", "evidence_ids"],
+        "additionalProperties": false,
+        "properties": {
+          "indicator_id": { "type": "string", "pattern": "^IND-[0-9]{2}$" },
+          "klaim_parameter_id": {
+            "type": ["string", "null"],
+            "pattern": "^IND-[0-9]{2}-P[1-3]$",
+            "description": "Tingkat parameter yang DIKLAIM pengaju. AI bertugas memverifikasi klaim ini, bukan menebak dari nol."
+          },
+          "evidence_ids": { "type": "array", "items": { "type": "string" } },
+          "naskah_naratif": { "type": ["string", "null"], "description": "Narasi pendukung (mis. rancang bangun 300 kata untuk IND-19)" }
+        }
+      }
+    }
+  }
+}

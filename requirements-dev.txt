@@ -1,0 +1,7 @@
+# Dependensi untuk pengembangan & pengujian (bukan runtime produksi)
+# Pasang dengan: pip install -r requirements.txt -r requirements-dev.txt
+
+-r requirements.txt
+
+pytest>=8.3.0
+jsonschema>=4.23.0        # validasi penuh dataset terhadap data/schemas/

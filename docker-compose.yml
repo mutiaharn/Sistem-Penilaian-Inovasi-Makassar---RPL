@@ -1,0 +1,62 @@
+services:
+  # ============================================================================
+  # PostgreSQL 16 Database
+  # ============================================================================
+  db:
+    image: postgres:16-alpine
+    container_name: idp_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: idp_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d idp_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ============================================================================
+  # IDP Application & Web Server (FastAPI + 5-Stage Pipeline)
+  # ============================================================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: sturdy-idp:latest
+    container_name: idp_engine
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/idp_db
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-}
+      - DEBUG=False
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./storage:/app/storage
+
+  # ============================================================================
+  # Database Web Dashboard (Adminer GUI for PostgreSQL)
+  # ============================================================================
+  db-dashboard:
+    image: adminer:latest
+    container_name: idp_db_dashboard
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+
+volumes:
+  pgdata:
+    driver: local

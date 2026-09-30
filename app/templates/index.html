@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sturdy IDP Engine - Intelligent Document Processing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans">
+    <!-- Navbar -->
+    <nav class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="h-9 w-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-bold shadow-lg shadow-indigo-500/20">
+                    <i class="fa-solid fa-file-shield text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-lg font-bold tracking-tight text-white">Sturdy IDP</span>
+                    <span class="text-xs ml-2 px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-medium">PostgreSQL Engine</span>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3">
+                <button onclick="triggerBenchmark()" class="px-3.5 py-1.5 rounded-lg bg-indigo-600/20 hover:bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 text-sm font-medium transition flex items-center gap-2">
+                    <i class="fa-solid fa-chart-line"></i> Run Benchmark
+                </button>
+                <a href="http://localhost:8080" target="_blank" class="px-3 py-1.5 rounded-lg bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 text-sm font-medium transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-database text-xs"></i> Database GUI
+                </a>
+                <a href="/docs" target="_blank" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-sm font-medium transition">
+                    <i class="fa-solid fa-book text-xs mr-1.5"></i> API Docs
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- Top Stats Row -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5">
+                <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Total Dokumen</div>
+                <div id="stat-total-docs" class="text-3xl font-extrabold text-white mt-2">--</div>
+                <div class="text-xs text-slate-500 mt-1">Tersimpan dalam database</div>
+            </div>
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5">
+                <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Tingkat Akurasi</div>
+                <div id="stat-accuracy" class="text-3xl font-extrabold text-emerald-400 mt-2">--%</div>
+                <div class="text-xs text-emerald-500/80 mt-1">+ Peningkatan antar iterasi</div>
+            </div>
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5">
+                <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">TTE / QR Terverifikasi</div>
+                <div id="stat-qr-count" class="text-3xl font-extrabold text-indigo-400 mt-2">--</div>
+                <div class="text-xs text-indigo-400/80 mt-1">BSrE / Sigap / Srikandi</div>
+            </div>
+            <div class="bg-slate-800/60 border border-slate-700/60 rounded-xl p-5">
+                <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Perlu Review Manual</div>
+                <div id="stat-review-count" class="text-3xl font-extrabold text-amber-400 mt-2">--</div>
+                <div class="text-xs text-amber-500/80 mt-1">Keyakinan &lt; 70%</div>
+            </div>
+        </div>
+
+        <!-- Benchmark Comparison Card -->
+        <div class="bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-code-compare text-indigo-400"></i>
+                        Komparasi Akurasi Antar Iterasi (Benchmark)
+                    </h2>
+                    <p class="text-sm text-slate-400">Peningkatan presisi dan recall per field di setiap iterasi arsitektur</p>
+                </div>
+                <span id="benchmark-status" class="text-xs px-2.5 py-1 rounded-full bg-slate-700 text-slate-300">Siap</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-slate-300">
+                    <thead class="text-xs uppercase bg-slate-900/60 text-slate-400 border-b border-slate-700">
+                        <tr>
+                            <th class="px-4 py-3">Nama Iterasi</th>
+                            <th class="px-4 py-3">Deskripsi Arsitektur</th>
+                            <th class="px-4 py-3">Nomor Surat</th>
+                            <th class="px-4 py-3">Tanggal ISO</th>
+                            <th class="px-4 py-3">NIP 18-Digit</th>
+                            <th class="px-4 py-3">QR / TTE</th>
+                            <th class="px-4 py-3 text-right">Akurasi Keseluruhan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="benchmark-table-body" class="divide-y divide-slate-800">
+                        <tr>
+                            <td colspan="7" class="px-4 py-6 text-center text-slate-500">Memuat data benchmark...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Upload & Process Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Upload Box -->
+            <div class="lg:col-span-1 bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 space-y-4">
+                <h3 class="text-md font-bold text-white flex items-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up text-indigo-400"></i>
+                    Upload Dokumen PDF
+                </h3>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Dokumen akan melewati 5 tahapan pipeline: Deteksi Scanned, 300 DPI Preprocessing, Auto-Deskew, Vision Extraction, QR Reader, dan Validasi NIP/Tanggal.
+                </p>
+
+                <form id="upload-form" class="space-y-4">
+                    <div class="border-2 border-dashed border-slate-700 hover:border-indigo-500 rounded-xl p-6 text-center cursor-pointer transition" onclick="document.getElementById('pdf-file-input').click()">
+                        <i class="fa-regular fa-file-pdf text-4xl text-slate-500 mb-2"></i>
+                        <div class="text-xs text-slate-300 font-medium" id="file-chosen-text">Klik untuk pilih file PDF</div>
+                        <div class="text-[10px] text-slate-500 mt-1">Maksimal 20MB</div>
+                        <input type="file" id="pdf-file-input" accept="application/pdf" class="hidden" onchange="handleFileSelected(this)">
+                    </div>
+
+                    <button type="submit" id="btn-upload" class="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-semibold shadow-lg shadow-indigo-600/30 transition disabled:opacity-50">
+                        <i class="fa-solid fa-play mr-2"></i> Jalankan Pipeline IDP
+                    </button>
+                </form>
+
+                <div id="process-log" class="hidden bg-slate-950 rounded-xl p-3 text-xs font-mono text-slate-400 space-y-1 border border-slate-800">
+                    <div class="text-indigo-400 font-bold">Log Eksekusi:</div>
+                    <div id="log-content">Menunggu upload...</div>
+                </div>
+            </div>
+
+            <!-- Documents Table -->
+            <div class="lg:col-span-2 bg-slate-800/40 border border-slate-700/60 rounded-2xl p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-md font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-indigo-400"></i>
+                            Hasil Ekstraksi Dokumen Terdaftar
+                        </h3>
+                        <button onclick="loadDocuments()" class="text-xs text-slate-400 hover:text-white transition">
+                            <i class="fa-solid fa-rotate-right mr-1"></i> Refresh
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto max-h-96">
+                        <table class="w-full text-left text-xs text-slate-300">
+                            <thead class="text-[11px] uppercase bg-slate-900/80 text-slate-400 sticky top-0">
+                                <tr>
+                                    <th class="px-3 py-2.5">Dokumen</th>
+                                    <th class="px-3 py-2.5">Nomor Surat</th>
+                                    <th class="px-3 py-2.5">Tanggal</th>
+                                    <th class="px-3 py-2.5">NIP</th>
+                                    <th class="px-3 py-2.5">QR / TTE</th>
+                                    <th class="px-3 py-2.5">Skor</th>
+                                    <th class="px-3 py-2.5 text-center">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="documents-table-body" class="divide-y divide-slate-800">
+                                <tr>
+                                    <td colspan="7" class="px-3 py-6 text-center text-slate-500">Memuat daftar dokumen...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        Sturdy IDP Engine &bull; PostgreSQL Persistence &bull; Zero-Cost 100% Free Architecture &bull; Docker Ready
+    </footer>
+
+    <!-- Frontend Script -->
+    <script>
+        let selectedFile = null;
+
+        function handleFileSelected(input) {
+            if (input.files && input.files[0]) {
+                selectedFile = input.files[0];
+                document.getElementById('file-chosen-text').innerText = selectedFile.name + " (" + (selectedFile.size / 1024).toFixed(1) + " KB)";
+            }
+        }
+
+        async function loadStats() {
+            try {
+                const res = await fetch('/api/stats');
+                const data = await res.json();
+                document.getElementById('stat-total-docs').innerText = data.total_documents || 0;
+                document.getElementById('stat-accuracy').innerText = (data.latest_accuracy || 0) + '%';
+                document.getElementById('stat-qr-count').innerText = data.total_qr_verified || 0;
+                document.getElementById('stat-review-count').innerText = data.needs_review_count || 0;
+            } catch (e) {
+                console.error("Gagal memuat stats:", e);
+            }
+        }
+
+        async function loadBenchmark() {
+            try {
+                const res = await fetch('/api/benchmark');
+                const data = await res.json();
+                const tbody = document.getElementById('benchmark-table-body');
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="px-4 py-6 text-center text-slate-500">Belum ada data benchmark. Klik tombol "Run Benchmark" di atas.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = data.map(r => {
+                    const fields = r.field_accuracies || {};
+                    return `
+                        <tr class="hover:bg-slate-800/60 transition">
+                            <td class="px-4 py-3 font-semibold text-white">${r.iteration_name}</td>
+                            <td class="px-4 py-3 text-slate-400 text-xs">${r.description || '-'}</td>
+                            <td class="px-4 py-3 font-mono">${fields.nomor_surat ? fields.nomor_surat.f1 + '%' : '-'}</td>
+                            <td class="px-4 py-3 font-mono">${fields.tanggal_surat ? fields.tanggal_surat.f1 + '%' : '-'}</td>
+                            <td class="px-4 py-3 font-mono">${fields.nip_pejabat ? fields.nip_pejabat.f1 + '%' : '-'}</td>
+                            <td class="px-4 py-3 font-mono">${fields.verification_url ? fields.verification_url.f1 + '%' : '-'}</td>
+                            <td class="px-4 py-3 text-right font-bold text-emerald-400 text-base">${r.accuracy_overall}%</td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (e) {
+                console.error("Gagal memuat benchmark:", e);
+            }
+        }
+
+        async function loadDocuments() {
+            try {
+                const res = await fetch('/api/documents');
+                const data = await res.json();
+                const tbody = document.getElementById('documents-table-body');
+                if (!data || data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" class="px-3 py-6 text-center text-slate-500">Belum ada dokumen yang diproses.</td></tr>';
+                    return;
+                }
+                tbody.innerHTML = data.map(d => {
+                    const ext = d.extractions && d.extractions[0] ? d.extractions[0] : {};
+                    const score = Math.round((ext.confidence_score || 0) * 100);
+                    const isReview = d.needs_manual_review;
+                    return `
+                        <tr class="hover:bg-slate-800/60 transition">
+                            <td class="px-3 py-2 font-medium text-white truncate max-w-[140px]" title="${d.original_filename}">${d.original_filename}</td>
+                            <td class="px-3 py-2 font-mono text-indigo-300 truncate max-w-[130px]">${ext.nomor_surat || '<span class="text-slate-600">-</span>'}</td>
+                            <td class="px-3 py-2 font-mono">${ext.tanggal_surat || '<span class="text-slate-600">-</span>'}</td>
+                            <td class="px-3 py-2 font-mono">${ext.nip_pejabat || '<span class="text-slate-600">-</span>'}</td>
+                            <td class="px-3 py-2">
+                                ${ext.verification_url ? `<a href="${ext.verification_url}" target="_blank" class="text-indigo-400 underline hover:text-indigo-300"><i class="fa-solid fa-qrcode mr-1"></i>Link</a>` : '<span class="text-slate-600">-</span>'}
+                            </td>
+                            <td class="px-3 py-2 font-bold ${score >= 70 ? 'text-emerald-400' : 'text-amber-400'}">${score}%</td>
+                            <td class="px-3 py-2 text-center">
+                                <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isReview ? 'bg-amber-500/20 text-amber-400 border border-amber-500/30' : 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'}">
+                                    ${isReview ? 'REVIEW' : 'VALID'}
+                                </span>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            } catch (e) {
+                console.error("Gagal memuat documents:", e);
+            }
+        }
+
+        async function triggerBenchmark() {
+            const status = document.getElementById('benchmark-status');
+            status.innerText = "Sedang Berjalan...";
+            status.className = "text-xs px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-400 animate-pulse";
+            try {
+                const res = await fetch('/api/benchmark/run', { method: 'POST' });
+                const result = await res.json();
+                status.innerText = "Selesai";
+                status.className = "text-xs px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-400";
+                loadBenchmark();
+                loadStats();
+            } catch (e) {
+                status.innerText = "Gagal";
+                status.className = "text-xs px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-400";
+            }
+        }
+
+        document.getElementById('upload-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!selectedFile) {
+                alert("Silakan pilih file PDF terlebih dahulu!");
+                return;
+            }
+
+            const btn = document.getElementById('btn-upload');
+            const logBox = document.getElementById('process-log');
+            const logContent = document.getElementById('log-content');
+            
+            btn.disabled = true;
+            btn.innerText = "Memproses Pipeline...";
+            logBox.classList.remove('hidden');
+            logContent.innerText = "Menjalankan Stage 1 hingga 5...";
+
+            const formData = new FormData();
+            formData.append("file", selectedFile);
+
+            try {
+                const res = await fetch('/api/process', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await res.json();
+                logContent.innerText = "Selesai! Nomor: " + (result.nomor_surat || "N/A") + " | Skor: " + Math.round(result.confidence_score * 100) + "%";
+                loadDocuments();
+                loadStats();
+            } catch (err) {
+                logContent.innerText = "Error: " + err.message;
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Jalankan Pipeline IDP";
+            }
+        });
+
+        // Initial Load
+        loadStats();
+        loadBenchmark();
+        loadDocuments();
+    </script>
+</body>
+</html>

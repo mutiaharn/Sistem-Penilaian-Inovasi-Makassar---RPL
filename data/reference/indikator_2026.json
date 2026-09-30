@@ -1,0 +1,371 @@
+{
+  "version": "2026.1",
+  "sumber": "Pedoman Teknis Indeks Inovasi Daerah (Kemendagri) — disalin ulang oleh tim SIP-BRIDA",
+  "catatan_versi": "19 indikator aktif pada Tahap 1. Indikator ke-20 (berbasis video) dikecualikan sesuai ruang lingkup SRS 1.2.",
+  "aturan_penilaian": {
+    "tipe_skor": "ordinal_bertingkat",
+    "aturan": "Skor indikator = skor parameter TERTINGGI yang terbukti terpenuhi. Parameter di bawahnya dianggap implisit terpenuhi.",
+    "skala": "Nilai akhir = jumlah skor indikator yang dipenuhi, dibagi skor maksimum total (lihat skor_maksimum_total).",
+    "skor_maksimum_total": 96.0
+  },
+  "skor_maksimum_total": 96.0,
+  "catatan_skor_maksimum": "96,0 adalah jumlah skor 19 indikator aktif pada Tahap 1. Indikator ke-20 (video) belum ditetapkan parameternya sehingga belum dihitung; setelah ditetapkan, nilainya menambah angka ini.",
+  "indicators": [
+    {
+      "id": "IND-01",
+      "kode": "regulasi_inovasi",
+      "nama": "Regulasi Inovasi Daerah",
+      "definisi": "Landasan hukum yang menetapkan nama inovasi daerah sebagai payung hukum operasional penerapannya.",
+      "mandatori": true,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["regulasi"],
+      "bukti_dukung": [
+        "Berkas PDF naskah regulasi yang memuat judul, nomor, tanggal, tanda tangan resmi (stempel basah / TTE BSrE)",
+        "Halaman lampiran yang mencantumkan nama inovasi"
+      ],
+      "parameters": [
+        { "id": "IND-01-P1", "nama": "Ditetapkan melalui Keputusan Kepala Perangkat Daerah / OPD", "skor": 3.0 },
+        { "id": "IND-01-P2", "nama": "Ditetapkan melalui Keputusan Kepala Daerah (Walikota/Bupati/Gubernur)", "skor": 6.0 },
+        { "id": "IND-01-P3", "nama": "Ditetapkan melalui Peraturan Kepala Daerah (Perwali/Perbup/Pergub) atau Peraturan Daerah (Perda)", "skor": 9.0 }
+      ],
+      "skor_maksimum": 9.0
+    },
+    {
+      "id": "IND-02",
+      "kode": "ketersediaan_sdm",
+      "nama": "Ketersediaan SDM terhadap Inovasi Daerah",
+      "definisi": "Jumlah personel atau aparatur yang secara sah ditugaskan mengelola dan mengoperasikan inovasi.",
+      "mandatori": true,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["sk_tim"],
+      "bukti_dukung": [
+        "Surat Keputusan (SK) Tim Kerja / Tim Efektif atau Surat Perintah Tugas yang mencantumkan nama, NIP, dan jabatan pelaksana inovasi"
+      ],
+      "parameters": [
+        { "id": "IND-02-P1", "nama": "Inovasi dikelola oleh 1 - 10 orang personel", "skor": 2.0 },
+        { "id": "IND-02-P2", "nama": "Inovasi dikelola oleh 11 - 30 orang personel", "skor": 4.0 },
+        { "id": "IND-02-P3", "nama": "Inovasi dikelola oleh lebih dari 30 orang personel", "skor": 6.0 }
+      ],
+      "skor_maksimum": 6.0
+    },
+    {
+      "id": "IND-03",
+      "kode": "dukungan_anggaran",
+      "nama": "Dukungan Anggaran",
+      "definisi": "Alokasi pembiayaan dalam APBD yang dialokasikan khusus untuk tahapan penerapan, operasional, atau pemeliharaan inovasi.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["dpa_rka"],
+      "bukti_dukung": [
+        "Salinan Dokumen Pelaksanaan Anggaran (DPA) atau RKA SKPD yang memuat uraian kegiatan dan rincian alokasi belanja inovasi"
+      ],
+      "parameters": [
+        { "id": "IND-03-P1", "nama": "Anggaran hanya dialokasikan pada tahun berjalan (T-0)", "skor": 2.0 },
+        { "id": "IND-03-P2", "nama": "Anggaran dialokasikan pada satu tahun anggaran sebelumnya (T-1 atau T-2)", "skor": 4.0 },
+        { "id": "IND-03-P3", "nama": "Anggaran dialokasikan secara berkelanjutan pada T-0, T-1, dan T-2", "skor": 6.0 }
+      ],
+      "skor_maksimum": 6.0
+    },
+    {
+      "id": "IND-04",
+      "kode": "bimtek_inovasi",
+      "nama": "Bimbingan Teknis (Bimtek) Inovasi",
+      "definisi": "Pelaksanaan kegiatan peningkatan kapasitas, literasi, atau alih pengetahuan teknis bagi pelaksana/pengguna inovasi.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["notula_bimtek"],
+      "bukti_dukung": [
+        "Surat tugas bimtek, notula/laporan kegiatan, daftar hadir peserta, materi presentasi, atau sertifikat kegiatan"
+      ],
+      "parameters": [
+        { "id": "IND-04-P1", "nama": "Dilaksanakan 1 kali kegiatan transfer pengetahuan dalam 2 tahun terakhir", "skor": 1.0 },
+        { "id": "IND-04-P2", "nama": "Dilaksanakan 2 - 3 kali kegiatan workshop/bimtek/FGD dalam 2 tahun terakhir", "skor": 2.0 },
+        { "id": "IND-04-P3", "nama": "Dilaksanakan lebih dari 3 kali kegiatan secara berkala dan terstruktur", "skor": 3.0 }
+      ],
+      "skor_maksimum": 3.0
+    },
+    {
+      "id": "IND-05",
+      "kode": "integrasi_rkpd",
+      "nama": "Integrasi Program dan Kegiatan Inovasi dalam RKPD",
+      "definisi": "Pencantuman inovasi ke dalam dokumen Rencana Kerja Pemerintah Daerah tahunan.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["rkpd"],
+      "bukti_dukung": [
+        "Cuplikan halaman Bab/Tabel Program dan Kegiatan dalam dokumen RKPD resmi yang memuat nomenklatur inovasi"
+      ],
+      "parameters": [
+        { "id": "IND-05-P1", "nama": "Dituangkan dalam dokumen RKPD pada 1 tahun anggaran", "skor": 2.0 },
+        { "id": "IND-05-P2", "nama": "Dituangkan dalam dokumen RKPD pada 2 tahun anggaran", "skor": 4.0 },
+        { "id": "IND-05-P3", "nama": "Dituangkan secara konsisten dalam dokumen RKPD selama 3 tahun berturut-turut", "skor": 6.0 }
+      ],
+      "skor_maksimum": 6.0
+    },
+    {
+      "id": "IND-06",
+      "kode": "pentahelix",
+      "nama": "Keterlibatan Aktor Inovasi (Pentahelix)",
+      "definisi": "Kemitraan multi-pihak yang melibatkan unsur Pemerintah, Akademisi, Pelaku Usaha/Bisnis, Komunitas/Masyarakat, dan Media.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["pks_mou"],
+      "bukti_dukung": [
+        "Naskah Perjanjian Kerja Sama (PKS), nota kesepahaman (MoU), daftar hadir rapat koordinasi, atau dokumentasi kolaborasi lintas sektor"
+      ],
+      "parameters": [
+        { "id": "IND-06-P1", "nama": "Melibatkan 1 - 2 unsur aktor pemangku kepentingan", "skor": 2.0 },
+        { "id": "IND-06-P2", "nama": "Melibatkan 3 - 4 unsur aktor pemangku kepentingan", "skor": 4.0 },
+        { "id": "IND-06-P3", "nama": "Melibatkan 5 unsur aktor secara utuh (Pentahelix Collaboration)", "skor": 6.0 }
+      ],
+      "skor_maksimum": 6.0
+    },
+    {
+      "id": "IND-07",
+      "kode": "pelaksana_inovasi",
+      "nama": "Pelaksana Inovasi Daerah",
+      "definisi": "Kedudukan hukum unit kerja atau struktur tim yang bertanggung jawab mengoperasikan inovasi sehari-hari.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["sk_pelaksana"],
+      "bukti_dukung": [
+        "Surat Keputusan Penetapan Pelaksana Operasional Inovasi yang telah dibubuhi tanda tangan dan stempel sah/TTE"
+      ],
+      "parameters": [
+        { "id": "IND-07-P1", "nama": "Ditetapkan oleh Pejabat Administrator / Eselon III / Kepala Bidang", "skor": 1.0 },
+        { "id": "IND-07-P2", "nama": "Ditetapkan oleh Kepala Perangkat Daerah / Kepala Dinas", "skor": 2.0 },
+        { "id": "IND-07-P3", "nama": "Ditetapkan langsung oleh Kepala Daerah (Walikota/Bupati)", "skor": 3.0 }
+      ],
+      "skor_maksimum": 3.0
+    },
+    {
+      "id": "IND-08",
+      "kode": "jejaring_inovasi",
+      "nama": "Jejaring Inovasi",
+      "definisi": "Kolaborasi implementasi atau integrasi kerja inovasi dengan perangkat daerah lain di lingkungan pemerintah daerah.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["skb_jejaring"],
+      "bukti_dukung": [
+        "Surat Keputusan Bersama (SKB), SOP layanan lintas dinas, atau berita acara pemanfaatan layanan bersama"
+      ],
+      "parameters": [
+        { "id": "IND-08-P1", "nama": "Diterapkan mandiri pada satu unit kerja (tanpa jejaring)", "skor": 1.0 },
+        { "id": "IND-08-P2", "nama": "Berjejaring dengan 1 - 2 perangkat daerah lain / instansi vertikal", "skor": 2.0 },
+        { "id": "IND-08-P3", "nama": "Berjejaring dengan lebih dari 2 perangkat daerah atau lintas yurisdiksi daerah", "skor": 3.0 }
+      ],
+      "skor_maksimum": 3.0
+    },
+    {
+      "id": "IND-09",
+      "kode": "sosialisasi_inovasi",
+      "nama": "Sosialisasi Inovasi Daerah",
+      "definisi": "Upaya diseminasi, publikasi, dan edukasi keberadaan inovasi kepada khalayak sasaran.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["sosialisasi_media"],
+      "bukti_dukung": [
+        "Tangkapan layar postingan media sosial resmi, kliping berita koran/media online terverifikasi Dewan Pers, brosur/leaflet, dan foto dokumentasi kegiatan"
+      ],
+      "parameters": [
+        { "id": "IND-09-P1", "nama": "Disosialisasikan melalui 1 saluran media (misal: sosialisasi tatap muka saja)", "skor": 1.0 },
+        { "id": "IND-09-P2", "nama": "Disosialisasikan melalui 2 jenis saluran media (misal: media cetak dan media sosial)", "skor": 2.0 },
+        { "id": "IND-09-P3", "nama": "Disosialisasikan secara masif melalui 3 media atau lebih", "skor": 3.0 }
+      ],
+      "skor_maksimum": 3.0
+    },
+    {
+      "id": "IND-10",
+      "kode": "pedoman_teknis",
+      "nama": "Pedoman Teknis Inovasi",
+      "definisi": "Ketersediaan buku petunjuk operasional teknis atau manual penggunaan bagi pelaksana maupun masyarakat pengguna.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["sop_manual"],
+      "bukti_dukung": [
+        "Buku petunjuk operasional (user manual PDF) dan naskah Standar Operasional Prosedur (SOP) berformat baku tata naskah dinas"
+      ],
+      "parameters": [
+        { "id": "IND-10-P1", "nama": "Tersedia petunjuk teknis sederhana / manual book tidak berbadan hukum formal", "skor": 1.0 },
+        { "id": "IND-10-P2", "nama": "Pedoman Teknis / SOP disahkan oleh Kepala Perangkat Daerah", "skor": 2.0 },
+        { "id": "IND-10-P3", "nama": "Pedoman Teknis / SOP disahkan melalui Keputusan / Peraturan Kepala Daerah", "skor": 3.0 }
+      ],
+      "skor_maksimum": 3.0
+    },
+    {
+      "id": "IND-11",
+      "kode": "kemudahan_informasi",
+      "nama": "Kemudahan Informasi Layanan",
+      "definisi": "Kemudahan bagi masyarakat atau pengguna dalam mengakses panduan dan alur pelayanan inovasi.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["portal_informasi"],
+      "bukti_dukung": [
+        "Tangkapan layar beranda website, menu panduan online, akun hotline terverifikasi, dan foto loket informasi publik"
+      ],
+      "parameters": [
+        { "id": "IND-11-P1", "nama": "Informasi hanya dapat diakses secara luring/manual di kantor pelayanan", "skor": 1.0 },
+        { "id": "IND-11-P2", "nama": "Informasi tersedia melalui 2 media (tatap muka dan telepon/WhatsApp/Hotline)", "skor": 2.0 },
+        { "id": "IND-11-P3", "nama": "Informasi dapat diakses daring secara penuh (portal web, aplikasi mobile, medsos, helpdesk 24 jam)", "skor": 3.0 }
+      ],
+      "skor_maksimum": 3.0
+    },
+    {
+      "id": "IND-12",
+      "kode": "kemudahan_proses",
+      "nama": "Kemudahan Proses Inovasi yang Dihasilkan",
+      "definisi": "Kecepatan waktu penyelesaian layanan inovasi dibandingkan dengan mekanisme birokrasi sebelum adanya inovasi (Service Level Agreement).",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["sop_sla"],
+      "bukti_dukung": [
+        "Dokumen Standar Pelayanan / SOP yang memuat diagram alir (flowchart) serta durasi baku penyelesaian layanan"
+      ],
+      "parameters": [
+        { "id": "IND-12-P1", "nama": "Waktu penyelesaian layanan memerlukan 6 hari kerja atau lebih", "skor": 2.0 },
+        { "id": "IND-12-P2", "nama": "Waktu penyelesaian layanan selesai dalam 2 - 5 hari kerja", "skor": 4.0 },
+        { "id": "IND-12-P3", "nama": "Waktu penyelesaian layanan tuntas dalam 1 hari kerja (atau jam/menit/instan)", "skor": 6.0 }
+      ],
+      "skor_maksimum": 6.0
+    },
+    {
+      "id": "IND-13",
+      "kode": "layanan_pengaduan",
+      "nama": "Penyelesaian Layanan Pengaduan",
+      "definisi": "Efektivitas penanganan keluhan, laporan masyarakat, saran, dan kritik terkait operasional inovasi.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["rekap_pengaduan"],
+      "bukti_dukung": [
+        "Laporan rekapitulasi penanganan pengaduan dari kanal resmi (SP4N-LAPOR!, aplikasi pengaduan internal, atau buku register komplain)"
+      ],
+      "parameters": [
+        { "id": "IND-13-P1", "nama": "Rasio pengaduan diselesaikan kurang dari 50% dari total laporan masuk", "skor": 1.0 },
+        { "id": "IND-13-P2", "nama": "Rasio pengaduan diselesaikan antara 50% hingga 80%", "skor": 2.0 },
+        { "id": "IND-13-P3", "nama": "Rasio pengaduan diselesaikan tuntas lebih dari 80% hingga 100%", "skor": 3.0 }
+      ],
+      "skor_maksimum": 3.0
+    },
+    {
+      "id": "IND-14",
+      "kode": "layanan_terintegrasi",
+      "nama": "Layanan Terintegrasi",
+      "definisi": "Keterhubungan inovasi dengan sistem informasi, basis data, atau modul layanan lainnya (interoperabilitas sistem).",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["integrasi_sistem"],
+      "bukti_dukung": [
+        "Tangkapan layar menu integrasi, diagram arsitektur sistem/data flow, dokumentasi REST API, atau naskah perjanjian integrasi sistem"
+      ],
+      "parameters": [
+        { "id": "IND-14-P1", "nama": "Sistem berdiri sendiri (silo system) tanpa integrasi eksternal", "skor": 2.0 },
+        { "id": "IND-14-P2", "nama": "Terintegrasi dengan 1 - 2 sistem/layanan di lingkungan internal OPD", "skor": 4.0 },
+        { "id": "IND-14-P3", "nama": "Terintegrasi lintas OPD, SSO, atau interoperabilitas basis data tingkat Pemda/Nasional", "skor": 6.0 }
+      ],
+      "skor_maksimum": 6.0
+    },
+    {
+      "id": "IND-15",
+      "kode": "replikasi_inovasi",
+      "nama": "Replikasi Inovasi Daerah",
+      "definisi": "Pengadopsian atau peniruan inovasi oleh unit kerja lain, pemerintah kabupaten/kota, atau instansi lain.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["replikasi"],
+      "bukti_dukung": [
+        "Surat permohonan replikasi / kaji tiru, naskah kesepakatan alih teknologi/replikasi inovasi, atau surat pernyataan penerapan replikasi dari instansi pengadopsi"
+      ],
+      "parameters": [
+        { "id": "IND-15-P1", "nama": "Inovasi belum pernah direplikasi oleh pihak lain", "skor": 3.0 },
+        { "id": "IND-15-P2", "nama": "Telah direplikasi oleh 1 - 2 perangkat daerah atau pemda lain", "skor": 6.0 },
+        { "id": "IND-15-P3", "nama": "Telah direplikasi secara luas oleh lebih dari 2 perangkat daerah atau pemda lain", "skor": 9.0 }
+      ],
+      "skor_maksimum": 9.0
+    },
+    {
+      "id": "IND-16",
+      "kode": "kecepatan_penciptaan",
+      "nama": "Kecepatan Penciptaan Inovasi",
+      "definisi": "Waktu yang dihabiskan dalam proses penciptaan inovasi, mulai dari penjaringan gagasan (ideation), perancangan uji coba (piloting), hingga implementasi resmi.",
+      "mandatori": true,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["milestone"],
+      "bukti_dukung": [
+        "Laporan tahapan kronologi inovasi (milestone report), berita acara uji coba awal inovasi, dan surat penetapan peluncuran perdana"
+      ],
+      "parameters": [
+        { "id": "IND-16-P1", "nama": "Waktu penciptaan diselesaikan dalam waktu 10 - 12 bulan", "skor": 2.0 },
+        { "id": "IND-16-P2", "nama": "Waktu penciptaan diselesaikan dalam waktu 5 - 9 bulan", "skor": 4.0 },
+        { "id": "IND-16-P3", "nama": "Waktu penciptaan diselesaikan secara cepat dan terukur dalam 1 - 4 bulan", "skor": 6.0 }
+      ],
+      "skor_maksimum": 6.0
+    },
+    {
+      "id": "IND-17",
+      "kode": "kemanfaatan",
+      "nama": "Kemanfaatan Inovasi",
+      "definisi": "Skala kuantitatif penerima manfaat atau pengguna aktif inovasi selama 2 tahun terakhir.",
+      "mandatori": true,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["rekap_penerima"],
+      "bukti_dukung": [
+        "Rekapitulasi buku tamu / daftar register penerima layanan (luring) atau tangkapan layar statistik pengguna/transaksi dari basis data aplikasi (daring)"
+      ],
+      "parameters": [
+        { "id": "IND-17-P1", "nama": "Jumlah penerima manfaat tercatat 1 - 100 orang", "skor": 2.0 },
+        { "id": "IND-17-P2", "nama": "Jumlah penerima manfaat tercatat 101 - 200 orang", "skor": 4.0 },
+        { "id": "IND-17-P3", "nama": "Jumlah penerima manfaat tercatat lebih dari 200 orang (atau masyarakat luas)", "skor": 6.0 }
+      ],
+      "skor_maksimum": 6.0
+    },
+    {
+      "id": "IND-18",
+      "kode": "monev",
+      "nama": "Monitoring dan Evaluasi (Monev) Inovasi Daerah",
+      "definisi": "Pelaksanaan pemantauan berkala dan evaluasi efektivitas serta dampak pelaksanaan inovasi.",
+      "mandatori": false,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["laporan_monev"],
+      "bukti_dukung": [
+        "Dokumen Laporan Hasil Monev Inovasi, Laporan Hasil SKM berkala, atau lembar rekomendasi perbaikan tindak lanjut"
+      ],
+      "parameters": [
+        { "id": "IND-18-P1", "nama": "Laporan evaluasi internal perangkat daerah secara mandiri", "skor": 1.0 },
+        { "id": "IND-18-P2", "nama": "Memiliki laporan hasil Survei Kepuasan Masyarakat (SKM) berkala dengan nilai indeks terukur", "skor": 2.0 },
+        { "id": "IND-18-P3", "nama": "Memiliki laporan monev komprehensif dengan rekomendasi berbasis kajian ilmiah/akademis atau audit independen", "skor": 3.0 }
+      ],
+      "skor_maksimum": 3.0
+    },
+    {
+      "id": "IND-19",
+      "kode": "kualitas_rancang_bangun",
+      "nama": "Kualitas Inovasi Daerah (Rancang Bangun)",
+      "definisi": "Kematangan narasi proposal rancang bangun yang memuat 5 unsur substansi pokok inovasi (minimal 300 kata sesuai standar Kemendagri).",
+      "mandatori": true,
+      "aktif_tahap_1": true,
+      "evidence_tags": ["rancang_bangun"],
+      "bukti_dukung": [
+        "Dokumen proposal/naskah rancang bangun inovasi (PDF) yang diekspor dari formulir isian SIGAP/Kemendagri"
+      ],
+      "parameters": [
+        { "id": "IND-19-P1", "nama": "Memenuhi 1 - 2 unsur substansi (hanya latar belakang dan tujuan umum)", "skor": 2.0 },
+        { "id": "IND-19-P2", "nama": "Memenuhi 3 - 4 unsur substansi (latar belakang, penjaringan ide, pemilihan ide, dan manfaat)", "skor": 4.0 },
+        { "id": "IND-19-P3", "nama": "Memenuhi 5 unsur substansi secara mendalam (Latar Belakang Masalah, Penjaringan Ide, Pemilihan Ide Terpilih, Manfaat Nyata, Dampak Positif Berkelanjutan)", "skor": 6.0 }
+      ],
+      "skor_maksimum": 6.0
+    },
+    {
+      "id": "IND-20",
+      "kode": "kualitas_video",
+      "nama": "Kualitas Inovasi Daerah (Video)",
+      "definisi": "Penilaian kualitas narasi visual/video inovasi daerah.",
+      "mandatori": false,
+      "aktif_tahap_1": false,
+      "alasan_tidak_aktif": "Dikecualikan pada Tahap 1 sesuai SRS 1.2 - pengolahan media video berbeda dari dokumen PDF.",
+      "evidence_tags": ["video"],
+      "bukti_dukung": ["Berkas video inovasi (TBD)"],
+      "parameters": [],
+      "skor_maksimum": null
+    }
+  ]
+}

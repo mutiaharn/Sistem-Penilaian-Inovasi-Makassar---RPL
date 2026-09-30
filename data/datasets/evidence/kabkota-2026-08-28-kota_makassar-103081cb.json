@@ -1,0 +1,62 @@
+{
+  "document_id": null,
+  "filename": "kabkota-2026-08-28-kota_makassar-103081cb.pdf",
+  "sha256": "3bf46f3a29ab08548489eb2c306be4b654f222ec844643d7bcb23a5870264578",
+  "file_size_bytes": 3660543,
+  "page_count": 20,
+  "is_scanned": true,
+  "manifest": null,
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 0,
+      "is_scanned": true,
+      "text_pages_read": 3
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1,
+        20
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "field_confidence": {
+        "nomor_surat": 0.0,
+        "instansi": 0.0,
+        "perihal": 0.0,
+        "tanggal_surat": 0.0,
+        "nip_pejabat": 0.0
+      }
+    },
+    "stage4_qr": {
+      "verification_url": null,
+      "detector": null
+    },
+    "stage5_validation": {
+      "is_valid_nip": false,
+      "confidence_score": 0.05,
+      "needs_manual_review": true,
+      "validation_flags": [
+        "Missing or incomplete Nomor Surat",
+        "Missing Instansi",
+        "Missing Perihal",
+        "Missing or invalid date"
+      ]
+    }
+  },
+  "metadata": {
+    "nomor_surat": null,
+    "instansi": null,
+    "perihal": null,
+    "tanggal_surat": null,
+    "nama_pejabat": null,
+    "jabatan_pejabat": null,
+    "nip_pejabat": null,
+    "ada_stempel_basah": false,
+    "ada_tanda_tangan": false,
+    "verification_url": null
+  },
+  "text_excerpt": null
+}

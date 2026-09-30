@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sip-brida/schemas/idp_extraction.schema.json",
+  "title": "IDP Extraction - keluaran pipeline 5 tahap untuk satu berkas PDF",
+  "description": "Ini format keluaran scripts/build_dataset_json.py. Satu file = satu PDF. Menjadi bahan baku tahap penilaian indikator dan bahan latih/evaluasi ML.",
+  "type": "object",
+  "required": ["document_id", "filename", "sha256", "page_count", "pipeline", "metadata"],
+  "additionalProperties": false,
+  "properties": {
+    "document_id": { "type": ["integer", "null"] },
+    "filename": { "type": "string" },
+    "sha256": { "type": "string" },
+    "file_size_bytes": { "type": "integer" },
+    "page_count": { "type": "integer" },
+    "is_scanned": {
+      "type": "boolean",
+      "description": "true = PDF hasil scan tanpa lapisan teks. Tanpa OCR, isinya tidak terbaca."
+    },
+    "manifest": {
+      "type": ["object", "null"],
+      "description": "Kaitan ke innovation/indikator (diisi dari evidence manifest)",
+      "properties": {
+        "inovasi_id": { "type": "string" },
+        "indicator_id": { "type": "string" },
+        "evidence_tag": { "type": "string" }
+      }
+    },
+    "pipeline": {
+      "type": "object",
+      "required": ["stage1_inspector", "stage2_preprocessing", "stage3_extraction", "stage4_qr", "stage5_validation"],
+      "properties": {
+        "stage1_inspector": {
+          "type": "object",
+          "properties": {
+            "words_page_1": { "type": "integer" },
+            "is_scanned": { "type": "boolean" },
+            "text_pages_read": { "type": "integer", "description": "Jumlah halaman yang teksnya diekstrak (saat ini maksimum 3)" }
+          }
+        },
+        "stage2_preprocessing": {
+          "type": "object",
+          "properties": {
+            "target_dpi": { "type": "integer", "default": 300 },
+            "pages_rasterized": { "type": "array", "items": { "type": "integer" } },
+            "skew_angle_deg": { "type": "number" }
+          }
+        },
+        "stage3_extraction": {
+          "type": "object",
+          "properties": {
+            "engine": { "type": "string", "enum": ["gemini_flash", "smart_heuristics"] },
+            "field_confidence": { "type": "object" }
+          }
+        },
+        "stage4_qr": {
+          "type": "object",
+          "properties": {
+            "verification_url": { "type": ["string", "null"] },
+            "detector": { "type": ["string", "null"], "enum": ["pyzbar", "opencv", null] }
+          }
+        },
+        "stage5_validation": {
+          "type": "object",
+          "properties": {
+            "is_valid_nip": { "type": "boolean" },
+            "confidence_score": { "type": "number", "minimum": 0, "maximum": 1 },
+            "needs_manual_review": { "type": "boolean" },
+            "validation_flags": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Metadata naskah dinas hasil ekstraksi",
+      "properties": {
+        "nomor_surat": { "type": ["string", "null"] },
+        "instansi": { "type": ["string", "null"] },
+        "perihal": { "type": ["string", "null"] },
+        "tanggal_surat": { "type": ["string", "null"], "description": "ISO-8601 YYYY-MM-DD bila berhasil dinormalisasi" },
+        "nama_pejabat": { "type": ["string", "null"] },
+        "jabatan_pejabat": { "type": ["string", "null"] },
+        "nip_pejabat": { "type": ["string", "null"] },
+        "ada_stempel_basah": { "type": "boolean" },
+        "ada_tanda_tangan": { "type": "boolean" },
+        "verification_url": { "type": ["string", "null"] }
+      }
+    },
+    "text_excerpt": {
+      "type": ["string", "null"],
+      "description": "Cuplikan teks mentah untuk inspeksi manual / fitur"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+# ==============================================================================
+# SIP-BRIDA - .gitignore
+# ==============================================================================
+
+# --- Environment & secrets ----------------------------------------------------
+.env
+.env.local
+*.pem
+*.key
+
+# --- Python -------------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# --- Database lokal -----------------------------------------------------------
+storage/*.db
+storage/*.sqlite
+storage/temp/
+*.sql-journal
+
+# --- Data mentah: JANGAN masuk git (total ~60 MB, tidak boleh di repo) --------
+# Bukti PDF tetap disimpan lokal untuk pengembangan, tetapi folder ini WAJIB
+# kosong di GitHub. Lihat data/raw/README.md untuk cara berbagi data ke tim.
+data/raw/evidence/*
+!data/raw/evidence/.gitkeep
+data/raw/output/*
+!data/raw/output/.gitkeep
+
+
+# --- OS / Editor --------------------------------------------------------------
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# --- Salinan/backup dokumen (tetap ada di disk, tidak perlu di repo) ----------
+docs/source/*_backup.docx

@@ -1,0 +1,427 @@
+{
+  "inovasi_id": "GANTI_DENGAN_ID_INOVASI",
+  "manifest_version": "0.1-draft",
+  "catatan": "DRAFT OTOMATIS. indicator_id hasil tebak kata kunci BELUM DIVERIFIKASI. Wajib dikonfirmasi manusia dari formulir pengajuan, lalu disimpan sebagai data/reference/evidence_manifest.json",
+  "evidences": [
+    {
+      "evidence_id": "EVD-0001",
+      "filename": "kabkota-2026-08-28-kota_makassar-103081cb.pdf",
+      "indicator_id": "IND-05",
+      "evidence_tag": "rkpd",
+      "sha256": "3bf46f3a29ab08548489eb2c306be4b654f222ec844643d7bcb23a5870264578",
+      "usulan_dari": "rencana kerja pemerintah daerah",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0002",
+      "filename": "kabkota-2026-08-28-kota_makassar-18bfb801.pdf",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "aa170353dc256da6c5482307f857fb0fdc1628e898716c181682afa757e457da",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0003",
+      "filename": "kabkota-2026-08-28-kota_makassar-3836d9f3.pdf",
+      "indicator_id": "IND-05",
+      "evidence_tag": "rkpd",
+      "sha256": "6c9470f080eb752a8d2bc60fe0ecbfc74af972396c3f6f25a4e5e41f322dfc7b",
+      "usulan_dari": "rencana kerja pemerintah daerah",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0004",
+      "filename": "kabkota-2026-08-28-kota_makassar-392a7f06.pdf",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "807620ae77b582db22746e4a0fb26b2efd85bf81ef4f726cfc61f60bc7cd9f3c",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0005",
+      "filename": "kabkota-2026-08-28-kota_makassar-3cade67d.pdf",
+      "indicator_id": "IND-03",
+      "evidence_tag": "dpa_rka",
+      "sha256": "64f3e4c745d9de7225703a2e09f93f565dade7a7ebfff337593cd9d53b5c9200",
+      "usulan_dari": "rkas",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0006",
+      "filename": "kabkota-2026-08-28-kota_makassar-41051553.pdf",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "df4afc20b040f362538f1c9feddd0fccf04ecc5c3237e2263f1f1111f08b2ae3",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0007",
+      "filename": "kabkota-2026-08-28-kota_makassar-46ef815f.pdf",
+      "indicator_id": "IND-01",
+      "evidence_tag": "regulasi",
+      "sha256": "2db50348d0b88c4095c70224f9b9be2668c5234bff58576d451e0a744296d9d6",
+      "usulan_dari": "peraturan daerah",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0008",
+      "filename": "kabkota-2026-08-28-kota_makassar-4d012e03.pdf",
+      "indicator_id": "IND-09",
+      "evidence_tag": "sosialisasi_media",
+      "sha256": "0332c82a38b1f60e84c491bcd6e521a497f85f58f922b208d60c2c5adf87b1e8",
+      "usulan_dari": "sosialisasi",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0009",
+      "filename": "kabkota-2026-08-28-kota_makassar-5076d0e4.pdf",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "3d160dfc67439a72749dc386403ba76f0bfd4247b197e771cc12ae51028d6040",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0010",
+      "filename": "kabkota-2026-08-28-kota_makassar-50c5af16.pdf",
+      "indicator_id": "IND-11",
+      "evidence_tag": "portal_informasi",
+      "sha256": "beac5c5b59ce8f53d049c719c572388417264371fce46797dbb38270c351efbf",
+      "usulan_dari": "hotline",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0011",
+      "filename": "kabkota-2026-08-28-kota_makassar-55f83d38.pdf",
+      "indicator_id": "IND-03",
+      "evidence_tag": "dpa_rka",
+      "sha256": "1e34575622aa2d3613fa6e1acd52e83b1e768d15364caadee148607b9791d852",
+      "usulan_dari": "rkas",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0012",
+      "filename": "kabkota-2026-08-28-kota_makassar-579f9f96.pdf",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "ede4f81d0bc16117fa1ec14cf10b74c103d186f18233433c37ee309802d64e23",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0013",
+      "filename": "kabkota-2026-08-28-kota_makassar-5b9de614.pdf",
+      "indicator_id": "IND-01",
+      "evidence_tag": "regulasi",
+      "sha256": "331e2b94a841ed44ac7427853e2c7b30192a0b8c8128a89053c76d2c03865e6c",
+      "usulan_dari": "peraturan bupati",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0014",
+      "filename": "kabkota-2026-08-28-kota_makassar-5da21b32 (1).pdf",
+      "indicator_id": "IND-04",
+      "evidence_tag": "notula_bimtek",
+      "sha256": "9277ceecaacc64f5315a76712071322ddcac199311be5a079b836d249dc0b9a7",
+      "usulan_dari": "bimbingan teknis",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0015",
+      "filename": "kabkota-2026-08-28-kota_makassar-5da21b32.pdf",
+      "indicator_id": "IND-04",
+      "evidence_tag": "notula_bimtek",
+      "sha256": "9277ceecaacc64f5315a76712071322ddcac199311be5a079b836d249dc0b9a7",
+      "usulan_dari": "bimbingan teknis",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0016",
+      "filename": "kabkota-2026-08-28-kota_makassar-86c56905.png",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "dfe24fcdfd4b9b7263f7a7052e377ec8619b8a4bfac91adcb64bae57e56e5de0",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0017",
+      "filename": "kabkota-2026-08-28-kota_makassar-89881820.pdf",
+      "indicator_id": "IND-09",
+      "evidence_tag": "sosialisasi_media",
+      "sha256": "3c048cbcbc21656699347916988f44308a60a0cd5fef8049c913b470c4f01966",
+      "usulan_dari": "sosialisasi",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0018",
+      "filename": "kabkota-2026-08-28-kota_makassar-8c364b5e.pdf",
+      "indicator_id": "IND-01",
+      "evidence_tag": "regulasi",
+      "sha256": "49942eb94f6bbabf9988d24ac327b67e35a4e3d2ba7f4c47fb92ca1d7d7ed9d6",
+      "usulan_dari": "peraturan bupati",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0019",
+      "filename": "kabkota-2026-08-28-kota_makassar-92ade882.pdf",
+      "indicator_id": "IND-04",
+      "evidence_tag": "notula_bimtek",
+      "sha256": "283e1cf88df24b57bcd38768403bfc4b681657153c0057db701524d6476cf2f2",
+      "usulan_dari": "daftar hadir",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0020",
+      "filename": "kabkota-2026-08-28-kota_makassar-934158fb.pdf",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "2d61b46704459141bba823dedd2dbd67cf69c675a2fa0536e3f1a30dd9bd3022",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0021",
+      "filename": "kabkota-2026-08-28-kota_makassar-98ec227b.pdf",
+      "indicator_id": "IND-05",
+      "evidence_tag": "rkpd",
+      "sha256": "4cea9a8172b9ec3a0c4549ea2184473070fdcd694e8d1f8375d0bcef21fa926f",
+      "usulan_dari": "rencana kerja pemerintah daerah",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0022",
+      "filename": "kabkota-2026-08-28-kota_makassar-99579045.pdf",
+      "indicator_id": "IND-03",
+      "evidence_tag": "dpa_rka",
+      "sha256": "0fe980a639566ec7601bea283db00a17737ce3a6ac484215689be0c1cf937ab5",
+      "usulan_dari": "rkas",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0023",
+      "filename": "kabkota-2026-08-28-kota_makassar-a31d1236.pdf",
+      "indicator_id": "IND-03",
+      "evidence_tag": "dpa_rka",
+      "sha256": "4dfe8bda7fb0e173200ac3cdfd04f0823ef13e84a6b784898885633d26abdac1",
+      "usulan_dari": "rkas",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0024",
+      "filename": "kabkota-2026-08-28-kota_makassar-ae3f7791.pdf",
+      "indicator_id": "IND-01",
+      "evidence_tag": "regulasi",
+      "sha256": "210129103ad4ed49288ff3b435ac1284b7ebc8a42df2382adbe28d9fe747593f",
+      "usulan_dari": "peraturan bupati",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0025",
+      "filename": "kabkota-2026-08-28-kota_makassar-aecb1c05.pdf",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "946c8ad7c35a53878ff95fce156e18b168d03e0bb80c8f9244d978b8c0899961",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0026",
+      "filename": "kabkota-2026-08-28-kota_makassar-c08ae061.pdf",
+      "indicator_id": "IND-02",
+      "evidence_tag": "sk_tim",
+      "sha256": "7b266fa3a15d3b62e1fa14d3dbfa9575e500687f86904f8c70edd491be25b6f7",
+      "usulan_dari": "pembentukan tim",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0027",
+      "filename": "kabkota-2026-08-28-kota_makassar-c17624b9.pdf",
+      "indicator_id": "IND-12",
+      "evidence_tag": "sop_sla",
+      "sha256": "f8fa520b6f548cd8921496511033b0f252540d7f8b5e5b922b628a948eb3e0bf",
+      "usulan_dari": "waktu penyelesaian",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0028",
+      "filename": "kabkota-2026-08-28-kota_makassar-c93b5421.pdf",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "c761dbb069c0b848ac0173406cc433d08e5fb9d241bf319e814eb3424dace411",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0029",
+      "filename": "kabkota-2026-08-28-kota_makassar-cccd1e77.pdf",
+      "indicator_id": "IND-13",
+      "evidence_tag": "rekap_pengaduan",
+      "sha256": "5ef877fc083bbfaf037f87e82cecffde1a83cc4926f8afdfbca7b42ee74170b1",
+      "usulan_dari": "pengaduan",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0030",
+      "filename": "kabkota-2026-08-28-kota_makassar-ce47f2e4.pdf",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "97757d3d9c7736cb03902c41f24fe2f1edfd0f21f882a3ea6a21272d061f8950",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0031",
+      "filename": "kabkota-2026-08-28-kota_makassar-df8e5f96.pdf",
+      "indicator_id": "IND-01",
+      "evidence_tag": "regulasi",
+      "sha256": "cb44f6a093e163916d81ccc603d958684fed523244a39cacde0ac0abcc4db55b",
+      "usulan_dari": "peraturan bupati",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0032",
+      "filename": "kabkota-2026-08-28-kota_makassar-e3a4756a.pdf",
+      "indicator_id": "IND-09",
+      "evidence_tag": "sosialisasi_media",
+      "sha256": "551af1ee8279e8d10f92dfc2f9d9a604b6f5557efe527768f3bb1e0561ca53a8",
+      "usulan_dari": "sosialisasi",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0033",
+      "filename": "kabkota-2026-08-28-kota_makassar-f4a30b5c.pdf",
+      "indicator_id": "IND-01",
+      "evidence_tag": "regulasi",
+      "sha256": "b78f4a95326af533d0f68294fac9a3fc69299fd1db0198e276f26e7f5c9a98d5",
+      "usulan_dari": "perda",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0034",
+      "filename": "kabkota-2026-08-28-kota_makassar-f72169a9.pdf",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "8ad48d57fa32cb8079cafba683f2f23f36dc97668d1c5a5804489661745d9abe",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0035",
+      "filename": "kabkota-2026-08-28-kota_makassar-fb8fdc56.pdf",
+      "indicator_id": null,
+      "evidence_tag": null,
+      "sha256": "202e948fbdbbeba8ebd8fafec26e56a32c00c4a53660ebb15fe6680fb4cfb045",
+      "usulan_dari": null,
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0036",
+      "filename": "kabkota-2026-08-31-kota_makassar-1764e596.pdf",
+      "indicator_id": "IND-10",
+      "evidence_tag": "sop_manual",
+      "sha256": "205ce18081a126d1d919dcfba00191588c82e186cc61b7a0f1e75fb6503abd43",
+      "usulan_dari": "manual book",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0037",
+      "filename": "kabkota-2026-08-31-kota_makassar-3371a005.pdf",
+      "indicator_id": "IND-15",
+      "evidence_tag": "replikasi",
+      "sha256": "7f431eb22d0cca62479f6fb9c82627f869c5047b785ae9e8422f34ae4d1d7855",
+      "usulan_dari": "replikasi",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0038",
+      "filename": "kabkota-2026-08-31-kota_makassar-ac411c1a.pdf",
+      "indicator_id": "IND-03",
+      "evidence_tag": "dpa_rka",
+      "sha256": "0bbf422cb1b2d885d42ece01ef4dca2767ae8169a9d3d9f495aee6a5d65560ff",
+      "usulan_dari": "rkas",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0039",
+      "filename": "kabkota-2026-08-31-kota_makassar-af946972.pdf",
+      "indicator_id": "IND-03",
+      "evidence_tag": "dpa_rka",
+      "sha256": "088d98355bf904fd6a33fbc3a0b936d56ed69af1680cf0b55f6dad85228ad1fc",
+      "usulan_dari": "rkas",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0040",
+      "filename": "kabkota-2026-08-31-kota_makassar-b69ae106.pdf",
+      "indicator_id": "IND-03",
+      "evidence_tag": "dpa_rka",
+      "sha256": "34c802deb106338f272d9453cc5f15271bbb3948376392895fc5b6889b32d764",
+      "usulan_dari": "rkas",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0041",
+      "filename": "kabkota-2026-08-31-kota_makassar-ba3721c8.pdf",
+      "indicator_id": "IND-17",
+      "evidence_tag": "rekap_penerima",
+      "sha256": "814b31d2434392941942c14f262ac19698ee80941e73cef1e7cbc9ecbdf8e91e",
+      "usulan_dari": "penerima manfaat",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    },
+    {
+      "evidence_id": "EVD-0042",
+      "filename": "kabkota-2026-08-31-kota_makassar-dabaa261.pdf",
+      "indicator_id": "IND-15",
+      "evidence_tag": "replikasi",
+      "sha256": "a62e84ac10c11dc0ea36eccf796396de900cc298cc2fd66f1cf5a544c06f1309",
+      "usulan_dari": "replikasi",
+      "perlu_konfirmasi_manusia": true,
+      "catatan_pengaju": ""
+    }
+  ]
+}

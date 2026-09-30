@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      # libzbar0 & libgl1 dibutuhkan pyzbar dan opencv saat modul app diimpor
+      - name: Pasang dependensi sistem
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libzbar0 libgl1 libglib2.0-0
+
+      - name: Pasang dependensi Python
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -r requirements-dev.txt
+
+      - name: Validasi dataset terhadap skema
+        run: python scripts/validate_dataset.py --strict
+
+      - name: Pastikan docs/INDICATORS.md sinkron dengan katalog
+        run: |
+          python scripts/gen_indicators_doc.py
+          git diff --exit-code docs/INDICATORS.md \
+            || (echo "::error::docs/INDICATORS.md tidak sinkron. Jalankan: python scripts/gen_indicators_doc.py" && exit 1)
+
+      - name: Katalog indikator dapat dimuat ke database
+        run: python scripts/seed_reference.py
+
+      - name: Jalankan test
+        run: python -m pytest -q
+
+      - name: Aplikasi dapat diimpor & tabel terbentuk
+        run: |
+          python -c "
+          from app.database.connection import create_tables, DB_DIALECT
+          create_tables()
+          from app.main import app
+          print('FastAPI app siap. DB dialect:', DB_DIALECT)
+          print('Jumlah route:', len(app.routes))
+          "

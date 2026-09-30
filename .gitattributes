@@ -1,0 +1,38 @@
+# ==============================================================================
+# Normalisasi berkas: kunci ke LF di repositori
+# Mencegah diff palsu "seluruh berkas berubah" saat berpindah antara Windows
+# dan Linux/macOS. Anggota tim yang memakai Windows tidak perlu set apa pun.
+# ==============================================================================
+
+* text=auto eol=lf
+
+# --- Kode & teks --------------------------------------------------------------
+*.py          text eol=lf
+*.md          text eol=lf
+*.json        text eol=lf
+*.yml         text eol=lf
+*.yaml        text eol=lf
+*.txt         text eol=lf
+*.csv         text eol=lf
+*.html        text eol=lf
+*.css         text eol=lf
+*.js          text eol=lf
+Makefile      text eol=lf
+Dockerfile    text eol=lf
+*.sh          text eol=lf
+
+# --- Biner (jangan pernah dinormalisasi) --------------------------------------
+*.pdf         binary
+*.png         binary
+*.jpg         binary
+*.jpeg        binary
+*.docx        binary
+*.xlsx        binary
+*.pptx        binary
+*.db          binary
+*.sqlite      binary
+*.pyc         binary
+
+# --- Hasil generate: jangan tampilkan di diff / laporan kontribusi ------------
+data/datasets/evidence/*.json  linguist-generated
+docs/INDICATORS.md             linguist-generated
