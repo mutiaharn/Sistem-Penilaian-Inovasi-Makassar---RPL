@@ -1,0 +1,30 @@
+# ==============================================================================
+# Dependensi opsional: OCR lokal (offline, di dalam venv)
+#
+# Dipasang HANYA bila dokumen hasil scan perlu dibaca. Tidak masuk requirements.txt
+# utama agar pemasangan dasar tetap ringan dan cepat.
+#
+#   pip install -r requirements-ocr.txt
+#
+# CATATAN PENTING (hasil pengujian di jaringan tim):
+#   1. Jaringan ini hanya ~17 KB/s ke files.pythonhosted.org, sehingga pip sering
+#      "Read timed out". Gunakan timeout panjang:
+#          pip install -r requirements-ocr.txt --timeout 180 --retries 12
+#   2. Paket rapidocr-onnxruntime menyatakan dependensi `opencv-python` (44 MB),
+#      padahal proyek ini sudah memakai `opencv-python-headless` (dari
+#      requirements.txt) yang menyediakan modul cv2 yang sama.
+#      Karena itu pasang rapidocr dengan --no-deps, lalu dependensi lain terpisah:
+#
+#          pip install --no-deps rapidocr-onnxruntime
+#          pip install onnxruntime pyclipper shapely PyYAML tqdm
+# ==============================================================================
+
+rapidocr-onnxruntime>=1.4.4   # mesin OCR, model PP-OCR sudah di dalam paket
+onnxruntime>=1.30.0           # backend inferensi CPU
+pyclipper>=1.4.0              # pemrosesan kotak teks
+shapely>=2.1.0                # geometri deteksi teks
+PyYAML>=6.0                   # pembacaan konfigurasi model
+tqdm>=4.70.0                  # progres (dipakai internal rapidocr)
+
+# opsional, hanya bila ingin memakai tesseract sebagai mesin alternatif:
+# pytesseract>=0.3.13

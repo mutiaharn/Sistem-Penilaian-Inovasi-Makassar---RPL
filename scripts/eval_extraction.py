@@ -36,12 +36,22 @@ def muat_dokumen() -> list[dict]:
         with open(gt_path, "r", encoding="utf-8") as f:
             cadangan = json.load(f)
 
+    # Jenis dokumen (dari report_doc_types.py) -> field yang relevan saja yang dinilai
+    jenis: dict = {}
+    cache = settings.DATASETS_DIR / "doc_types.json"
+    if cache.exists():
+        with open(cache, "r", encoding="utf-8") as f:
+            jenis = json.load(f)
+
     dokumen = []
     for file in sorted(settings.extract_dir.glob("*.json")):
         with open(file, "r", encoding="utf-8") as f:
             dok = json.load(f)
         if not nilai_benar(dok)["sumber"] and dok.get("filename") in cadangan:
             dok["_ground_truth"] = cadangan[dok["filename"]]
+        info = jenis.get(dok["filename"])
+        if info and info.get("field_relevan"):
+            dok["_field_relevan"] = info["field_relevan"]
         dokumen.append(dok)
     return dokumen
 

@@ -60,7 +60,8 @@ class HasilField:
     sebagian: int = 0
     salah: int = 0
     kosong: int = 0
-    tanpa_acuan: int = 0  # GT kosong -> tidak masuk penyebut
+    tanpa_acuan: int = 0      # GT kosong -> tidak masuk penyebut
+    tidak_relevan: int = 0    # field tidak berlaku untuk jenis dokumen ini
 
     @property
     def ada_acuan(self) -> int:
@@ -91,6 +92,10 @@ class RingkasanEvaluasi:
     @property
     def total_acuan(self) -> int:
         return sum(h.ada_acuan for h in self.per_field.values())
+
+    @property
+    def total_tidak_relevan(self) -> int:
+        return sum(h.tidak_relevan for h in self.per_field.values())
 
     @property
     def akurasi(self) -> float:
@@ -144,7 +149,16 @@ def evaluasi(dokumen_list: list[dict]) -> RingkasanEvaluasi:
         ringkasan.jumlah_dokumen += 1
         rincian = {"filename": dok.get("filename", "?"), "salah": [], "kosong": []}
 
+        # Field yang memang tidak berlaku untuk jenis dokumen ini (mis. nomor_surat
+        # pada RKAS, NIP pada manual book) dikeluarkan dari penyebut - kalau tidak,
+        # akurasi akan dihukum oleh ketidakcocokan skema, bukan oleh kesalahan mesin.
+        relevan = dok.get("_field_relevan")
+        relevan = set(relevan) if relevan else set(FIELDS)
+
         for f in FIELDS:
+            if f not in relevan:
+                ringkasan.per_field[f].tidak_relevan += 1
+                continue
             hasil = bandingkan(dok.get("metadata", {}).get(f), acuan["nilai"].get(f))
             h = ringkasan.per_field[f]
             if hasil == "tanpa_acuan":
@@ -168,7 +182,8 @@ def laporan_teks(ringkasan: RingkasanEvaluasi, judul: str = "Evaluasi Ekstraksi"
     baris.append(
         f"Dokumen dievaluasi: {ringkasan.jumlah_dokumen} | "
         f"tanpa acuan (dilewati): {len(ringkasan.dokumen_terlewat)} | "
-        f"titik data: {ringkasan.total_acuan}"
+        f"titik data: {ringkasan.total_acuan} | "
+        f"sel tidak relevan (dikecualikan): {ringkasan.total_tidak_relevan}"
     )
     baris.append("")
     baris.append(f"{'field':<18}{'acuan':>6}{'tepat':>6}{'sebagian':>9}{'salah':>6}{'kosong':>7}{'akurasi':>9}{'ketat':>8}")

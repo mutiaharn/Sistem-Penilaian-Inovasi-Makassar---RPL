@@ -183,8 +183,11 @@ class Stage3VisionExtractor:
             if re.search(r'PEMERINTAH|DINAS|UPT|BADAN|SEKOLAH|KOMUNITAS|KEMENTERIAN|KOTA|KABUPATEN|SDI', line, re.IGNORECASE):
                 instansi_candidates.append(line)
         if instansi_candidates:
-            # Join with space for standard naming
-            res.instansi = " ".join(instansi_candidates[:2])
+            # Normalisasi penting untuk hasil OCR: "PEMERINTAHKABUPATENGOWA DINASPENDIDIKAN"
+            # -> "PEMERINTAH KABUPATEN GOWA DINAS PENDIDIKAN"
+            from app.pipeline.text_normalizer import normalisasi_instansi
+
+            res.instansi = normalisasi_instansi(" ".join(instansi_candidates[:2]))
 
         # 3. Perihal / Judul
         perihal_match = re.search(r'(?:Perihal|Hal|TENTANG)\s*[:.]?\s*([^\n\r]+(?:\n[^\n\r]+)?)', text, re.IGNORECASE)
@@ -228,6 +231,19 @@ class Stage3VisionExtractor:
                         if len(candidate_name) > 3 and not re.search(r'pembina|golongan|nip', candidate_name, re.IGNORECASE):
                             res.nama_pejabat = candidate_name
                     break
+
+        # 6b. Rapikan nilai hasil OCR (derau ":nama", "Dacrah", spasi berlebih)
+        from app.pipeline.text_normalizer import (
+            normalisasi_nama_pejabat,
+            normalisasi_teks,
+        )
+
+        if res.nama_pejabat:
+            res.nama_pejabat = normalisasi_nama_pejabat(res.nama_pejabat)
+        if res.perihal:
+            res.perihal = normalisasi_teks(res.perihal)[:200]
+        if res.jabatan_pejabat:
+            res.jabatan_pejabat = normalisasi_teks(res.jabatan_pejabat)
 
         # 7. Visual stamp & signature detection via OpenCV
         if pil_image:
