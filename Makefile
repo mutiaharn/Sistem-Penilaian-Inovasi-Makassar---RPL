@@ -14,7 +14,7 @@ else
 endif
 
 .DEFAULT_GOAL := help
-.PHONY: help setup env seed data-check manifest dataset dataset-quick validate docs test \
+.PHONY: help setup env seed data-check doc-types gaps eval review-sheet apply-review manifest dataset dataset-quick validate docs test \
         run benchmark docker-up docker-down clean
 
 help: ## Tampilkan daftar perintah
@@ -34,6 +34,21 @@ seed: ## Muat katalog indikator ke database
 
 data-check: ## Cek berkas bukti + usulan pemetaan ke indikator
 	$(VENV_PY) scripts/check_data.py
+
+doc-types: ## Laporan jenis dokumen, wilayah, dan relevansi field
+	$(VENV_PY) scripts/report_doc_types.py
+
+gaps: ## Laporan: field mana yang kosong dan mengapa
+	$(VENV_PY) scripts/report_dataset_gaps.py
+
+eval: ## Akurasi ekstraksi dengan metrik jujur (exact match)
+	$(VENV_PY) scripts/eval_extraction.py --simpan
+
+review-sheet: ## Buat lembar verifikasi CSV untuk anotator (dokumen terbaca)
+	$(VENV_PY) scripts/make_review_sheet.py --status BELUM_DIVERIFIKASI --keluar review_sheet_terbaca.csv
+
+apply-review: ## Impor lembar verifikasi: make apply-review CSV=review_sheet_terbaca.csv AN=MAF
+	$(VENV_PY) scripts/apply_review_sheet.py --masuk $(CSV) --anotator $(AN)
 
 manifest: ## Tulis draf pemetaan bukti -> indikator
 	$(VENV_PY) scripts/check_data.py --write-draft

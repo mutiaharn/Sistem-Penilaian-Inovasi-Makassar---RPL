@@ -6,15 +6,24 @@
   "page_count": 5,
   "is_scanned": true,
   "doc_type": {
-    "jenis": "tidak_diketahui",
-    "label": "Belum terklasifikasi",
-    "keyakinan": 0.0
+    "jenis": "keputusan",
+    "label": "Keputusan (SK/SKB)",
+    "keyakinan": 0.95
   },
   "wilayah": {
-    "kode": "tidak_diketahui",
-    "nama": ""
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR"
   },
-  "field_relevan": [],
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "nama_pejabat",
+    "jabatan_pejabat",
+    "nip_pejabat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -36,14 +45,14 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
-      "text_source": "pdf_text_layer",
-      "ocr_engine": "",
+      "text_source": "ocr",
+      "ocr_engine": "rapidocr",
       "field_confidence": {
-        "nomor_surat": 0.0,
-        "instansi": 0.0,
-        "perihal": 0.0,
+        "nomor_surat": 0.8,
+        "instansi": 0.8,
+        "perihal": 0.6,
         "tanggal_surat": 0.0,
-        "nip_pejabat": 0.0
+        "nip_pejabat": 0.9
       }
     },
     "stage4_qr": {
@@ -51,39 +60,32 @@
       "detector": ""
     },
     "stage5_validation": {
-      "is_valid_nip": false,
-      "confidence_score": 0.05,
+      "is_valid_nip": true,
+      "confidence_score": 0.75,
       "needs_manual_review": true,
       "validation_flags": [
-        "Missing or incomplete Nomor Surat",
-        "Missing Instansi",
-        "Missing Perihal",
         "Missing or invalid date"
       ]
     }
   },
   "metadata": {
-    "nomor_surat": "",
-    "instansi": "",
-    "perihal": "",
+    "nomor_surat": "421.1/4Io9/INOVASI/DP/VI1/2025",
+    "instansi": "PEMERINTAH KOTA MAKASSAR DINAS PENDIDIKAN",
+    "perihal": "PENETAPANINOVASIDANTIMINOVASI GENTING(AGEN ANTIBULLYING)",
     "tanggal_surat": "",
     "nama_pejabat": "",
     "jabatan_pejabat": "",
-    "nip_pejabat": "",
+    "nip_pejabat": "197708311995112001",
     "verification_url": "",
     "ada_stempel_basah": false,
     "ada_tanda_tangan": false
   },
-  "text_excerpt": "0",
+  "text_excerpt": "PEMERINTAHKOTAMAKASSAR\nDINASPENDIDIKAN\nJl.A.P.Pettarani No.62Kel.Tamamaung.Kec.Panakukkang\nKotaMakassar90232,SulawesiSelatan\nWebsite:http://disdik.makassar.go.id:e-maildisdikkotamks@gmail.com.com\nKEPUTUSANKEPALADINASPENDIDIKANKOTAMAKASSAR\nNomor:421.1/4Io9/INOVASI/DP/VI1/2025\nTENTANGPENETAPANINOVASIDANTIMINOVASI\nGENTING(AGEN ANTIBULLYING)\nUPTSPFINPRESTALLOTUA2 TAHUN2025\nDENGANRAHMATTUHANYANGMAHAESA\nKEPALADINASPENDIDIKANKOTAMAKASSAR\nMenimbang:a.Bahwa dalamrangkameningkatkan sumber daya\nmanusiadanpelayananpublikdibidangpendidikan\nkhususnyaliterasidansalahsatubentuklayanan\npendidikan bermutu kepada masyarakat adalah\nPemerintahperlumelaksanakanpengelolaan\npendidikansecara\nintegratif,holistik dan\nberkelanjutan;\nb.\nUntuk\nmengelola\nPendidikan\nsecara\nberkelanjutanoleh\nDinas\nPendidikanKota\nMakassar diperlukan program Inovasi Pendidikan\ndi\nsemua\njenjang\nPendidikan\ndengan\nmengedepankan kerja secaraholistik integratif\ndengan menggunakan potensi lintas stakeholder\ndiKota Makassar;\nC.\nUntukmengakomodasiinovasisekolahpada\njenjang pendidikan PAUD,SD dan SMP yang\nbelum memiliki SK Tentang Penetapan Inovasi\ndanInovatorBidangPendidikanKotaMakassar;\nd.\nBahwamaksud\npertimbangansebagaimana\ndimaksud dalam huruf a,b dan c,perlu\nmenetapkanKeputusanKepalaDinasPendidikan\nKotaMakassar tentang Inovasi dan Inovator\nPendidikan\npadaDinasPendidikanKota\nMakassar.\nMengingat:1.\nUndang-UndangNomor30 Tahun2003 Tentang\nSistem Pendidikan Nasional (Lembaran Negara\nRepublik IndonesiaTahun2003 Nomor 47,\nTambahan Lembar",
   "field_tidak_ada": {
-    "nomor_surat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "instansi": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "perihal": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "tanggal_surat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "jabatan_pejabat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "verification_url": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi"
+    "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
+    "nama_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
+    "jabatan_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: jabatan tidak selalu ditulis di bawah tanda tangan",
+    "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },
   "verified": {
     "status": "BELUM_TERBACA_SCAN",
