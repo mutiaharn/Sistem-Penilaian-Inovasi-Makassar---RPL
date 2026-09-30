@@ -381,6 +381,42 @@ def _field_confidence(extracted, iso_date, healed_nip) -> dict:
     }
 
 
+def tandai_duplikat(out_dir: Path) -> list[tuple[str, str]]:
+    """Tandai dataset dengan isi identik (sha256 sama).
+
+    Berkas bukti dari portal kadang terunduh dua kali (nama berakhiran " (1)"),
+    sehingga satu dokumen ikut dihitung dua kali saat evaluasi. Yang dipertahankan
+    sebagai acuan adalah berkas tanpa akhiran ganda.
+    """
+    import hashlib  # noqa: F401  (sha sudah tersimpan di dataset, ini hanya jaga-jaga)
+
+    per_isi: dict[str, list[Path]] = {}
+    for path in sorted(out_dir.glob("*.json")):
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                dok = json.load(f)
+        except (json.JSONDecodeError, OSError):
+            continue
+        per_isi.setdefault(dok.get("sha256", ""), []).append(path)
+
+    hasil: list[tuple[str, str]] = []
+    for _, paths in per_isi.items():
+        if len(paths) < 2:
+            continue
+        paths.sort(key=lambda p: ("(" in p.name, len(p.name), p.name))
+        utama = paths[0]
+        with open(utama, "r", encoding="utf-8") as f:
+            dok_utama = json.load(f)
+        for turunan in paths[1:]:
+            with open(turunan, "r", encoding="utf-8") as f:
+                dok = json.load(f)
+            dok["duplikat_dari"] = dok_utama["filename"]
+            with open(turunan, "w", encoding="utf-8") as f:
+                json.dump(dok, f, ensure_ascii=False, indent=2)
+            hasil.append((dok_utama["filename"], dok["filename"]))
+    return hasil
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="PDF bukti -> dataset JSON")
     parser.add_argument("--limit", type=int, default=0, help="Batasi jumlah berkas (0 = semua)")
@@ -485,6 +521,15 @@ def main() -> int:
     print("-" * 100)
     print(f"Selesai dalam {time.time() - t0:.1f}s | berhasil: {ok} | dilewati: {skipped} | gagal: {failed}")
     print(f"Output: {out_dir}")
+
+    ganda = tandai_duplikat(out_dir)
+    if ganda:
+        print()
+        print(f"Berkas ganda (isi identik, ditandai lewat `duplikat_dari`): {len(ganda)}")
+        for utama, turunan in ganda:
+            print(f"  {turunan}  ->  duplikat dari {utama}")
+        print("  Dokumen ganda dikeluarkan dari evaluasi & lembar verifikasi supaya satu")
+        print("  dokumen tidak dihitung dua kali.")
     return 0 if failed == 0 else 2
 
 

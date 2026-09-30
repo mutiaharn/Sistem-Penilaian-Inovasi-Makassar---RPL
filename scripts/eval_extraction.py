@@ -31,6 +31,9 @@ LAPORAN = settings.DATASETS_DIR / "EVAL_EKSTRAKSI.md"
 # Diisi saat pemuatan; dilaporkan supaya terlihat, bukan disembunyikan.
 DIKECUALIKAN: list[str] = []
 
+# Berkas dengan isi identik (sha256 sama) - dihitung sekali saja.
+DOKUMEN_GANDA: list[tuple[str, str]] = []
+
 
 def muat_dokumen() -> list[dict]:
     """Gabungkan dataset dengan cadangan ground_truth.json bila verified masih kosong.
@@ -59,6 +62,9 @@ def muat_dokumen() -> list[dict]:
         info = jenis.get(dok["filename"]) or {}
         if info.get("wilayah") == "luar_kota_makassar":
             DIKECUALIKAN.append(dok["filename"])
+            continue
+        if dok.get("duplikat_dari"):
+            DOKUMEN_GANDA.append((dok["filename"], dok["duplikat_dari"]))
             continue
         if not nilai_benar(dok)["sumber"] and dok.get("filename") in cadangan:
             dok["_ground_truth"] = cadangan[dok["filename"]]
@@ -111,6 +117,10 @@ def main() -> int:
 
     teks = laporan_teks(ringkasan, "Akurasi Ekstraksi IDP (metrik jujur)")
     print(teks)
+    if DOKUMEN_GANDA:
+        print(f"Berkas ganda (dihitung sekali): {len(DOKUMEN_GANDA)}")
+        for nama, utama in DOKUMEN_GANDA:
+            print(f"  - {nama}  = salinan dari {utama}")
     if DIKECUALIKAN:
         print(f"Dikecualikan (bukan Kota Makassar): {len(DIKECUALIKAN)} berkas")
         for nama in DIKECUALIKAN:

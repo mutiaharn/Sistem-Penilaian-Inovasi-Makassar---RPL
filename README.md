@@ -212,7 +212,9 @@ docker compose up -d --build
 | `python scripts/report_dataset_gaps.py` | Laporan: field mana yang kosong dan mengapa |
 | `python scripts/report_doc_types.py` | Laporan: jenis dokumen, wilayah, dan relevansi field |
 | `python scripts/eval_extraction.py --simpan` | **Akurasi ekstraksi** dengan metrik jujur (exact match, kosong = salah) |
-| `python scripts/make_review_sheet.py --status BELUM_DIVERIFIKASI` | Buat lembar verifikasi CSV untuk anotator |
+| `python scripts/make_review_sheet.py --prioritas --tanpa-luar-makassar` | Lembar verifikasi CSV bentuk **lebar** (1 baris = 1 dokumen), 12 dokumen prioritas |
+| `python scripts/make_review_sheet.py --status BELUM_DIVERIFIKASI` | Lembar verifikasi semua dokumen yang belum terverifikasi |
+| `python scripts/apply_review_sheet.py --masuk <berkas>.csv --anotator MAF --uji` | Lihat rencana impor tanpa mengubah berkas |
 | `python scripts/apply_review_sheet.py --masuk <berkas>.csv --anotator MAF` | Impor lembar yang sudah diisi → blok `verified` + ground truth |
 | `python scripts/seed_reference.py` | Muat ulang katalog indikator ke database |
 | `python scripts/make_annotation_template.py --kode INV-2026-001 --nama "..." --opd "..."` | Buat kerangka anotasi |
@@ -220,6 +222,9 @@ docker compose up -d --build
 | `python scripts/gen_indicators_doc.py` | Perbarui `docs/INDICATORS.md` dari katalog |
 | `python scripts/run_benchmark.py` | Benchmark 3 iterasi arsitektur |
 | `pytest -q` | Jalankan test |
+
+Petunjuk kerja untuk anotator manusia: **`docs/LANGKAH_ANOTASI.md`** (langkah persis,
+termasuk cara mengisi `=`, `-`, dan menghindari Excel mengubah tanggal).
 
 ## Alur data (dari PDF ke label)
 
@@ -233,7 +238,8 @@ docker compose up -d --build
    menghasilkan `data/datasets/evidence/*.json` sesuai skema `idp_extraction.schema.json`.
 5. **Susun anotasi** → `python scripts/make_annotation_template.py` membuat kerangka
    submission + ground truth berisi seluruh parameter indikator aktif.
-6. **Anotasi** → tim penguji mengisi label mengikuti `docs/ANNOTATION_GUIDE.md`.
+6. **Anotasi** → anotator mengikuti **`docs/LANGKAH_ANOTASI.md`** (langkah praktis) dengan
+   latar metodologi di `docs/ANNOTATION_GUIDE.md`.
 7. **Validasi** → `python scripts/validate_dataset.py --strict` sebelum commit.
 
 ## Katalog indikator

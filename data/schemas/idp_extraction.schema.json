@@ -66,6 +66,10 @@
       "items": { "type": "string" },
       "description": "Field yang berlaku untuk jenis dokumen ini. Field di luar daftar ini TIDAK dihitung sebagai kesalahan ekstraksi."
     },
+    "duplikat_dari": {
+      "type": "string",
+      "description": "Nama berkas acuan bila isi berkas ini identik (sha256 sama). Berkas ganda tidak dipakai saat evaluasi maupun verifikasi supaya satu dokumen tidak dihitung dua kali."
+    },
     "manifest": {
       "type": "object",
       "description": "Kaitan ke indikator. Diisi dari data/reference/evidence_manifest.json; string kosong bila belum dipetakan.",
