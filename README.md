@@ -40,7 +40,7 @@ menimpa keputusan verifikator — alasan rancangan ini ada di `docs/DATA_MODEL.m
 | Dashboard pemantauan (statistik, tabel hasil ekstraksi, upload) | ✅ jalan | `app/templates/index.html` |
 | Katalog indikator & parameter (19 indikator × 3 parameter) | ✅ data siap | `data/reference/indikator_2026.json` |
 | Skema JSON + skrip pembangun dataset | ✅ jalan | `data/schemas/`, `scripts/build_dataset_json.py` |
-| Dataset JSON 33 berkas / **26 dokumen unik** (tanpa `null`) | ✅ jalan | `data/datasets/evidence/` — memuat `doc_type`, `wilayah`, `field_relevan`, blok `verified`; 7 salinan isi ditandai `duplikat_dari` |
+| Dataset JSON **28 berkas = 24 dokumen unik** (tanpa `null`) | ✅ jalan | `data/datasets/evidence/` — PDF **dan gambar** (PNG/JPG); 4 salinan isi ditandai `duplikat_dari` |
 | Deteksi dokumen berisi sama (`tandai_duplikat.py`) | ✅ jalan | Menangkap satu dokumen yang discan/terunduh berulang (sha256 berkas saja tidak cukup) |
 | Audit nilai ekstraksi vs isi dokumen | ✅ jalan | `scripts/audit_nilai_ekstraksi.py` — bisa jalan pada dokumen tanpa anotasi |
 | Klasifikasi jenis dokumen (11 jenis) | ✅ jalan | `app/pipeline/doc_classifier.py` — menentukan field mana yang **wajar** ada di tiap jenis dokumen |

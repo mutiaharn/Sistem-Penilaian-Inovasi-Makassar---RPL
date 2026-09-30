@@ -43,24 +43,7 @@
     "label": "Keputusan (SK/SKB)",
     "keyakinan": 0.95,
     "wilayah": "kota_makassar",
-    "wilayah_nama": "KOTA MAKASSAR",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "nama_pejabat",
-      "jabatan_pejabat",
-      "nip_pejabat",
-      "verification_url"
-    ]
-  },
-  "kabkota-2026-08-28-kota_makassar-3cade67d.pdf": {
-    "jenis": "keputusan",
-    "label": "Keputusan (SK/SKB)",
-    "keyakinan": 1.0,
-    "wilayah": "kota_makassar",
-    "wilayah_nama": "KOTA MAKASSAR",
+    "wilayah_nama": "KOTA MAKASSAR DINAS PENDIDIKAN",
     "field_relevan": [
       "nomor_surat",
       "instansi",
@@ -101,7 +84,7 @@
     "label": "Keputusan (SK/SKB)",
     "keyakinan": 0.95,
     "wilayah": "kota_makassar",
-    "wilayah_nama": "KOTA MAKASSAR",
+    "wilayah_nama": "KOTA MAKASSAR DINAS PENDIDIKAN",
     "field_relevan": [
       "nomor_surat",
       "instansi",
@@ -119,23 +102,6 @@
     "keyakinan": 0.0,
     "wilayah": "kota_makassar",
     "wilayah_nama": "KOTA MAKASSAR UPT SPF SD INPR",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "nama_pejabat",
-      "jabatan_pejabat",
-      "nip_pejabat",
-      "verification_url"
-    ]
-  },
-  "kabkota-2026-08-28-kota_makassar-55f83d38.pdf": {
-    "jenis": "keputusan",
-    "label": "Keputusan (SK/SKB)",
-    "keyakinan": 1.0,
-    "wilayah": "kota_makassar",
-    "wilayah_nama": "KOTA MAKASSAR",
     "field_relevan": [
       "nomor_surat",
       "instansi",
@@ -240,40 +206,6 @@
       "verification_url"
     ]
   },
-  "kabkota-2026-08-28-kota_makassar-99579045.pdf": {
-    "jenis": "keputusan",
-    "label": "Keputusan (SK/SKB)",
-    "keyakinan": 1.0,
-    "wilayah": "kota_makassar",
-    "wilayah_nama": "KOTA MAKASSAR",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "nama_pejabat",
-      "jabatan_pejabat",
-      "nip_pejabat",
-      "verification_url"
-    ]
-  },
-  "kabkota-2026-08-28-kota_makassar-a31d1236.pdf": {
-    "jenis": "keputusan",
-    "label": "Keputusan (SK/SKB)",
-    "keyakinan": 1.0,
-    "wilayah": "kota_makassar",
-    "wilayah_nama": "KOTA MAKASSAR",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "nama_pejabat",
-      "jabatan_pejabat",
-      "nip_pejabat",
-      "verification_url"
-    ]
-  },
   "kabkota-2026-08-28-kota_makassar-aecb1c05.pdf": {
     "jenis": "bukti_media",
     "label": "Bukti Media / Tangkapan Layar / Dokumentasi",
@@ -336,7 +268,7 @@
     "label": "Keputusan (SK/SKB)",
     "keyakinan": 0.95,
     "wilayah": "kota_makassar",
-    "wilayah_nama": "KOTA MAKASSAR",
+    "wilayah_nama": "KOTA MAKASSAR DINAS PENDIDIKAN",
     "field_relevan": [
       "nomor_surat",
       "instansi",
@@ -359,23 +291,6 @@
       "perihal"
     ]
   },
-  "kabkota-2026-08-28-kota_makassar-f4a30b5c.pdf": {
-    "jenis": "surat_dinas",
-    "label": "Surat Dinas / Undangan / Nota Dinas",
-    "keyakinan": 0.8,
-    "wilayah": "kota_makassar",
-    "wilayah_nama": "KOTA MAKASSAR BADAN RISET DAN",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "nama_pejabat",
-      "jabatan_pejabat",
-      "nip_pejabat",
-      "verification_url"
-    ]
-  },
   "kabkota-2026-08-28-kota_makassar-f72169a9.pdf": {
     "jenis": "peraturan",
     "label": "Peraturan (Perwali/Perda/Perbup)",
@@ -395,7 +310,7 @@
     "label": "Keputusan (SK/SKB)",
     "keyakinan": 0.95,
     "wilayah": "kota_makassar",
-    "wilayah_nama": "KOTA MAKASSAR",
+    "wilayah_nama": "KOTA MAKASSAR DINAS PENDIDIKAN",
     "field_relevan": [
       "nomor_surat",
       "instansi",
@@ -429,60 +344,31 @@
     ]
   },
   "kabkota-2026-08-31-kota_makassar-af946972.pdf": {
-    "jenis": "tidak_diketahui",
-    "label": "Belum terklasifikasi",
-    "keyakinan": 0.0,
-    "wilayah": "tidak_diketahui",
-    "wilayah_nama": "",
+    "jenis": "anggaran",
+    "label": "Dokumen Anggaran (DPA/RKA/RKAS)",
+    "keyakinan": 0.65,
+    "wilayah": "kota_makassar",
+    "wilayah_nama": "KOTA MAKASSAR",
     "field_relevan": [
-      "nomor_surat",
       "instansi",
-      "perihal",
-      "tanggal_surat",
-      "nama_pejabat",
-      "jabatan_pejabat",
-      "nip_pejabat",
-      "verification_url"
+      "tanggal_surat"
     ]
   },
   "kabkota-2026-08-31-kota_makassar-b69ae106.pdf": {
-    "jenis": "tidak_diketahui",
-    "label": "Belum terklasifikasi",
-    "keyakinan": 0.0,
-    "wilayah": "tidak_diketahui",
-    "wilayah_nama": "",
+    "jenis": "anggaran",
+    "label": "Dokumen Anggaran (DPA/RKA/RKAS)",
+    "keyakinan": 0.65,
+    "wilayah": "kota_makassar",
+    "wilayah_nama": "KOTA MAKASSAR",
     "field_relevan": [
-      "nomor_surat",
       "instansi",
-      "perihal",
-      "tanggal_surat",
-      "nama_pejabat",
-      "jabatan_pejabat",
-      "nip_pejabat",
-      "verification_url"
+      "tanggal_surat"
     ]
   },
   "kabkota-2026-08-31-kota_makassar-ba3721c8.pdf": {
     "jenis": "tidak_diketahui",
     "label": "Belum terklasifikasi",
     "keyakinan": 0.0,
-    "wilayah": "kota_makassar",
-    "wilayah_nama": "KOTA MAKASSAR",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "nama_pejabat",
-      "jabatan_pejabat",
-      "nip_pejabat",
-      "verification_url"
-    ]
-  },
-  "kabkota-2026-08-31-kota_makassar-dabaa261.pdf": {
-    "jenis": "surat_dinas",
-    "label": "Surat Dinas / Undangan / Nota Dinas",
-    "keyakinan": 0.8,
     "wilayah": "kota_makassar",
     "wilayah_nama": "KOTA MAKASSAR",
     "field_relevan": [

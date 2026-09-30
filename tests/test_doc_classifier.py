@@ -17,6 +17,22 @@ from app.pipeline.doc_classifier import (
 
 # --- deteksi wilayah ------------------------------------------------------------
 
+def test_berkas_gambar_selalu_bukti_media():
+    """Kasus nyata: poster PNG 'Linoa' terbaca sebagai instansi karena jenisnya
+    tidak dikenali. Berkas gambar harus langsung dikenali sebagai bukti media."""
+    h = klasifikasi("Linoa (Layanan Inovasi Sekolah) Dinas Pendidikan Kota Makassar",
+                    "kabkota-2026-08-28-kota_makassar-86c56905.png")
+    assert h.jenis == "bukti_media"
+    assert "nomor_surat" not in h.field_relevan
+    assert "nomor_surat" in h.field_tidak_relevan
+
+
+def test_pdf_dengan_teks_pendek_tidak_dipaksa_jadi_bukti_media():
+    """Aturan gambar hanya untuk berkas gambar, bukan PDF berteks sedikit."""
+    h = klasifikasi("SURAT TUGAS Nomor 005/2025", "surat.pdf")
+    assert h.jenis != "bukti_media"
+
+
 def test_dokumen_kota_makassar():
     h = deteksi_wilayah("PEMERINTAH KOTA MAKASSAR\nDINAS PENDIDIKAN\nNomor: 421.2/47/SDN")
     assert h.kode == WILAYAH_ACUAN

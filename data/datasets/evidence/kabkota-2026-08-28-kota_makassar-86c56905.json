@@ -1,0 +1,106 @@
+{
+  "document_id": "",
+  "filename": "kabkota-2026-08-28-kota_makassar-86c56905.png",
+  "sha256": "dfe24fcdfd4b9b7263f7a7052e377ec8619b8a4bfac91adcb64bae57e56e5de0",
+  "file_size_bytes": 1005457,
+  "page_count": 1,
+  "is_scanned": true,
+  "doc_type": {
+    "jenis": "bukti_media",
+    "label": "Bukti Media / Tangkapan Layar / Dokumentasi",
+    "keyakinan": 0.8
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR"
+  },
+  "field_relevan": [
+    "instansi",
+    "perihal"
+  ],
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 0,
+      "is_scanned": true,
+      "text_pages_read": 1
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "text_source": "ocr",
+      "ocr_engine": "rapidocr",
+      "field_confidence": {
+        "nomor_surat": 0.0,
+        "instansi": 0.8,
+        "perihal": 0.0,
+        "tanggal_surat": 0.0,
+        "nip_pejabat": 0.0
+      }
+    },
+    "stage4_qr": {
+      "verification_url": "",
+      "detector": ""
+    },
+    "stage5_validation": {
+      "is_valid_nip": false,
+      "confidence_score": 0.2,
+      "needs_manual_review": true,
+      "validation_flags": [
+        "Missing or incomplete Nomor Surat",
+        "Missing Perihal",
+        "Missing or invalid date"
+      ]
+    }
+  },
+  "metadata": {
+    "nomor_surat": "",
+    "instansi": "Linoa (Layanan Inovasi Sekolah)",
+    "perihal": "",
+    "tanggal_surat": "",
+    "nama_pejabat": "",
+    "jabatan_pejabat": "",
+    "nip_pejabat": "",
+    "verification_url": "",
+    "ada_stempel_basah": true,
+    "ada_tanda_tangan": true
+  },
+  "text_excerpt": "Linoa (Layanan Inovasi Sekolah)\nDinasPendidikanKota Makassar\nInkubator(lnspirasiKreatifuntuk\nBerbagi TreatmentInovasiMakassar)\nBadanRisetdan Inovasi DaerahKota Makassar\nLayanan dan wadah yang disiapkan oleh BRIDA\nuntuk mendampingi dan memfasilitasi inovasi yang\ndihasilkan, sehingga  lebih  terstandarisasi dan\nberkualitas.\nBACCE(BallaAmma Caradde)\nDinasPemberdayaanPerempuandanPerlindungan\nGENTING\nAnak(DP3A)\nWadah \"rumah pintar perempuan\" untuk layanan\nAGEN ANTI BULLYING\nkonsultasi\ndanpelaporan\nberbagai\nmasalah\nperempuan dan anak, termasuk kekerasan dalam\nrumah tangga (KDRT) dan perundungan, melalui\nplatform online dan offline.\nGenting(AgenAnti Bullying)\nUPT SPFSD InpresTallo Tua 2",
+  "field_tidak_ada": {
+    "nomor_surat": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi",
+    "perihal": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
+    "tanggal_surat": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi",
+    "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi",
+    "jabatan_pejabat": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi",
+    "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi",
+    "verification_url": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi"
+  },
+  "verified": {
+    "status": "BELUM_DIVERIFIKASI",
+    "sumber": "",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "",
+      "perihal": "",
+      "tanggal_surat": "",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": []
+  },
+  "text_sha256": "76aaa83741af5a73fe946ed55420632e10665c5b929f412361e7d5c2e6fc4b01"
+}

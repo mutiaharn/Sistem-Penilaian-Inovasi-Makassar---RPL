@@ -161,6 +161,20 @@ def klasifikasi(teks: str, nama_berkas: str = "") -> HasilKlasifikasi:
     nama_kecil = (nama_berkas or "").lower()
     gabungan = f"{nama_kecil}\n{teks_kecil}"
 
+    # Berkas yang MEMANG gambar (bukan PDF) hampir selalu bukti media: poster,
+    # tangkapan layar, dokumentasi kegiatan. Tanpa aturan ini, teks poster yang
+    # sedikit bisa terbaca sebagai `instansi` (mis. judul poster "Linoa (Layanan
+    # Inovasi Sekolah)"), padahal field itu tidak berlaku untuk jenis dokumen ini.
+    from pathlib import Path
+
+    if Path(nama_berkas or "").suffix.lower() in {".png", ".jpg", ".jpeg", ".tif", ".tiff"}:
+        info = JENIS["bukti_media"]
+        return HasilKlasifikasi(
+            "bukti_media", info["label"], 0.8,
+            [],                      # pola cocok: tidak dihitung untuk berkas gambar
+            list(info["field_relevan"]),
+        )
+
     skor: dict[str, list[str]] = {}
     for jenis, info in JENIS.items():
         cocok = [p for p in info["pola"] if re.search(p, gabungan, re.IGNORECASE | re.MULTILINE)]

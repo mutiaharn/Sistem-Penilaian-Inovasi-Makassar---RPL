@@ -23,6 +23,46 @@ from PIL import Image
 logger = logging.getLogger("idp.ocr")
 
 
+def _varian_gambar(gambar: Image.Image) -> list[tuple[str, Image.Image, float]]:
+    """Beberapa prapemrosesan dari halaman yang sama + faktor skala masing-masing.
+
+    Semuanya tetap berasal dari dokumen asli - tidak ada nilai yang ditambahkan.
+    Faktor skala WAJIB dikembalikan: varian 2x menghasilkan koordinat y dua kali
+    lipat, sehingga tanpa koreksi baris dari skala berbeda akan salah digabung
+    (pernah membuat 36 baris menyusut jadi 20 - teks hilang).
+    """
+    import numpy as np
+    from PIL import ImageEnhance, ImageFilter, ImageOps
+
+    keluar: list[tuple[str, Image.Image, float]] = [("asli", gambar, 1.0)]
+
+    # 2x upscale + skala abu: membantu huruf kecil dan hasil scan rapat
+    besar = gambar.resize((gambar.width * 2, gambar.height * 2), Image.LANCZOS)
+    abu = ImageOps.grayscale(besar)
+    skala2 = besar.width / max(gambar.width, 1)
+    keluar.append(("upscale_abu", abu, skala2))
+
+    # + penajaman kontras: membantu scan buram/pudar
+    tajam = ImageEnhance.Contrast(abu).enhance(1.8).filter(
+        ImageFilter.UnsharpMask(radius=2, percent=150, threshold=3)
+    )
+    keluar.append(("upscale_tajam", tajam.convert("RGB"), skala2))
+
+    # + ambang adaptif: membantu kertas kotor, bayangan, dan derau
+    try:
+        import cv2
+
+        arr = np.array(abu)
+        biner = cv2.adaptiveThreshold(
+            arr, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 31, 15
+        )
+        keluar.append(("upscale_biner", Image.fromarray(biner).convert("RGB"), skala2))
+    except Exception:  # noqa: BLE001 - cv2 tidak wajib ada
+        pass
+
+    return keluar
+
+
 @dataclass
 class HasilOcr:
     teks: str = ""
@@ -118,6 +158,105 @@ class OcrLokal:
             baris_semua.extend(hasil.baris)
             if hasil.rata_keyakinan:
                 skor.append(hasil.rata_keyakinan)
+        return HasilOcr(
+            teks="\n".join(baris_semua),
+            baris=baris_semua,
+            rata_keyakinan=(sum(skor) / len(skor)) if skor else 0.0,
+            mesin=mesin,
+        )
+
+    # --- OCR multi-prapemrosesan (mutu lebih tinggi) ---------------------------
+
+    def proses_terbaik(self, gambar: Image.Image) -> HasilOcr:
+        """OCR dengan beberapa prapemrosesan, lalu pilih SATU hasil terbaik secara utuh.
+
+        Riwayat penting: versi pertama menggabungkan bacaan PER BARIS antar varian
+        berdasarkan posisi. Itu terbukti MERUGI - penggabungan posisi membuat baris
+        yang berdekatan menyatu, dan teks menyusut dari 264 menjadi 104 karakter pada
+        dokumen uji: sebagian isi hilang tanpa jejak. Pemilihan utuh tidak bisa
+        menghilangkan baris seperti itu.
+
+        Aturannya: hanya varian yang cakupan teksnya sebanding (>= 95% varian terpanjang)
+        yang boleh menang, lalu dipilih yang keyakinannya tertinggi. Jadi keyakinan
+        tinggi TIDAK bisa menang dengan cara membuang teks.
+        """
+        if not self.siap():
+            return HasilOcr(mesin="none")
+        if self.mesin_aktif != "rapidocr":
+            return self.proses(gambar)      # mesin lain tidak memberi skor keyakinan
+
+        bacaan: list[tuple[str, HasilOcr]] = []
+        for nama, img, _skala in _varian_gambar(gambar):
+            hasil = self._pakai_rapidocr(img)
+            if hasil.ada_isi:
+                bacaan.append((nama, hasil))
+        if not bacaan:
+            return HasilOcr(mesin="rapidocr")
+
+        terpanjang = max(len(h.teks) for _, h in bacaan)
+        layak = [(n, h) for n, h in bacaan if len(h.teks) >= 0.95 * terpanjang]
+        nama, terbaik = max(layak, key=lambda nh: nh[1].rata_keyakinan)
+        return HasilOcr(
+            teks=terbaik.teks,
+            baris=terbaik.baris,
+            rata_keyakinan=terbaik.rata_keyakinan,
+            mesin=f"rapidocr+{nama}",
+        )
+
+    def proses_terbaik_banyak(self, gambar_list: list[Image.Image]) -> HasilOcr:
+        """proses_terbaik() untuk beberapa halaman sekaligus."""
+        baris_semua: list[str] = []
+        skor: list[float] = []
+        mesin = self.mesin_aktif
+        for g in gambar_list:
+            hasil = self.proses_terbaik(g)
+            baris_semua.extend(hasil.baris)
+            if hasil.rata_keyakinan:
+                skor.append(hasil.rata_keyakinan)
+            if "+" in hasil.mesin:
+                mesin = hasil.mesin
+        return HasilOcr(
+            teks="\n".join(baris_semua),
+            baris=baris_semua,
+            rata_keyakinan=(sum(skor) / len(skor)) if skor else 0.0,
+            mesin=mesin,
+        )
+
+    def proses_adaptif(self, gambar: Image.Image, ambang_yakin: float = 0.80) -> HasilOcr:
+        """proses() dulu (cepat); hanya bila hasilnya lemah, coba prapemrosesan lain.
+
+        Multi-varian sekitar 3-4x lebih lambat, jadi memakainya untuk semua halaman
+        membuat rebuild korpus berjam-jam. Halaman yang sudah terbaca baik dengan
+        sekali jalan tidak perlu diulang.
+
+        Aturan pemilihan: varian alternatif hanya menang bila cakupan teksnya tidak
+        berkurang (>= 90% teks hasil cepat) DAN keyakinannya lebih tinggi. Ini mencegah
+        "menang dengan keyakinan tinggi" padahal teksnya justru berkurang.
+        """
+        dasar = self.proses(gambar)
+        if dasar.rata_keyakinan >= ambang_yakin and len(dasar.baris) >= 5:
+            return dasar
+        lanjutan = self.proses_terbaik(gambar)
+        if not lanjutan.ada_isi:
+            return dasar
+        if len(lanjutan.teks) < 0.90 * max(len(dasar.teks), 1):
+            return dasar
+        if lanjutan.rata_keyakinan > dasar.rata_keyakinan or len(lanjutan.teks) > len(dasar.teks):
+            return lanjutan
+        return dasar
+
+    def proses_adaptif_banyak(self, gambar_list: list[Image.Image]) -> HasilOcr:
+        """proses_adaptif() untuk beberapa halaman sekaligus."""
+        baris_semua: list[str] = []
+        skor: list[float] = []
+        mesin = self.mesin_aktif
+        for g in gambar_list:
+            hasil = self.proses_adaptif(g)
+            baris_semua.extend(hasil.baris)
+            if hasil.rata_keyakinan:
+                skor.append(hasil.rata_keyakinan)
+            if "multipass" in hasil.mesin:
+                mesin = hasil.mesin
         return HasilOcr(
             teks="\n".join(baris_semua),
             baris=baris_semua,

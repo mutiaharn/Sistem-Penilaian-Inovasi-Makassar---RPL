@@ -18,6 +18,7 @@ Pemakaian:
 """
 
 import argparse
+import hashlib
 import json
 import logging
 import sys
@@ -27,6 +28,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.core.config import settings
+from PIL import Image
 from app.pipeline.stage1_inspector import Stage1Inspector
 from app.pipeline.stage2_preprocessor import Stage2Preprocessor
 from app.pipeline.stage3_vision_extractor import Stage3VisionExtractor
@@ -38,6 +40,11 @@ from app.pipeline.doc_classifier import deteksi_wilayah, klasifikasi
 logger = logging.getLogger("idp.dataset_builder")
 
 TEXT_EXCERPT_CHARS = 1500
+
+# Bukti dari SIGAP tidak selalu PDF: ada tangkapan layar/berkas gambar (bukti media).
+# Sebelumnya berkas gambar DIABAIKAN DIAM-DIAM karena hanya *.pdf yang dibaca.
+BERKAS_DIDUKUNG = {".pdf", ".png", ".jpg", ".jpeg", ".tif", ".tiff"}
+SUMBER_GAMBAR = {".png", ".jpg", ".jpeg", ".tif", ".tiff"}
 
 
 def pilih_halaman_ocr(page_count: int, batas: int) -> list[int]:
@@ -220,7 +227,12 @@ def build_one(
     ocr_min_teks: int = 40,
     pakai_ai: bool = False,
 ) -> dict:
-    """Jalankan pipeline 5 tahap untuk satu PDF dan susun payload sesuai skema.
+    """Jalankan pipeline 5 tahap untuk satu berkas bukti (PDF atau gambar) dan susun
+    payload sesuai skema.
+
+    `pdf_path` boleh berupa PDF atau gambar (png/jpg/tif). Untuk gambar tidak ada
+    rasterisasi PDF: gambarnya langsung dipakai, tidak ada lapisan teks, dan OCR
+    menjadi satu-satunya sumber teks.
 
     `pakai_ai=False` (bawaan) berarti TIDAK ADA panggilan ke layanan AI sama sekali:
     seluruh ekstraksi dikerjakan lokal (teks/OCR + heuristik + normalisasi).
@@ -230,10 +242,30 @@ def build_one(
     qr_detector = Stage4QrDetector()
     validator = Stage5PostValidator()
 
-    meta = inspector.inspect(pdf_path)
+    berkas_gambar = pdf_path.suffix.lower() in SUMBER_GAMBAR
 
-    # Teks seluruh halaman (bukan hanya 3 halaman pertama seperti pipeline produksi)
-    full_text = read_all_text(pdf_path) or meta["extracted_text"]
+    if berkas_gambar:
+        with Image.open(pdf_path) as im:
+            lebar, tinggi = im.size
+        # meta disusun sendiri karena Stage1Inspector khusus PDF. Kuncinya SAMA
+        # dengan keluaran inspector supaya sisa pipeline tidak perlu bercabang.
+        meta = {
+            "file_path": str(pdf_path),
+            "filename": pdf_path.name,
+            "file_hash": hashlib.sha256(pdf_path.read_bytes()).hexdigest(),
+            "file_size_bytes": pdf_path.stat().st_size,
+            "page_count": 1,
+            "words_page_1": 0,
+            "is_scanned": True,
+            "extracted_text": "",
+            "_gambar": f"{lebar}x{tinggi}",
+        }
+        full_text = ""
+    else:
+        meta = inspector.inspect(pdf_path)
+        # Teks seluruh halaman (bukan hanya 3 halaman pertama seperti pipeline produksi)
+        full_text = read_all_text(pdf_path) or meta["extracted_text"]
+
     text_source = "pdf_text_layer" if full_text.strip() else ""
     ocr_engine = ""
 
@@ -249,12 +281,26 @@ def build_one(
             teks_ocr, gambar_ocr = "", []
             for idx in indeks:
                 try:
-                    hasil = preprocessor.process(pdf_path, page_index=idx)
-                    gambar_ocr.append(hasil["pil_image"])
+                    if berkas_gambar:
+                        gambar_ocr.append(Image.open(pdf_path).convert("RGB"))
+                    else:
+                        hasil = preprocessor.process(pdf_path, page_index=idx)
+                        gambar_ocr.append(hasil["pil_image"])
                 except Exception as exc:  # noqa: BLE001
                     logger.debug(f"halaman {idx + 1} gagal diraster: {exc}")
             if gambar_ocr:
-                keluaran = ocr.proses_banyak(gambar_ocr)
+                # OCR_MODE=cepat (bawaan): satu kali baca per halaman.
+                # OCR_MODE=multi: coba beberapa prapemrosesan lalu pilih yang terbaik.
+                #   Diuji pada berkas sulit (b69ae106, af946972): multi TIDAK menambah
+                #   ketepatan (nama justru sempat salah baca 'Idiyanti, S.Pd.l') dan
+                #   3-5x lebih lambat. Karena itu bukan bawaan - jangan dipakai tanpa
+                #   alasan dan tanpa mengukur ulang.
+                import os
+
+                if os.getenv("OCR_MODE", "cepat").strip().lower() == "multi":
+                    keluaran = ocr.proses_terbaik_banyak(gambar_ocr)
+                else:
+                    keluaran = ocr.proses_banyak(gambar_ocr)
                 teks_ocr = keluaran.teks
                 ocr_engine = keluaran.mesin
             full_text = teks_ocr.strip()
@@ -266,16 +312,21 @@ def build_one(
     skew_angles: list[float] = []
     images = []
 
-    p1 = preprocessor.process(pdf_path, page_index=0)
-    images.append(p1["pil_image"])
-    skew_angles.append(p1.get("skew_angle", 0.0))
+    if berkas_gambar:
+        # Berkas gambar tidak perlu dirasterisasi: dirinya sendiri sudah citra penuh.
+        images = [Image.open(pdf_path).convert("RGB")]
+        skew_angles = [0.0]
+    else:
+        p1 = preprocessor.process(pdf_path, page_index=0)
+        images.append(p1["pil_image"])
+        skew_angles.append(p1.get("skew_angle", 0.0))
 
-    if meta["page_count"] > 1:
-        last_idx = meta["page_count"] - 1
-        pl = preprocessor.process(pdf_path, page_index=last_idx)
-        images.append(pl["pil_image"])
-        skew_angles.append(pl.get("skew_angle", 0.0))
-        pages_rasterized.append(meta["page_count"])
+        if meta["page_count"] > 1:
+            last_idx = meta["page_count"] - 1
+            pl = preprocessor.process(pdf_path, page_index=last_idx)
+            images.append(pl["pil_image"])
+            skew_angles.append(pl.get("skew_angle", 0.0))
+            pages_rasterized.append(meta["page_count"])
 
     # --- Stage 3: ekstraksi semantik -------------------------------------------
     # AI TIDAK dipakai secara bawaan. Aktifkan hanya bila memang dibutuhkan
@@ -424,7 +475,7 @@ def main() -> int:
     ocr_aktif = not args.no_ocr
 
     src_dir = Path(args.dir)
-    pdfs = sorted(src_dir.glob("*.pdf"))
+    pdfs = sorted(p for p in src_dir.iterdir() if p.suffix.lower() in BERKAS_DIDUKUNG)
     if not pdfs:
         print(f"[!] Tidak ada PDF di {src_dir}")
         print("    Lihat data/raw/README.md untuk cara mendapatkan data bukti.")

@@ -44,8 +44,11 @@ menjadi `PRE_LABEL` — jadi **seluruh 26 dokumen unik masih menunggu Anda**, te
 
 | Paket | Berkas lembar | Isi | Waktu |
 |---|---|---|---|
-| **1 (mulai di sini)** | `data/datasets/review_prioritas.csv` | **6 dokumen** (4 surat dinas + 2 keputusan) × 8 kolom = 48 sel | ±20 menit |
-| 2 | `data/datasets/review_belum_diverifikasi.csv` | **20 dokumen** sisanya | ±1,5 jam |
+| **1 (mulai di sini)** | `data/datasets/review_prioritas.csv` | **3 dokumen** surat dinas × 8 kolom = 24 sel | ±10 menit |
+| 2 | `data/datasets/review_belum_diverifikasi.csv` | **24 dokumen** (termasuk paket 1) | ±1,5 jam |
+
+Korpus: 28 berkas = **24 dokumen unik** (4 berkas salinan sudah ditandai; 6 dokumen draf
+template dan 8 dokumen luar daerah sudah dipindahkan keluar).
 
 Kalau paket 1 dan 2 selesai, `ground_truth.json` Anda berisi acuan yang benar-benar dibaca
 manusia untuk seluruh dokumen Kota Makassar yang unik — inilah syarat angka akurasi boleh
