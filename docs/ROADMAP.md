@@ -69,8 +69,9 @@ Pekerjaan:
    → **selesai: 33 berkas = 26 dokumen unik** (bentuk final, tanpa `null`, blok `verified`).
    8 dokumen luar Kota Makassar dipindahkan ke `data/raw/evidence/luar_daerah/`;
    7 berkas salinan isi ditandai `duplikat_dari` (`scripts/tandai_duplikat.py`).
-3. Verifikasi ekstraksi: isi blok `verified` untuk 25 berkas yang belum diverifikasi.
-   → OCR sudah terpasang, jadi tidak ada lagi berkas yang benar-benar "belum terbaca".
+3. Verifikasi ekstraksi: **seluruh 26 dokumen unik** menunggu anotator manusia.
+   → 8 berkas berstatus `PRE_LABEL` (nilai awal mesin, tanpa verifikator) dan 18 lainnya
+   belum ada acuan sama sekali. OCR sudah terpasang, jadi tidak ada berkas "belum terbaca".
 4. Buat ground truth **strategi A (manual penuh)** untuk 3–5 inovasi
    (lihat `ANNOTATION_GUIDE.md`).
 5. Verifikasi ganda 15–20% sampel, hitung Cohen's kappa.

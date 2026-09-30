@@ -71,7 +71,7 @@
     "perihal": "",
     "tanggal_surat": "2025-07-22",
     "nama_pejabat": "",
-    "jabatan_pejabat": "",
+    "jabatan_pejabat": "Ketua STIA Al Gazali Barru",
     "nip_pejabat": "",
     "verification_url": "",
     "ada_stempel_basah": false,
@@ -83,7 +83,6 @@
     "instansi": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
     "perihal": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
     "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Laporan / Rekapitulasi / Monev) - bukan kegagalan ekstraksi",
-    "jabatan_pejabat": "tidak berlaku untuk jenis dokumen ini (Laporan / Rekapitulasi / Monev) - bukan kegagalan ekstraksi",
     "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Laporan / Rekapitulasi / Monev) - bukan kegagalan ekstraksi",
     "verification_url": "tidak berlaku untuk jenis dokumen ini (Laporan / Rekapitulasi / Monev) - bukan kegagalan ekstraksi"
   },

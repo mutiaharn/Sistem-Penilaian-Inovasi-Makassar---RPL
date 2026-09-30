@@ -176,9 +176,14 @@ def finalize(payload: dict, gt: dict) -> dict:
     if gt:
         values = {f: _teks(gt.get(f)) for f in METADATA_FIELDS}
         beda = [f for f in METADATA_FIELDS if values[f] and values[f] != metadata[f]]
+        # JEJAK PENTING: nilai acuan ini berasal dari ground_truth.json lama, dan file
+        # itu TIDAK memuat identitas anotator. Jadi kita TIDAK boleh mengklaimnya
+        # "TERVERIFIKASI oleh manusia" - statusnya PRE_LABEL, menunggu verifikasi.
+        # Sebelumnya blok ini ditulis TERVERIFIKASI dengan verified_by kosong, sehingga
+        # acuan yang belum diperiksa manusia menyamar sebagai sudah selesai.
         verified = {
-            "status": "TERVERIFIKASI",
-            "sumber": "anotasi_manual",
+            "status": "PRE_LABEL",
+            "sumber": "pre_label_warisan",
             "verified_by": "",
             "verified_at": "",
             "values": values,

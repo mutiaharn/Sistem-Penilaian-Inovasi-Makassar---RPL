@@ -57,6 +57,8 @@ def main() -> int:
 
     total_files = 0
     total_errors = 0
+    statistik_pre_label = 0
+    statistik_manusia = 0
 
     for target, schema_name in TARGETS:
         path = settings.BASE_DIR / "data" / target
@@ -98,6 +100,21 @@ def main() -> int:
                     if not ann.get("label"):
                         errors.append(f"label kosong: {ann.get('parameter_id')}")
 
+            # Integritas klaim verifikasi: label "sudah diverifikasi manusia" harus
+            # benar-benar punya verifikator. Tanpa aturan ini, nilai pra-label mesin
+            # pernah ditulis TERVERIFIKASI dengan verified_by kosong - acuan yang belum
+            # diperiksa manusia menyamar sebagai selesai.
+            if "evidence" in target:
+                v = payload.get("verified") or {}
+                status = v.get("status", "")
+                if status == "TERVERIFIKASI" and not (v.get("verified_by") or "").strip():
+                    errors.append("status TERVERIFIKASI tetapi verified_by kosong "
+                                  "(klaim verifikasi manusia tanpa verifikator)")
+                if status == "PRE_LABEL":
+                    statistik_pre_label += 1
+                elif status == "TERVERIFIKASI":
+                    statistik_manusia += 1
+
             if errors:
                 total_errors += len(errors)
                 print(f"  [X] {file.name}: {len(errors)} masalah")
@@ -110,6 +127,9 @@ def main() -> int:
 
     print("\n" + "=" * 60)
     print(f"Berkas diperiksa: {total_files} | masalah: {total_errors}")
+    if statistik_pre_label or statistik_manusia:
+        print(f"Acuan diverifikasi manusia : {statistik_manusia} berkas")
+        print(f"Pra-label mesin (belum diverifikasi manusia) : {statistik_pre_label} berkas")
     return 0 if total_errors == 0 else 1
 
 

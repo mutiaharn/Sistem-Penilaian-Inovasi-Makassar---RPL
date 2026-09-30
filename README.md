@@ -47,7 +47,8 @@ menimpa keputusan verifikator — alasan rancangan ini ada di `docs/DATA_MODEL.m
 | OCR lokal offline (di dalam `.venv`) | ✅ jalan | `app/pipeline/ocr.py` (rapidocr); seluruh 12 berkas scan Kota Makassar kini terbaca |
 | Normalisasi derau OCR | ✅ jalan | `app/pipeline/text_normalizer.py` (spasi hilang, `Dacrah`→`Daerah`) |
 | Penjaga privasi AI Vision | ✅ jalan | `app/pipeline/vision_ai.py` — dokumen digital-native tidak pernah dikirim |
-| Metrik evaluasi jujur (exact match, kosong = salah) | ✅ jalan | `app/evaluation/metrics.py` + `scripts/eval_extraction.py` |
+| Metrik evaluasi jujur (exact match, kosong = salah) | ✅ jalan | `app/evaluation/metrics.py` + `scripts/eval_extraction.py`; **belum ada akuan yang diverifikasi manusia** — angka akurasi saat ini diukur terhadap pra-label mesin |
+| Audit: nilai vs isi dokumen | ✅ jalan | `scripts/audit_nilai_ekstraksi.py` — 92,6% nilai terbukti ada di dokumen (sisanya QR & sisa kebocoran OCR) |
 | Alat anotasi (lembar CSV) | ✅ jalan | `scripts/make_review_sheet.py` + `apply_review_sheet.py` |
 | Model data domain penilaian (usulan, indikator, bukti, keputusan, audit) | 🚧 baru kerangka | `app/database/assessment_models.py` |
 | **Mesin penilaian indikator (AI penilai parameter)** | ❌ belum | Belum ada kode. Ini pekerjaan utama berikutnya. |
@@ -292,6 +293,12 @@ Dicatat jujur supaya tidak terulang dan supaya bisa ditelusuri saat pengujian:
 3. **Hanya 2 halaman yang dirasterisasi** (halaman 1 dan terakhir) oleh pipeline produksi,
    dan Stage 1 hanya membaca teks 3 halaman pertama. Bukti indikator yang berada di halaman
    tengah (RKAS 13 hlm, manual book 22 hlm, Perwali 20 hlm) belum terbaca dari sisi citra.
+4. **Angka akurasi masih diukur terhadap PRA-LABEL mesin, bukan acuan manusia.** Seluruh 33
+   berkas dataset belum ada yang diverifikasi anotator manusia (`validate_dataset.py` kini
+   melaporkannya: 0 manusia, 8 pra-label). Nilai pra-label itu 28 dari 40 selnya persis sama
+   dengan keluaran mesin, sehingga mengukur akurasi terhadapnya sebagian melingkar dan
+   angkanya cenderung **optimistis**. Jangan laporkan angka akurasi sebagai hasil validasi
+   sebelum `docs/LANGKAH_ANOTASI.md` selesai dikerjakan.
    *Catatan:* `build_dataset_json.py` sudah membaca teks **seluruh halaman**; yang belum
    diperluas adalah rasterisasi citra di pipeline produksi.
 4. ~~Ekstraksi nomor surat rawan salah tangkap~~ → **sudah diperbaiki.** Kandidat nomor surat

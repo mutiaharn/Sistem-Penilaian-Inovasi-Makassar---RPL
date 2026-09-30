@@ -35,14 +35,21 @@ dokumen.
 satu berkas terunduh 2 kali). Salinan sudah ditandai otomatis (field `duplikat_dari`) dan
 **tidak perlu Anda anotasi dua kali** — lembar verifikasi sudah mengeluarkannya.
 
+**Penting — belum ada satu pun akuan yang diverifikasi manusia.** Sebelumnya 8 dokumen
+berstatus "TERVERIFIKASI", tetapi setelah diperiksa blok `verified`-nya **tidak punya
+identitas anotator**: nilai itu pra-label mesin yang diwarisi dari `ground_truth.json`
+lama (28 dari 40 selnya persis sama dengan keluaran mesin). Status itu sudah saya perbaiki
+menjadi `PRE_LABEL` — jadi **seluruh 26 dokumen unik masih menunggu Anda**, termasuk yang
+8 itu.
+
 | Paket | Berkas lembar | Isi | Waktu |
 |---|---|---|---|
 | **1 (mulai di sini)** | `data/datasets/review_prioritas.csv` | **6 dokumen** (4 surat dinas + 2 keputusan) × 8 kolom = 48 sel | ±20 menit |
-| 2 | `data/datasets/review_belum_diverifikasi.csv` | **18 dokumen** sisanya | ±1 jam |
+| 2 | `data/datasets/review_belum_diverifikasi.csv` | **20 dokumen** sisanya | ±1,5 jam |
 
-Kalau paket 1 dan 2 selesai, `ground_truth.json` Anda berisi acuan untuk seluruh dokumen
-Kota Makassar yang unik (24 dari 26; 2 sisanya belum terklasifikasi jenisnya) — cukup kuat
-untuk dilaporkan.
+Kalau paket 1 dan 2 selesai, `ground_truth.json` Anda berisi acuan yang benar-benar dibaca
+manusia untuk seluruh dokumen Kota Makassar yang unik — inilah syarat angka akurasi boleh
+dilaporkan di sidang.
 
 Delapan kolom yang diisi: `nomor_surat`, `instansi`, `perihal`, `tanggal_surat`,
 `nama_pejabat`, `jabatan_pejabat`, `nip_pejabat`, `verification_url`.

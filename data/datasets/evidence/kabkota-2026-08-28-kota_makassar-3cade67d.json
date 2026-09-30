@@ -49,7 +49,7 @@
       "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.8,
-        "instansi": 0.8,
+        "instansi": 0.0,
         "perihal": 0.6,
         "tanggal_surat": 0.8,
         "nip_pejabat": 0.9
@@ -61,18 +61,20 @@
     },
     "stage5_validation": {
       "is_valid_nip": true,
-      "confidence_score": 1.0,
-      "needs_manual_review": false,
-      "validation_flags": []
+      "confidence_score": 0.85,
+      "needs_manual_review": true,
+      "validation_flags": [
+        "Missing Instansi"
+      ]
     }
   },
   "metadata": {
     "nomor_surat": "400.3.10/2/S.Kep/Disdik/VIII/2026",
-    "instansi": "KOTA MAKASSAR KEPUTUSAN KEPALA DINAS PENDIDIKAN KOTA MAKASSAR",
+    "instansi": "",
     "perihal": "Pembentukan Tim Inovasi Lingkup TK SD dan SMP se-Kota Makassar Tahun 2026.",
     "tanggal_surat": "2026-08-05",
     "nama_pejabat": "",
-    "jabatan_pejabat": "KEPALA DINAS PENDIDIKAN KOTA MAKASSAR",
+    "jabatan_pejabat": "Kepala Dinas Pendidikan",
     "nip_pejabat": "197708311995112001",
     "verification_url": "https://srikandi.arsip.go.id/result-scan/gi5KG7AJO6UTqKPMaOHINw",
     "ada_stempel_basah": false,
@@ -80,11 +82,12 @@
   },
   "text_excerpt": "${ttd_pengirim} \nr4$_0{nn0ao.s3mk.a1oh0r}_naskah} ${nomo \n \nKOTA MAKASSAR \nKEPUTUSAN KEPALA DINAS PENDIDIKAN KOTA MAKASSAR \nNomor : 400.3.10/2/S.Kep/Disdik/VIII/2026 \nTENTANG \nPembentukan Tim Inovasi \nLingkup TK SD dan SMP se-Kota Makassar Tahun 2026. \nMenimbang : \n \n \n \n \n \n \nMengingat : \n1. Bahwa dalam rangka mendukung pelaksanaan inovasi daerah di lingkup TK  \nSD dan SMP se -Kota Makassar, diperlukan pembentukan Tim Inovasi yang \ndapat mengelola, melaksanakan, dan melaporkan kegiatan inovasi secara \nterstruktur. \n2. Bahwa untuk menjamin keberlangsungan, akuntabilitas, dan keberlanjutan \ninovasi daerah, perlu ditetapkan Surat Keputusan Kepala Dinas Pendidikan atas \nnama Wali Kota Makassar  tentang Tim Inovasi Bersama Lingkup TK SD dan \nSMP se-Kota Makassar Tahun 2026. \n1. Undang-Undang Nomor 23 Tahun 2014 tentang Pemerintahan Daerah \n2. Undang-Undang Nomor 20 Tahun 2023 tentang Sistem Pendidikan Nasional \n3. Peraturan Pemerintah RI Nomor 38 Tahun 2017 tentang Inovasi Daerah \n4. Peraturan Menteri Dalam Negeri RI Nomor 104 Tahun 2018 tentang Penilaian \ndan Pemberian Penghargaan dan/atau Insentif Inovasi Daerah \n5. Peraturan Daerah Kota Makassar Nomor 9 Tahun 2023 tentang Inovasi Daerah \nMEMUTUSKAN \nMenetapkan : PEMBENTUKAN TIM INOVASI LINGKUP TK SD DAN SMP \nSE-KOTA MAKASSAR TAHUN 2026. \n \nPertama : \n \n \nKedua : \n \n \n \nKetiga : \n \n \n \nKeempat : \n \n \nKelima : \n \nKeenam : \nPembentukan Tim Inovasi (per satuan inovasi) sebagaimana tercantum dalam \nLampiran SK ini. \nTim Inovasi seb",
   "field_tidak_ada": {
+    "instansi": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
     "nama_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama"
   },
   "verified": {
-    "status": "TERVERIFIKASI",
-    "sumber": "anotasi_manual",
+    "status": "PRE_LABEL",
+    "sumber": "pre_label_warisan",
     "verified_by": "",
     "verified_at": "",
     "values": {
@@ -98,7 +101,9 @@
       "verification_url": "https://srikandi.arsip.go.id/result-scan/gi5KG7AJO6UTqKPMaOHINw"
     },
     "berbeda_dari_mesin": [
-      "perihal"
+      "instansi",
+      "perihal",
+      "jabatan_pejabat"
     ]
   },
   "text_sha256": "8997fbc37eebe66a0e06db5bdc224f393147a672e41456712e9892a92afad9a5"

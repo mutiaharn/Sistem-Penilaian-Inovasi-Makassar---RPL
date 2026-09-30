@@ -68,11 +68,11 @@
   },
   "metadata": {
     "nomor_surat": "",
-    "instansi": "WALIKOTA MAKASSAR PERATURAN DAERAH KOTA MAKASSAR",
+    "instansi": "WALIKOTA MAKASSAR",
     "perihal": "INOVASI DAERAH DENGANRAHMATTUHANYANGMAHAESA",
     "tanggal_surat": "",
     "nama_pejabat": "",
-    "jabatan_pejabat": "Kepala Badan Riset dan Inovasi Daerah adalah Kepala",
+    "jabatan_pejabat": "",
     "nip_pejabat": "",
     "verification_url": "",
     "ada_stempel_basah": false,
@@ -83,6 +83,7 @@
     "nomor_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
     "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
     "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
+    "jabatan_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
     "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
     "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },

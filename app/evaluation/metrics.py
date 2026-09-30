@@ -123,6 +123,22 @@ def nilai_benar(dokumen: dict) -> dict:
     return {"nilai": nilai, "sumber": sumber if any(v for v in nilai.values()) else ""}
 
 
+def sumber_acuan(dokumen: dict) -> str:
+    """Dari mana acuan dokumen ini berasal - dan apakah manusia benar-benar memverifikasinya.
+
+    "manusia"   : ada nilai acuan DAN ada identitas verifikator (anotator mengisi).
+    "pre_label" : ada nilai acuan tetapi TIDAK ada verifikator - nilai awal mesin yang
+                  diwarisi dari ground_truth.json lama. Mengukur akurasi terhadap
+                  pre-label semacam ini sebagian melingkar (mesin dinilai dengan
+                  keluarannya sendiri), jadi angkanya harus dibaca sebagai optimistis.
+    "tidak_ada" : belum ada acuan sama sekali.
+    """
+    if not any(v for v in (nilai_benar(dokumen)["nilai"] or {}).values()):
+        return "tidak_ada"
+    verified = dokumen.get("verified") or {}
+    return "manusia" if (verified.get("verified_by") or "").strip() else "pre_label"
+
+
 def bandingkan(nilai_mesin, nilai_acuan) -> str:
     a, b = normalisasi(nilai_mesin), normalisasi(nilai_acuan)
     if not b:

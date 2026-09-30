@@ -23,7 +23,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from app.core.config import settings
-from app.evaluation.metrics import evaluasi, laporan_teks, nilai_benar
+from app.evaluation.metrics import evaluasi, laporan_teks, nilai_benar, sumber_acuan
+from collections import Counter
 
 LAPORAN = settings.DATASETS_DIR / "EVAL_EKSTRAKSI.md"
 
@@ -117,6 +118,19 @@ def main() -> int:
 
     teks = laporan_teks(ringkasan, "Akurasi Ekstraksi IDP (metrik jujur)")
     print(teks)
+
+    # Dari mana acuan berasal - ini menentukan bagaimana angka di atas boleh dibaca.
+    asal: Counter = Counter(sumber_acuan(d) for d in dokumen)
+    if asal["pre_label"]:
+        print("PERINGATAN METODOLOGI")
+        print(f"  {asal['pre_label']} dokumen acuannya adalah PRE-LABEL mesin (nilai awal dari")
+        print("  ground_truth.json lama, tanpa identitas anotator). Mengukur akurasi terhadap")
+        print("  pre-label semacam ini sebagian melingkar - mesin dinilai dengan keluarannya")
+        print("  sendiri - sehingga angka di atas cenderung OPTIMISTIS. Angka ini baru sah")
+        print("  dilaporkan setelah anotator manusia mengisi lembar verifikasi")
+        print("  (docs/LANGKAH_ANOTASI.md), yang menandai dokumen dengan identitas anotator.")
+    if asal["manusia"]:
+        print(f"  Acuan yang sudah diverifikasi manusia: {asal['manusia']} dokumen")
     if DOKUMEN_GANDA:
         print(f"Berkas ganda (dihitung sekali): {len(DOKUMEN_GANDA)}")
         for nama, utama in DOKUMEN_GANDA:

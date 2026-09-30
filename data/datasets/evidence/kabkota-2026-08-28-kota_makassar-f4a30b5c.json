@@ -72,7 +72,7 @@
     "perihal": "${hal}",
     "tanggal_surat": "2026-07-02",
     "nama_pejabat": "",
-    "jabatan_pejabat": "Kepala Perangkat",
+    "jabatan_pejabat": "Kepala Badan",
     "nip_pejabat": "197002161998031004",
     "verification_url": "https://srikandi.arsip.go.id/result-scan/28k2ZHVupgELjUQKeBIC_g",
     "ada_stempel_basah": false,
@@ -83,8 +83,8 @@
     "nama_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama"
   },
   "verified": {
-    "status": "TERVERIFIKASI",
-    "sumber": "anotasi_manual",
+    "status": "PRE_LABEL",
+    "sumber": "pre_label_warisan",
     "verified_by": "",
     "verified_at": "",
     "values": {

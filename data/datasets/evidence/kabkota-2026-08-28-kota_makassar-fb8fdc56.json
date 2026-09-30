@@ -12,7 +12,7 @@
   },
   "wilayah": {
     "kode": "kota_makassar",
-    "nama": "KOTA MAKASSAR"
+    "nama": "KOTA MAKASSAR DINAS PENDIDIKAN"
   },
   "field_relevan": [
     "nomor_surat",
@@ -74,7 +74,7 @@
     "perihal": "PENETAPANINOVASIDANTIMINOVASI GENTING(AGEN ANTIBULLYING)",
     "tanggal_surat": "",
     "nama_pejabat": "",
-    "jabatan_pejabat": "",
+    "jabatan_pejabat": "KEPALA DINAS PENDIDIKAN KOTA MAKASSAR",
     "nip_pejabat": "197708311995112001",
     "verification_url": "",
     "ada_stempel_basah": false,
@@ -84,7 +84,6 @@
   "field_tidak_ada": {
     "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
     "nama_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
-    "jabatan_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: jabatan tidak selalu ditulis di bawah tanda tangan",
     "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },
   "verified": {

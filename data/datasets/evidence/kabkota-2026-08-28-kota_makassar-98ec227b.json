@@ -46,7 +46,7 @@
       "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.0,
-        "instansi": 0.8,
+        "instansi": 0.0,
         "perihal": 0.6,
         "tanggal_surat": 0.0,
         "nip_pejabat": 0.0
@@ -58,21 +58,22 @@
     },
     "stage5_validation": {
       "is_valid_nip": false,
-      "confidence_score": 0.35,
+      "confidence_score": 0.2,
       "needs_manual_review": true,
       "validation_flags": [
         "Missing or incomplete Nomor Surat",
+        "Missing Instansi",
         "Missing or invalid date"
       ]
     }
   },
   "metadata": {
     "nomor_surat": "",
-    "instansi": "a. bahwa Rencana Kerja Pemerintah Daerah Kota dalam Peraturan Wali Kota Makassar Nomor 25 Tahun",
+    "instansi": "",
     "perihal": "Rencana Kerja Pemerintah Daerah Tahun 2024 , namun dalam perkembangannya",
     "tanggal_surat": "",
     "nama_pejabat": "",
-    "jabatan_pejabat": "Kepala Badan Peren canaan Pembanguna n Daerah",
+    "jabatan_pejabat": "",
     "nip_pejabat": "",
     "verification_url": "",
     "ada_stempel_basah": false,
@@ -81,8 +82,10 @@
   "text_excerpt": "a. bahwa Rencana Kerja Pemerintah Daerah Kota \nMakassar Tahun 2024 telah diatur dan ditetapkan \ndalam Peraturan Wali Kota Makassar Nomor 25 Tahun \n2023 tentang Rencana Kerja Pemerintah Daerah \nTahun 2024 , namun dalam perkembangannya \nPeraturan Wali Kota dimaksud perlu disesuaikan \nsejalan dengan perubahan kebijakan Pemerintah \nDaerah dan adanya hasil pengendalian, evaluasi serta \npen yesuaian terhadap perkembangan kondisi di \nDaerah , maka Peraturan Wali Kota Makassar Nomor \n25 Tahun 2023 tentang Rencana Kerja Pemerintah \nDaerah Tahun 2024, perlu diubah dan ditinjau \nkembali; \nb. bahwa berdasarkan pertimbangan sebagaimana \ndimaksud pada huruf a, perlu menetapkan Peraturan \nWali Kota Makassar tentang Perubahan atas Peraturan \nWali Kota Makassar Nomor 25 Tahun 2023 tentang \nRencana Kerja Pemerintah Daerah Tahun 2024; \n1. Pasal 18 ayat (6) Undang-Undang Dasar Negara \nRepublik Indonesia Tahun 1945; \n2. Undang -Undang Nomor 29 Tahun 1959 tentang \npembentukan Daerah Tingkat II di Sulawesi \n(Lembaran Negara Republik Indonesia Tahun 1959 \nNomor 74, Tambahan Lembaran Negara Republik \nIndonesia Nomor 1822 ); \nWAL! KOTA MAKASSAR, \nDENGAN RAHMAT TUHAN YANG MAHA ESA \nMengingat \nMenimbang \nPERATURAN WAL! KOTA MAKASSAR \nNOMOR: 3o 7AHv t4 !lo1y \nTENT ANG \nPERUBAHAN ATAS PERATURAN WALI KOTA MAKASSAR NOMOR 25 \nTAHUN 2023 TENTANG RENCANA KERJA PEMERINTAH DAERAH \nTAHUN 2024 \nWAL! KOTA MAKASSAR \nPROVINS! SULAWESI SELATAN \n\nMEMUTUSKAN: \nPERATURAN WALI KOTA TENTANG PERUBAHAN ATAS \nPERATURAN WALI K",
   "field_tidak_ada": {
     "nomor_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "instansi": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
     "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
     "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
+    "jabatan_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
     "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
     "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },

@@ -78,8 +78,8 @@
     "verification_url": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi"
   },
   "verified": {
-    "status": "TERVERIFIKASI",
-    "sumber": "anotasi_manual",
+    "status": "PRE_LABEL",
+    "sumber": "pre_label_warisan",
     "verified_by": "",
     "verified_at": "",
     "values": {

@@ -6,27 +6,28 @@
 - Dokumen dievaluasi: **8**
 - Dokumen tanpa acuan (dilewati): **18**
 - Titik data: **35**
-- Akurasi: **78.6%** · Akurasi ketat: **74.3%**
+- Akurasi: **77.1%** · Akurasi ketat: **71.4%**
 
 | Field | Acuan | Tepat | Sebagian | Salah | Kosong | Akurasi | Ketat |
 |---|---|---|---|---|---|---|---|
 | `nomor_surat` | 3 | 3 | 0 | 0 | 0 | 100.0% | 100.0% |
-| `instansi` | 8 | 6 | 2 | 0 | 0 | 87.5% | 75.0% |
+| `instansi` | 8 | 6 | 1 | 0 | 1 | 81.2% | 75.0% |
 | `perihal` | 8 | 4 | 1 | 1 | 2 | 56.2% | 50.0% |
 | `tanggal_surat` | 4 | 4 | 0 | 0 | 0 | 100.0% | 100.0% |
 | `nama_pejabat` | 3 | 2 | 0 | 0 | 1 | 66.7% | 66.7% |
-| `jabatan_pejabat` | 4 | 3 | 0 | 1 | 0 | 75.0% | 75.0% |
+| `jabatan_pejabat` | 4 | 2 | 2 | 0 | 0 | 75.0% | 50.0% |
 | `nip_pejabat` | 3 | 3 | 0 | 0 | 0 | 100.0% | 100.0% |
 | `verification_url` | 2 | 1 | 0 | 1 | 0 | 50.0% | 50.0% |
-| **TOTAL** | **35** | | | | | **78.6%** | **74.3%** |
+| **TOTAL** | **35** | | | | | **77.1%** | **71.4%** |
 
 ## Dokumen dengan kesalahan
 
 | Berkas | Salah | Kosong |
 |---|---|---|
 | `kabkota-2026-08-28-kota_makassar-18bfb801.pdf` | — | perihal |
+| `kabkota-2026-08-28-kota_makassar-3cade67d.pdf` | — | instansi |
 | `kabkota-2026-08-28-kota_makassar-50c5af16.pdf` | — | perihal |
-| `kabkota-2026-08-28-kota_makassar-f4a30b5c.pdf` | perihal, jabatan_pejabat, verification_url | nama_pejabat |
+| `kabkota-2026-08-28-kota_makassar-f4a30b5c.pdf` | perihal, verification_url | nama_pejabat |
 
 ## Dokumen tanpa acuan (belum diverifikasi manusia)
 

@@ -46,7 +46,7 @@
       "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.0,
-        "instansi": 0.8,
+        "instansi": 0.0,
         "perihal": 0.6,
         "tanggal_surat": 0.0,
         "nip_pejabat": 0.0
@@ -58,21 +58,22 @@
     },
     "stage5_validation": {
       "is_valid_nip": false,
-      "confidence_score": 0.35,
+      "confidence_score": 0.2,
       "needs_manual_review": true,
       "validation_flags": [
         "Missing or incomplete Nomor Surat",
+        "Missing Instansi",
         "Missing or invalid date"
       ]
     }
   },
   "metadata": {
     "nomor_surat": "",
-    "instansi": "WALi KOTA MAKASSAR PERA TU RAN W ALI KOTA MAKASSAR",
+    "instansi": "",
     "perihal": "RENCANA KERJA PEMERINTAH DAERAH TAHUN 2026 DENGAN RAHMAT TUHAN YANG MAHA ESA",
     "tanggal_surat": "",
     "nama_pejabat": "",
-    "jabatan_pejabat": "kepala daerah dan DPRD dalam penyelenggaraan Urusan",
+    "jabatan_pejabat": "WALi KOTA MAKASSAR",
     "nip_pejabat": "",
     "verification_url": "",
     "ada_stempel_basah": false,
@@ -81,6 +82,7 @@
   "text_excerpt": "-------------------------------------------� \nWALi KOTA MAKASSAR \nPROVINS! SULAWESI SELATAN \nPERA TU RAN W ALI KOTA MAKASSAR \nNOMOR 1S TAHUN 2025 \nTENTANG \nRENCANA KERJA PEMERINTAH DAERAH TAHUN 2026 \nDENGAN RAHMAT TUHAN YANG MAHA ESA \nWALi KOTA MAKASSAR, \nMenirnbang \nMengingat \nbahwa untuk rnelaksanakan ketentuan Pasal 26 ayat (2) \nUndang-Undang Norn.or 25 Tahun 2004 tentang Sistem \nPerencanaan Pembangunan Nasional dan ketentuan Pasal \n264 ayat (2) Undang-Undang 23 Tahun 2014 tentang \nPernerintahan Daerah sebagairnana telah diubah beberapa \nkali terakhir dengan Undang-Undang 6 Tahun 2023 \ntentang Penetapan Peraturan Pemerintah Pengganti \nr _.-. TT _. 1 .- r .--=.%. t nr _ 1 .-.- tot t-.- 4-.- - 4' ..4or.' UIudIUIIUAll INOIIIUI A IAuun 4u44 uci~ii pa hcijd \nmenjadi Undang-Undang, perlu menetapkan Peraturan \nWali Kota tentang Rencana Kerja Pemerintah Daerah \nTahun 2026; \n1. Pasal 18 ayat (6) Undang-Undang Dasar Negara \nRepublik Indonesia Tahun 1945; \n2. Undang-Undang Nomor 25 Tahun 2004 tentang \nSistern Perencanaan Pembangunan Nasional \n(Lembaran Negara Republik Indonesia Tahun 2004 \nNomor 104, Tambahan Lembaran Negara Republik \nIndonesia Nomor 4421) ; \n3. Undang-Undang Nomor 23 Tahun 2014 tentang \nPemerintahan Daerah (1Lembaran Negara Republik \nIndonesia Tahun 2014 Nomor 244, Tambahan \nLembaran Negara Republik Indonesia Nomor 5587) \nsebagaimana telah diubah beberapa ali terakhir \ndengan Undang-Undang Nomor 6 Tahun 2023 tentang \nPenetapan Peraturan Pemerintah Pengganti Undang­ ",
   "field_tidak_ada": {
     "nomor_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "instansi": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
     "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
     "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
     "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",

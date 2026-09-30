@@ -175,12 +175,12 @@
       "properties": {
         "status": {
           "type": "string",
-          "enum": ["TERVERIFIKASI", "BELUM_DIVERIFIKASI", "BELUM_TERBACA_SCAN"],
-          "description": "TERVERIFIKASI = sudah dibaca ulang manusia; BELUM_TERBACA_SCAN = tidak ada lapisan teks, perlu OCR"
+          "enum": ["TERVERIFIKASI", "PRE_LABEL", "BELUM_DIVERIFIKASI", "BELUM_TERBACA_SCAN"],
+          "description": "TERVERIFIKASI = sudah dibaca ulang manusia (WAJIB punya verified_by); PRE_LABEL = nilai awal mesin dari ground_truth.json lama, BELUM diverifikasi manusia; BELUM_TERBACA_SCAN = tidak ada lapisan teks sama sekali"
         },
         "sumber": {
           "type": "string",
-          "enum": ["anotasi_manual", "pembacaan_ulang", ""],
+          "enum": ["anotasi_manual", "pembacaan_ulang", "pre_label_warisan", ""],
           "description": "Asal nilai pada `values`"
         },
         "verified_by": { "type": "string" },

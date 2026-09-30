@@ -6,15 +6,18 @@
   "page_count": 17,
   "is_scanned": true,
   "doc_type": {
-    "jenis": "tidak_diketahui",
-    "label": "Belum terklasifikasi",
-    "keyakinan": 0.0
+    "jenis": "anggaran",
+    "label": "Dokumen Anggaran (DPA/RKA/RKAS)",
+    "keyakinan": 0.65
   },
   "wilayah": {
-    "kode": "tidak_diketahui",
-    "nama": ""
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR"
   },
-  "field_relevan": [],
+  "field_relevan": [
+    "instansi",
+    "tanggal_surat"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -36,14 +39,14 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
-      "text_source": "pdf_text_layer",
-      "ocr_engine": "",
+      "text_source": "ocr",
+      "ocr_engine": "rapidocr",
       "field_confidence": {
         "nomor_surat": 0.0,
         "instansi": 0.8,
-        "perihal": 0.0,
+        "perihal": 0.6,
         "tanggal_surat": 0.0,
-        "nip_pejabat": 0.0
+        "nip_pejabat": 0.9
       }
     },
     "stage4_qr": {
@@ -51,37 +54,32 @@
       "detector": ""
     },
     "stage5_validation": {
-      "is_valid_nip": false,
-      "confidence_score": 0.2,
+      "is_valid_nip": true,
+      "confidence_score": 0.45,
       "needs_manual_review": true,
       "validation_flags": [
         "Missing or incomplete Nomor Surat",
-        "Missing Perihal",
         "Missing or invalid date"
       ]
     }
   },
   "metadata": {
     "nomor_surat": "",
-    "instansi": "UPTSPF SDINPRESTALLOTUA2",
-    "perihal": "",
+    "instansi": "SD INPRES TALLO TUA 2",
+    "perihal": "aman1dari16 Rinclan Perhitungan",
     "tanggal_surat": "",
-    "nama_pejabat": "",
-    "jabatan_pejabat": "",
-    "nip_pejabat": "",
+    "nama_pejabat": "Megawati, S.d",
+    "jabatan_pejabat": "Bendahara Sekolah RINIA",
+    "nip_pejabat": "198706092010012033",
     "verification_url": "",
     "ada_stempel_basah": false,
     "ada_tanda_tangan": false
   },
-  "text_excerpt": "ARKAS\nUPTSPF\nSDINPRESTALLOTUA2\nTA2025",
+  "text_excerpt": "ARKAS\nUPTSPF\nSD INPRES TALLO TUA 2\nTA2025\nKERTAS KERJA RENCANA KEGIATAN DANANGGARAN SEKOLAH(RKAS)PERTAHAP\nTAHUNANGGARAN:2025\nNPSN\n40314013\nNamaSekolah:UPTSPFSDINPRESTALLOTUA2\nAlamat\n:JI.Sultan Abdullah INo.16,Kec.Tallo\nKabupaten\n：KotaMakassar\nProvinsi\n:Prov.Sulawesi Selatan\nTahap\n：IdanIl\nA.PENERIMAAN\nSumberDana:\nNo.Kode\nPenerimaan\nJumlah\n4.3.1.01.\nBOSPReguler\n360.900.000\nTotalPenerimaan\n360.900.000\nB.BELANJA\nRincian Perhitungan\nNo.\nKode\nKode\nTahap\nUraian\nJumlah\nUrut\nRekening\nProgram\nVolume Satuan Tarif Harga\n1\n2\n1.\n02.\nPengembangan StandarIsi\n4.230.000\n630.000\n3.600.000\n2.\n02.03.\nPelaksanaan Kegiatan Pembelajaran dan Ekstrakurikuler\n4.130.000\n630.000\n3.500.000\n3.\n02.03.01.PenyusunanKurikulum\n4.130.000\n630.000\n3.500.000\n4.\n5.1.02.01.0102.03.01.PelatihanKegiatan PenyusunanKOSPs\n1paket\n3500000\n3.500.000\n可\n3.500.000\n0036\n5.\n5.1.02.01.0102.03.01.RapatPenyusunanKOSP,PersiapanPTS,E-KinerjaPMM\n18dus\n35000\n630.000\n630.000\n0\n0052\n6.\n02.06.\nPengembangan Profesi Pendidik dan Tenaga Kependidikan\n100.000\no\n100.000\n7.\n02.06.01.Kegiatan diskusi kolaborasi pengembangan RPP dalam\n100.000\n。\n100.000\nKomunitasBelajar(termasukKKG/MGMP/MGMPS/MGPMPK)\n8.\n5.1.02.04.0102.06.01.Biaya Transport dalamDaerah-WilayahKota\n2lorang/\n50000\n100.000\n100.000\n0003\nhari\n9.\n03.\nStandar Proses\n94.745.400\n50.734.500\n44.010.900\nKertasKerjaperTahap-NPSN:40314013,NamaSekolah:UPTSPFSDINPRESTALLOTUA2\nHalaman1dari16\nRinclan Perhitungan\nTahap\nNo.\nKode\nKode\nUraian\nJumlah\nUrut\nRekening\nProgram\nVolume Satuan\nTarif Harga\n1\n2\n13.3",
   "field_tidak_ada": {
-    "nomor_surat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "perihal": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "tanggal_surat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "jabatan_pejabat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
-    "verification_url": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi"
+    "nomor_surat": "tidak berlaku untuk jenis dokumen ini (Dokumen Anggaran (DPA/RKA/RKAS)) - bukan kegagalan ekstraksi",
+    "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
+    "verification_url": "tidak berlaku untuk jenis dokumen ini (Dokumen Anggaran (DPA/RKA/RKAS)) - bukan kegagalan ekstraksi"
   },
   "verified": {
     "status": "BELUM_DIVERIFIKASI",
@@ -100,5 +98,5 @@
     },
     "berbeda_dari_mesin": []
   },
-  "text_sha256": ""
+  "text_sha256": "0a13753dfba58439721b8bf577692ba0c3e72c4422cfeb9a80555c1ba0b30f62"
 }

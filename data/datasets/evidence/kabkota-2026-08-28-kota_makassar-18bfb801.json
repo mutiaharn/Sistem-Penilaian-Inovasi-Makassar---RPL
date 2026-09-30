@@ -65,11 +65,11 @@
   },
   "metadata": {
     "nomor_surat": "",
-    "instansi": "SDI Tallo Tua 2 Makassar 9/27/25, 6:21 PM Pemilihan Duta Genting: Agen Anti Bully sebagai Penguat Karakter Siswa di SDI Tallo Tua 2 Makassar - BN Nasional",
+    "instansi": "SDI Tallo Tua 2 Makassar",
     "perihal": "",
     "tanggal_surat": "2025-06-24",
     "nama_pejabat": "",
-    "jabatan_pejabat": "Kepala Sekolah",
+    "jabatan_pejabat": "",
     "nip_pejabat": "",
     "verification_url": "",
     "ada_stempel_basah": false,
@@ -80,12 +80,13 @@
     "nomor_surat": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi",
     "perihal": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
     "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi",
+    "jabatan_pejabat": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi",
     "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi",
     "verification_url": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi"
   },
   "verified": {
-    "status": "TERVERIFIKASI",
-    "sumber": "anotasi_manual",
+    "status": "PRE_LABEL",
+    "sumber": "pre_label_warisan",
     "verified_by": "",
     "verified_at": "",
     "values": {
@@ -99,7 +100,6 @@
       "verification_url": ""
     },
     "berbeda_dari_mesin": [
-      "instansi",
       "perihal"
     ]
   },
