@@ -5,6 +5,21 @@
   "file_size_bytes": 100687,
   "page_count": 1,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "sertifikat",
+    "label": "Sertifikat",
+    "keyakinan": 0.8
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR"
+  },
+  "field_relevan": [
+    "instansi",
+    "tanggal_surat",
+    "nama_pejabat",
+    "jabatan_pejabat"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -25,6 +40,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.8,
         "instansi": 0.0,
@@ -62,8 +79,8 @@
   "field_tidak_ada": {
     "instansi": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
     "nama_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
-    "nip_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
-    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+    "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Sertifikat) - bukan kegagalan ekstraksi",
+    "verification_url": "tidak berlaku untuk jenis dokumen ini (Sertifikat) - bukan kegagalan ekstraksi"
   },
   "verified": {
     "status": "BELUM_DIVERIFIKASI",

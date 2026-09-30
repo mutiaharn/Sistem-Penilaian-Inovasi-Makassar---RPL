@@ -5,6 +5,25 @@
   "file_size_bytes": 71935,
   "page_count": 1,
   "is_scanned": true,
+  "doc_type": {
+    "jenis": "surat_pernyataan",
+    "label": "Surat Pernyataan / Keterangan",
+    "keyakinan": 0.65
+  },
+  "wilayah": {
+    "kode": "tidak_diketahui",
+    "nama": ""
+  },
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "nama_pejabat",
+    "jabatan_pejabat",
+    "nip_pejabat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",

@@ -5,6 +5,19 @@
   "file_size_bytes": 1197171,
   "page_count": 13,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "anggaran",
+    "label": "Dokumen Anggaran (DPA/RKA/RKAS)",
+    "keyakinan": 0.8
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR"
+  },
+  "field_relevan": [
+    "instansi",
+    "tanggal_surat"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -26,6 +39,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.0,
         "instansi": 0.8,
@@ -62,11 +77,11 @@
   },
   "text_excerpt": "KERTAS KERJA RENCANA KEGIATAN DAN ANGGARAN SEKOLAH (RKAS) PER TAHAP\nTAHUN ANGGARAN : 2026\nNama Sekolah\nAlamat\nKabupaten\nProvinsi\nTahap\n:\n:\nUPT SPF SD INPRES TALLO TUA 2\nJl. Sultan Abdullah I No. 16, Kec. Tallo\nKota Makassar\nProv. Sulawesi Selatan\nI dan II\n:\n:\n:\nNPSN : 40314013\nA. PENERIMAAN\nSumber Dana : \nNo. Kode Penerimaan Jumlah\n4.3.1.01.     BOSP Reguler 369.900.000  \nB. BELANJA\n   Total Penerimaan 369.900.000  \nNo.\nUrut Uraian Jumlah\nTahap\n1 2Volume Satuan Tarif Harga\nRincian PerhitunganKode\nRekening\nKode\nProgram\n1. Pengembangan Standar Isi 15.250.000 6.250.000 9.000.00002.\n2. Pengembangan Perpustakaan 9.250.000 6.250.000 3.000.00002.02.\n01.3. Kegiatan pemberdayaan perpustakaan terutama untuk\npengembangan minat baca peserta didik\n9.250.000 6.250.000 3.000.00002.02.\n01.4. Tanaman Hias Pakis Sikas-Tinggi ±150 cm 150.000 150.000  01 per\nbatang\npohon\n15000002.02.5.1.02.01.01.\n0008\n01.5. KEGIATAN PENGEMBANGAN MINAT BACA SISWA 3.000.000  0 3.000.0001 kegiata\nn\n300000002.02.5.1.02.01.01.\n0012\n01.6. PEMBELIAN NASI TUMPENG DALAM KEGIATAN PERESMIAN\nPERPUSTAKAAN\n500.000 500.000  01 paket 50000002.02.5.1.02.01.01.\n0012\n01.7. KONSUMSI HARI PERTAMA KEGIATAN PENGIMBASAN\nLOKAKARYA MEMBACA SNACK\n440.000 440.000  022 dus 2000002.02.5.1.02.01.01.\n0012\nHalaman 1 dari 13Kertas Kerja perTahap - NPSN : 40314013, Nama Sekolah : UPT SPF SD INPRES TALLO TUA 2\nNo.\nUrut Uraian Jumlah\nTahap\n1 2Volume Satuan Tarif Harga\nRincian PerhitunganKode\nRekening\nKode\nProgram\n01.8. KONSUMSI HARI 1 KEGIATAN PENG",
   "field_tidak_ada": {
-    "nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "nomor_surat": "tidak berlaku untuk jenis dokumen ini (Dokumen Anggaran (DPA/RKA/RKAS)) - bukan kegagalan ekstraksi",
     "tanggal_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
-    "nama_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
-    "nip_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
-    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+    "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Dokumen Anggaran (DPA/RKA/RKAS)) - bukan kegagalan ekstraksi",
+    "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Dokumen Anggaran (DPA/RKA/RKAS)) - bukan kegagalan ekstraksi",
+    "verification_url": "tidak berlaku untuk jenis dokumen ini (Dokumen Anggaran (DPA/RKA/RKAS)) - bukan kegagalan ekstraksi"
   },
   "verified": {
     "status": "BELUM_DIVERIFIKASI",

@@ -5,6 +5,25 @@
   "file_size_bytes": 3834887,
   "page_count": 8,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "surat_dinas",
+    "label": "Surat Dinas / Undangan / Nota Dinas",
+    "keyakinan": 0.8
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR BADAN RISET DAN"
+  },
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "nama_pejabat",
+    "jabatan_pejabat",
+    "nip_pejabat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -26,6 +45,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.8,
         "instansi": 0.8,

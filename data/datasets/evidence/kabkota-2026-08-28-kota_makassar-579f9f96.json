@@ -5,6 +5,25 @@
   "file_size_bytes": 660926,
   "page_count": 1,
   "is_scanned": true,
+  "doc_type": {
+    "jenis": "surat_pernyataan",
+    "label": "Surat Pernyataan / Keterangan",
+    "keyakinan": 0.8
+  },
+  "wilayah": {
+    "kode": "tidak_diketahui",
+    "nama": ""
+  },
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "nama_pejabat",
+    "jabatan_pejabat",
+    "nip_pejabat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -25,12 +44,14 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "ocr",
+      "ocr_engine": "rapidocr",
       "field_confidence": {
-        "nomor_surat": 0.0,
-        "instansi": 0.0,
-        "perihal": 0.0,
+        "nomor_surat": 0.8,
+        "instansi": 0.8,
+        "perihal": 0.6,
         "tanggal_surat": 0.0,
-        "nip_pejabat": 0.0
+        "nip_pejabat": 0.9
       }
     },
     "stage4_qr": {
@@ -38,38 +59,29 @@
       "detector": ""
     },
     "stage5_validation": {
-      "is_valid_nip": false,
-      "confidence_score": 0.05,
+      "is_valid_nip": true,
+      "confidence_score": 0.75,
       "needs_manual_review": true,
       "validation_flags": [
-        "Missing or incomplete Nomor Surat",
-        "Missing Instansi",
-        "Missing Perihal",
         "Missing or invalid date"
       ]
     }
   },
   "metadata": {
-    "nomor_surat": "",
-    "instansi": "",
-    "perihal": "",
+    "nomor_surat": "285/421.3-UPT.SMP.2/X/2025",
+    "instansi": "PEMERINTAH KABUPATEN BONE DINAS PENDIDIKAN",
+    "perihal": "Inovasi Daerah, dengan ini saya yang bertanda tangan di bawah ini",
     "tanggal_surat": "",
-    "nama_pejabat": "",
-    "jabatan_pejabat": "",
-    "nip_pejabat": "",
+    "nama_pejabat": "HJ. MUSLIHA, S.S., S.Pd., M.Pd",
+    "jabatan_pejabat": "Kepala Sekolah",
+    "nip_pejabat": "197406302006042023",
     "verification_url": "",
     "ada_stempel_basah": false,
     "ada_tanda_tangan": false
   },
-  "text_excerpt": "",
+  "text_excerpt": "PEMERINTAHKABUPATENBONE\nDINAS PENDIDIKAN\nUPT SMP NEGERI 2 BAREBBO\nDesa Kading,Barebbo,Bone, Sulawesi Selatan,\nLaman https://bone.go.id,Pos-el smp2barebbo@yahoo.com\nSURATPERNYATAAN\nNOMOR : 285/421.3-UPT.SMP.2/X/2025\nPeraturan Bupati Bone Provinsi Sulawesi Selatan Nomor 3 Tahun 2022 tentang Inovasi\nDaerah, dengan ini saya yang bertanda tangan di bawah ini :\nNama\n: HJ. MUSLIHA, S.S., S.Pd., M.Pd\nNIP\n：197406302006042023\nPangkat / Gol.\n: Pembina Tk.1/IV.b\nJabatan\n:Kepala Sekolah\nDengan ini menyatakan bahwa telah melakukan replikasi “Inovasi Pelayanan\nurusan pemerintahan yang menjadi kewenangan Daerah\", dalam rangka Peningkatan\nPelayanan Publik di Lingkungan Pemerintahan Kabupaten Bone Provinsi Sulawesi Selatan.\nAdapun Inovasi yang direplikasi, sebagai berikut :\nSatuan Kerja Pemilik\nNo.\nNama Inovasi\nInovasi\n1.\nGenting (Agen Anti Bullying)\nUPTSMPNegeri2Barebbo\nDemikian Surat Pernyataan ini dibuat untuk dipergunakan sebagaimana\nmestinya.\nktober2025\nNegeri 2Barebbo\nBON\n☆\nUPTSM\nDIN\nWEEHSE\n/S.S.,S.Pd.,M.Pd",
   "field_tidak_ada": {
-    "nomor_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
-    "instansi": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
-    "perihal": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
     "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
-    "nama_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
-    "jabatan_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: jabatan tidak selalu ditulis di bawah tanda tangan",
-    "nip_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
     "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },
   "verified": {

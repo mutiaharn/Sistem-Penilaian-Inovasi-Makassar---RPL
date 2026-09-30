@@ -5,6 +5,16 @@
   "file_size_bytes": 458470,
   "page_count": 2,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "tidak_diketahui",
+    "label": "Belum terklasifikasi",
+    "keyakinan": 0.0
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR UPT SPF SD INPR"
+  },
+  "field_relevan": [],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -26,6 +36,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.0,
         "instansi": 0.8,
@@ -61,8 +73,8 @@
   },
   "text_excerpt": "PEMERINTAH KOTA MAKASSAR \nUPT SPF SD INPRES TALLO TUA 2 \nJalan Sultan Abdullah 1 No.16 Kelurahan Tallo Kecamatan Tallo Kota Makassar,  \nKode Pos 90212, Email: uptsditallotua2@gmail.com \n \nRASIO PENGADUAN \nLAYANAN INOVASI \n \nTotal Pengaduan : 5 Pengaduan \nTotal Ditangani : 5 Pengaduan \nRasio Pengaduan: 5/5 x 100% =  100 persen \n \n           \n \n\n      \n \n \n \nMakassar, 13 Juli 2026 \nKepala UPT SPF SD Inpres Tallo Tua 2 \n \n \n \n \n \nErnawati, S.Pd.., M.Pd.  \nNIP. 19861014 201001 2 029",
   "field_tidak_ada": {
-    "nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
-    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+    "nomor_surat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
+    "verification_url": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi"
   },
   "verified": {
     "status": "TERVERIFIKASI",

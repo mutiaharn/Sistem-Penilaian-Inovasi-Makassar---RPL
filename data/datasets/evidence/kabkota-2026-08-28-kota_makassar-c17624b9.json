@@ -5,6 +5,20 @@
   "file_size_bytes": 417007,
   "page_count": 6,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "laporan",
+    "label": "Laporan / Rekapitulasi / Monev",
+    "keyakinan": 0.65
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR"
+  },
+  "field_relevan": [
+    "instansi",
+    "tanggal_surat",
+    "perihal"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -26,6 +40,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.0,
         "instansi": 0.0,
@@ -63,13 +79,13 @@
   },
   "text_excerpt": "𝑱𝒖𝒎𝒍𝒂𝒉 𝑩𝒐𝒃𝒐𝒕 \n 𝟏 \n𝑩𝒐𝒃𝒐𝒕 𝑵𝒊𝒍𝒂𝒊 𝒓𝒂𝒕𝒂 − 𝒓𝒂𝒕𝒂 𝒕𝒆𝒓𝒕𝒊𝒎𝒃𝒂𝒏𝒈 = 𝑱𝒖𝒎𝒍𝒂𝒉 𝑼𝒏𝒔𝒖𝒓 = 𝟏𝟎 = 𝟎, 𝟏 \n𝑰𝑲𝑴 = \n 𝑻𝒐𝒕𝒂𝒍 𝑵𝒊𝒍𝒂𝒊 𝑷𝒆𝒓𝒔𝒆𝒑𝒔𝒊 𝑷𝒆𝒓𝒖𝒏𝒔𝒖𝒓 \n𝑻𝒐𝒕𝒂𝒍 𝑲𝒖𝒐𝒔𝒊𝒐𝒏𝒆𝒓 𝒕𝒆𝒓𝒊𝒔𝒊 \n 𝒙 𝑩𝒐𝒃𝒐𝒕 𝑵𝒊𝒍𝒂𝒊 𝑷𝒆𝒏𝒎𝒊𝒃𝒂𝒏𝒈 \n𝑰𝑲𝑴 𝑼𝒏𝒊𝒕 𝑷𝒆𝒍𝒂𝒚𝒂𝒏𝒂𝒏 𝒙 𝟐𝟓 \n \nLAPORAN HASIL PENELITIAN ANALISIS KEPUASAN \nMASYARAKAT TERHADAP INOVASI \n \nJenis Layanan : Inovasi Genting (Agen Anti Bullying) \nInstansi Pelayanan : Badan Penelitian dan Pengembangan Daerah Kota Makassar \nAlamat : Kantor Balaikota Makassar Jl. Jend. Ahmad Yani No.2 \nWaktu Survey : 22 Juli 2025 – 26 Agustus 2025 \nJumlah Responden : 95 Orang \n \nA. METODE PENGOLAHAN DATA \nPengolahan data IKM dilaksananakan dengan menghitung data hasil jawaban \nResponden yang merupakan persepsi terhadap masing -masing unsur  \npelayanan dan diisikan dalam tabel pengolahan. Nilai IKM dihitung \nmenggunakan “nilai rata -rata tertimbang“ masing -masing unsur pelayanan. \nDalam penghitungan IKM terhadap 9 unsur pelayanan (Peraturan Kementrian \nPendayagunaan Aparatur Negara dan Reformasi Birokrasi Nomor 14 Tahun \n2017), setiap unsur pelayanan memiliki penimbang yang sama dengan rumus \nsebagai berikut: \n \n \nUntuk memperoleh nilai Indeks Kepuasan Masyarakat, digunakan \npendekatan nilai rata-rata tertimbang dengam rumus : \n \n \nAgar dapat memudahkan dalam melihat hasil penilaian IKM untuk \ndiinterpretasikan, maka hasil penilaian IKM dikonversikan dengan nilai dasar 25, \ndengan rumus sebagai berikut : \n \n\nUntuk mengetahui interval pengukuran kualitas pelayanan digunakan tabel \nnilai sebagai berikut : \nNilai \nPersep",
   "field_tidak_ada": {
-    "nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "nomor_surat": "tidak berlaku untuk jenis dokumen ini (Laporan / Rekapitulasi / Monev) - bukan kegagalan ekstraksi",
     "instansi": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
     "perihal": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
-    "nama_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
-    "jabatan_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: jabatan tidak selalu ditulis di bawah tanda tangan",
-    "nip_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
-    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+    "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Laporan / Rekapitulasi / Monev) - bukan kegagalan ekstraksi",
+    "jabatan_pejabat": "tidak berlaku untuk jenis dokumen ini (Laporan / Rekapitulasi / Monev) - bukan kegagalan ekstraksi",
+    "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Laporan / Rekapitulasi / Monev) - bukan kegagalan ekstraksi",
+    "verification_url": "tidak berlaku untuk jenis dokumen ini (Laporan / Rekapitulasi / Monev) - bukan kegagalan ekstraksi"
   },
   "verified": {
     "status": "BELUM_DIVERIFIKASI",

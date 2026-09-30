@@ -5,6 +5,22 @@
   "file_size_bytes": 907630,
   "page_count": 14,
   "is_scanned": true,
+  "doc_type": {
+    "jenis": "peraturan",
+    "label": "Peraturan (Perwali/Perda/Perbup)",
+    "keyakinan": 0.95
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR"
+  },
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -26,10 +42,12 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "ocr",
+      "ocr_engine": "rapidocr",
       "field_confidence": {
         "nomor_surat": 0.0,
-        "instansi": 0.0,
-        "perihal": 0.0,
+        "instansi": 0.8,
+        "perihal": 0.6,
         "tanggal_surat": 0.0,
         "nip_pejabat": 0.0
       }
@@ -40,37 +58,32 @@
     },
     "stage5_validation": {
       "is_valid_nip": false,
-      "confidence_score": 0.05,
+      "confidence_score": 0.35,
       "needs_manual_review": true,
       "validation_flags": [
         "Missing or incomplete Nomor Surat",
-        "Missing Instansi",
-        "Missing Perihal",
         "Missing or invalid date"
       ]
     }
   },
   "metadata": {
     "nomor_surat": "",
-    "instansi": "",
-    "perihal": "",
+    "instansi": "WALIKOTA MAKASSAR PERATURAN DAERAH KOTA MAKASSAR",
+    "perihal": "INOVASI DAERAH DENGANRAHMATTUHANYANGMAHAESA",
     "tanggal_surat": "",
     "nama_pejabat": "",
-    "jabatan_pejabat": "",
+    "jabatan_pejabat": "Kepala Badan Riset dan Inovasi Daerah adalah Kepala",
     "nip_pejabat": "",
     "verification_url": "",
     "ada_stempel_basah": false,
     "ada_tanda_tangan": false
   },
-  "text_excerpt": "",
+  "text_excerpt": "WALIKOTAMAKASSAR\nPROVINSISULAWESISELATAN\nPERATURANDAERAHKOTAMAKASSAR\nNOMOR9TAHUN2023\nTENTANG\nINOVASIDAERAH\nDENGANRAHMATTUHANYANGMAHAESA\nWALIKOTAMAKASSAR,\nMenimbang\n:a.bahwa peningkatan kinerja PemerintahanDaerah\ndiarahkan\nuntuk\nmewujudkan\nmasyarakat melalui peningkatan pelayanan publik,\nkesejahteraan\npemberdayaan dan peran serta masyarakat,dan\npeningkatan daya saingdaerah;\nb.\nbahwa untuk mendukung peningkatan\nPemerintahan Daerah,diperlukan Inovasi Daerah\nkinerja\nberupa\npembaharuan\ndalam\npemerintahan;\npenyelenggaraan\nbahwa berdasarkan ketentuan Pasal 386 ayat (1)\nUndang-Undang Nomor 23 Tahun 2014 tentang\nPemerintahan Daerah sebagaimana telah diubah\nbeberapa kali,terakhir dengan Undang-Undang\nNomor6 Tahun2023 tentang PenetapanPeraturan\nPemerintah Pengganti Undang-Undang\nTahun 2022 tentang Cipta Kerja Menjadi Undang-\nNomor2\nUndang,PemerintahDaerah dapatmelakukaninovasi\ndalam rangka peningkatan kinerja penyelenggaraan\nPemerintahanDaerah;\nd.\nbahwa\nberdasarkanpertimbangan\ndimaksud dalam huruf a,huruf b,dan huruf cperlu\nsebagaimana\nmenetapkan Peraturan Daerah tentang Inovasi\nDaerah;\nMengingat\n1.\nPasal 18 ayat (6) Undang-Undang Dasar Negara\nRepublikIndonesia Tahun1945;\n2.\nUndang-Undang Nomor 29 Tahun 1959 tentang\nPembentukan\nDaerah\nTingkat\nSulawesi(LembaranNegaraRepublikIndonesia Tahun\nII\ndi\n1959 Nomor 74,Tambahan Lembaran Negara\nRepublikIndonesiaNomor 1822);\nCS\nCamScanner\n-2-\n3. Undang-Undang Nomor 23 Tahun 2014 tentang\nPemerintahan Daerah (Lembaran Negara Republik\nIndonesia Tahun 2",
   "field_tidak_ada": {
     "nomor_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
-    "instansi": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
-    "perihal": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
     "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
-    "nama_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
-    "jabatan_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: jabatan tidak selalu ditulis di bawah tanda tangan",
-    "nip_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
+    "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
+    "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
     "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },
   "verified": {

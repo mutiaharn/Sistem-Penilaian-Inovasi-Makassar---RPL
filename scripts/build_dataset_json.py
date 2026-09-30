@@ -203,6 +203,7 @@ def build_one(
     manifest_map: dict[str, dict],
     ocr_aktif: bool = True,
     ocr_halaman: int = 3,
+    ocr_min_teks: int = 40,
     pakai_ai: bool = False,
 ) -> dict:
     """Jalankan pipeline 5 tahap untuk satu PDF dan susun payload sesuai skema.
@@ -223,9 +224,11 @@ def build_one(
     ocr_engine = ""
 
     # --- OCR lokal untuk dokumen tanpa lapisan teks (hasil scan) ---------------
-    # Hanya dijalankan bila memang tidak ada teks sama sekali, dan hanya pada
-    # jendela halaman tertentu (default 3) supaya waktu proses tetap wajar.
-    if not full_text.strip() and ocr_aktif:
+    # Pemicunya bukan hanya "kosong sama sekali": banyak scan menghasilkan pecahan
+    # teks (nomor halaman, watermark) yang tidak berguna. Karena itu dipakai ambang
+    # minimum karakter. Hanya dijalankan bila memang tidak memadai, dan hanya pada
+    # jendela halaman tertentu (default 3 + halaman terakhir) agar waktu tetap wajar.
+    if len(full_text.strip()) < ocr_min_teks and ocr_aktif:
         ocr = ocr_default()
         if ocr.siap():
             indeks = pilih_halaman_ocr(meta["page_count"], ocr_halaman)
@@ -389,6 +392,8 @@ def main() -> int:
                         help="Jumlah halaman awal yang di-OCR (0 = semua halaman)")
     parser.add_argument("--pakai-ai", action="store_true",
                         help="Izinkan AI Vision dipanggil (bawaan: TIDAK, 100%% lokal)")
+    parser.add_argument("--ocr-min-teks", type=int, default=40,
+                        help="Di bawah jumlah karakter ini, dokumen dianggap perlu OCR (bawaan 40)")
     args = parser.parse_args()
 
     ocr_aktif = not args.no_ocr
@@ -446,6 +451,7 @@ def main() -> int:
                     manifest_map,
                     ocr_aktif=ocr_aktif,
                     ocr_halaman=args.ocr_halaman,
+                    ocr_min_teks=args.ocr_min_teks,
                     pakai_ai=args.pakai_ai,
                 ),
                 gt_map.get(pdf.name, {}),

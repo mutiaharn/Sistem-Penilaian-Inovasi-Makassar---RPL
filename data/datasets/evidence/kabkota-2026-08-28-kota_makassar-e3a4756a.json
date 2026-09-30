@@ -5,6 +5,19 @@
   "file_size_bytes": 602327,
   "page_count": 1,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "bukti_media",
+    "label": "Bukti Media / Tangkapan Layar / Dokumentasi",
+    "keyakinan": 0.8
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR UPT SPF SD INPR"
+  },
+  "field_relevan": [
+    "instansi",
+    "perihal"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -25,6 +38,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.0,
         "instansi": 0.8,
@@ -61,9 +76,9 @@
   },
   "text_excerpt": "PEMERINTAH KOTA MAKASSAR \nUPT SPF SD INPRES TALLO TUA 2 \nJl Sultan Abdullah I No.16. Kel Tallo. Kec. Tallo Kota  Makassar Sulawesi Selatan Kode Pos 90212 \n NSS : 101196002013 Pos-el: sditallotuadua@gmail.com  \n          \n \nSosialisasi Inovasi Daerah menggunakan Media Berita online \nLink berita: https://bidiknasional.id/2026/05/13/sdi-tallo-tua-2-makassar-hadirkan-generasi-tangguh-\nmelalui-duta-genting-dan-literawan/  \n \n \n  \nMakassar, 24 Juli 2026 \nKepala UPT SPF SD Inpres Tallo Tua 2 \n \n \n \n \n \nErnawati, S.Pd.., M.Pd.  \nNIP. 19861014 201001 2 029",
   "field_tidak_ada": {
-    "nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "nomor_surat": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi",
     "perihal": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
-    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+    "verification_url": "tidak berlaku untuk jenis dokumen ini (Bukti Media / Tangkapan Layar / Dokumentasi) - bukan kegagalan ekstraksi"
   },
   "verified": {
     "status": "BELUM_DIVERIFIKASI",

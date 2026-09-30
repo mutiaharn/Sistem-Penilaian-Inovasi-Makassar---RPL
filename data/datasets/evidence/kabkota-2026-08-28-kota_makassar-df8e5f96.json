@@ -5,6 +5,22 @@
   "file_size_bytes": 182525,
   "page_count": 1,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "peraturan",
+    "label": "Peraturan (Perwali/Perda/Perbup)",
+    "keyakinan": 0.8
+  },
+  "wilayah": {
+    "kode": "luar_kota_makassar",
+    "nama": "KABUPATEN PANGKAJENE DAN KEPULAUAN"
+  },
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -25,6 +41,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.8,
         "instansi": 0.8,

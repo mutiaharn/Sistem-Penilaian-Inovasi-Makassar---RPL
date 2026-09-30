@@ -5,6 +5,22 @@
   "file_size_bytes": 107781,
   "page_count": 1,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "peraturan",
+    "label": "Peraturan (Perwali/Perda/Perbup)",
+    "keyakinan": 0.8
+  },
+  "wilayah": {
+    "kode": "luar_kota_makassar",
+    "nama": "KABUPATEN BUNGO SD NEGERI NO"
+  },
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -25,6 +41,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.8,
         "instansi": 0.8,
@@ -46,10 +64,10 @@
   },
   "metadata": {
     "nomor_surat": "421.2/ 108/ SDN 36/2025",
-    "instansi": "PEMERINTAH KABUPATEN BUNGO Dalam rangka  pelaksanaan  Peraturan  Pemerintah  Nomor 38  Tahun  2017 tentang",
+    "instansi": "PEMERINTAH KABUPATEN BUNGO Dalam rangka pelaksanaan Peraturan Pemerintah Nomor 38 Tahun 2017 tentang",
     "perihal": "Inovasi Daerah; Peraturan Menteri Dalam Negeri Republik Indonesia Nomor 104 tahun 2018 tentang Penilaian dan Pemberian Penghargaan dan/atau Insentif Inovasi Daerah serta",
     "tanggal_surat": "2025-09-10",
-    "nama_pejabat": "N a m a                 : YUNITA SAPUTRI,S.Pd.I",
+    "nama_pejabat": "N a m a : YUNITA SAPUTRI, S.Pd.I",
     "jabatan_pejabat": "Kepala Sekolah",
     "nip_pejabat": "199006252020122013",
     "verification_url": "",

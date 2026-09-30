@@ -5,6 +5,22 @@
   "file_size_bytes": 1663088,
   "page_count": 8,
   "is_scanned": true,
+  "doc_type": {
+    "jenis": "peraturan",
+    "label": "Peraturan (Perwali/Perda/Perbup)",
+    "keyakinan": 0.95
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR TAHUN"
+  },
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -26,6 +42,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.0,
         "instansi": 0.8,
@@ -64,8 +82,8 @@
   "field_tidak_ada": {
     "nomor_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
     "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
-    "nama_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
-    "nip_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
+    "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
+    "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
     "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },
   "verified": {

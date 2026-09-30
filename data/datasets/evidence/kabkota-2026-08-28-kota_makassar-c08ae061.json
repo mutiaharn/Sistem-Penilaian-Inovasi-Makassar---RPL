@@ -5,6 +5,16 @@
   "file_size_bytes": 209364,
   "page_count": 2,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "tidak_diketahui",
+    "label": "Belum terklasifikasi",
+    "keyakinan": 0.0
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR UPT SPF SEKOLAH"
+  },
+  "field_relevan": [],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -26,6 +36,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.8,
         "instansi": 0.8,
@@ -59,7 +71,7 @@
   },
   "text_excerpt": "PEMERINTAH KOTA MAKASSAR \nUPT SPF SEKOLAH DASAR INPRES TALLO TUA 2 \nJl. Sultan Abdullah 1 No. Kelurahan Tallo Kecamtan Tallo Kota Makassar, \nKode Pos 90212 Email: uptsditallotua2@gmail.com \n \n \nPROSES PEMBUATAN INOVASI GENTING (AGEN ANTI-BULLYING) \nNo: 421.2/046/UPT.SPF.SDI. TT.2/VII/2025 \n \nNo. Uraian Kegiatan Bulan 2025 \nMei Juni Juli \n1. Sosialisasi ke Stakeholder    \n2. Identifikasi dan Asessmen    \n3. Pembentukan Tim    \n4. Pendampingan Pembina    \n5. Penentuan Tugas Tim    \n6. Pelaksanaan Inovasi    \n7. Sosialisasi Ke Luar    \n \n \nKecepatan Inovasi \nWaktu yang digunakan untuk menciptakan inovasi Genting (Agen Anti -Bullying) berlangsung \ndengan cepat dan efisien. UPT SPF SD Inpres Tallo Tua 2 mulai mengembangkan ide pada bulan Mei \n2025 dan meluncurkannya secara resmi pada 15 Juli 2025). Dalam kurun waktu yang relatif singkat, \nsekolah berhasil menyusun perencanaan, membentuk tim, hingga melaksanakan inovasi di \nlapangan. \n \nTahapan Pengembangan \n1. Identifikasi Kebutuhan (14 – 16 Mei 2025): \nPada tahap ini, sekolah melakukan survei dan observasi untuk menganalisis masalah bullying di \nsekolah. Sekolah mengidentifikasi murid yang rentan terhadap bullying dan mengumpulkan \ndata untuk memahami kondisi yang terjadi. Analisis ini menjadi dasar untuk menentukan \nkebutuhan intervensi anti-bullying di sekolah. \n2. Perumusan Ide dan Konsep (19 – 23 Mei 2025): \nBerdasarkan hasil identifikasi, Genting (Agen Anti -Bullying) mulai dirumuskan sebagai konsep \ninovasi kepemimpinan mur",
   "field_tidak_ada": {
-    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+    "verification_url": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi"
   },
   "verified": {
     "status": "BELUM_DIVERIFIKASI",

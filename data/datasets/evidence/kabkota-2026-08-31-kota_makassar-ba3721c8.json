@@ -5,6 +5,16 @@
   "file_size_bytes": 2082658,
   "page_count": 9,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "tidak_diketahui",
+    "label": "Belum terklasifikasi",
+    "keyakinan": 0.0
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR"
+  },
+  "field_relevan": [],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -26,6 +36,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.0,
         "instansi": 0.8,
@@ -61,8 +73,8 @@
   },
   "text_excerpt": "DAFTAR PENERIMAAN MANFAAT KEGIATAN INOVASI GENTING (AGEN ANTI BULLYING) \nUPT SPF SD INPRES TALLO TUA 2 \nSAMPAI AGUSTUS 2026 \n \nNO PROGRAM \nKEGIATAN/ SUB \nKEGIATAN \nNAMA \nKELOMPOK \nSASARAN \nNAMA PENGURUS NAMA PETUGAS JUMLAH ANGGOTA \n(ORANG) \n1 Tim Penggerak Genting Guru dan Tenaga \nKependidikan \nErnawati, S.Pd., M.Pd Hardiyanti, S.Pd.I., M.Pd 18 \n2 Genting Fase A Kelas IA Sri Wahyuni, S.Pd., M.Pd RIFKA SAHARANI 28 \n3 Genting Fase A Kelas IB Rezky Amaliah, S.Pd NURAENI 28 \n4 Genting Fase A Kelas IIA Megawati, S.Pd MUHAMMAD KHAIRUL ANAS 28 \n5 Genting Fase A Kelas IIB Eka Mustikawati, S.Pd HAERUL HABIBI 28 \n6 Genting Fase B Kelas IIIA Hasriati, S.Pd BILQIS KHADIJAH PUTRI 32 \n7 Genting Fase B Kelas IIIB Ardi, S.Pd HALIPAH 33 \n8 Genting Fase B Kelas IVA Risma Eka Damayanti, S.Pd ZAM ZAM 39 \n9 Genting Fase B Kelas IVB Mardiana Rusdi, S.Pd., Gr FIKRAM 36 \n10 Genting Fase C Kelas VA Musdalifah, S.Pd ZIDAN 38 \n11 Genting Fase C Kelas VB Andi Cholilah RS, S.Pd., Gr A. DHALILUN 38 \n12 Genting Fase C Kelas VIA Hasri Ainun Efendi, S.Pd KARINA 45 \n13 Genting Fase C Kelas VIB Nur Alim, S.Pd \n \nISMAIL 40 \n14 Genting Paguyuban Orangtua Siswa   Hasanuddin Lestaluhu   Ardi Darmawansyah, S.Pd., M.Pd 205 \nJUMLAH  636 Orang \n \nMakassar, 27 Agustus 2026 \nKepala UPT SPF SD Inpres Tallo Tua 2 \n \n \n \n \n \nErnawati, S.Pd.., M.Pd.  \nNIP. 19861014 201001 2 029\n \nDOKUMENTASI PENERIMA MANFAAT \nINOVASI GENTING (AGEN ANTI-BULLYING) \nUPT SPF SD INPRES TALLO TUA 2",
   "field_tidak_ada": {
-    "nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
-    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+    "nomor_surat": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi",
+    "verification_url": "tidak berlaku untuk jenis dokumen ini (Belum terklasifikasi) - bukan kegagalan ekstraksi"
   },
   "verified": {
     "status": "BELUM_DIVERIFIKASI",

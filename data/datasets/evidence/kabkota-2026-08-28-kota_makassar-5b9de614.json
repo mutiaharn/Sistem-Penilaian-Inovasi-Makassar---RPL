@@ -5,6 +5,22 @@
   "file_size_bytes": 180703,
   "page_count": 1,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "peraturan",
+    "label": "Peraturan (Perwali/Perda/Perbup)",
+    "keyakinan": 0.8
+  },
+  "wilayah": {
+    "kode": "tidak_diketahui",
+    "nama": ""
+  },
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -25,6 +41,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.8,
         "instansi": 0.8,
@@ -48,7 +66,7 @@
   },
   "metadata": {
     "nomor_surat": "421.2/50.a/UPTD.SDN. l 36/SBG/IX/2025",
-    "instansi": "PEMERINTAHKABUPATENMAROS UPTD SON 136 INPRES BONTO TALLASA",
+    "instansi": "PEMERINTAH KABUPATEN MAROS UPTD SON 136 INPRES BONTO TALLASA",
     "perihal": "lnovasi Daerah; Peraturan Menteri Dalam Negeri Republik Indonesia Nomor 104 tahun 2018 tentang Penilaian dan Pemberian",
     "tanggal_surat": "",
     "nama_pejabat": "",
@@ -61,8 +79,8 @@
   "text_excerpt": "• \nPEMERINTAHKABUPATENMAROS \nUPTD SON 136 INPRES BONTO TALLASA \nAlamat: JI.H.Bohari No.68 Dusun Pakere Desa Bonto Tallasa Kode Pos 90561 \nSURAT PERNY AT AAN \nNOMOR: 421.2/50.a/UPTD.SDN. l 36/SBG/IX/2025 \nDalam rangka pelaksanaan Peraturan Pemerintah Nomor 38 Tahun 2017 tentang lnovasi Daerah; \nPeraturan Menteri Dalam Negeri Republik Indonesia Nomor 104 tahun 2018 tentang Penilaian dan Pemberian \nPenghargaan dan/atau Insentif lnovasi Daerah serta Peraturan Bupati Maros 62 Tahun 2022 tentang lnovasi \nDaerah, dengan ini saya yang bertanda tangan di bawah ini : \nNama \nPangkat dan Golongan \nNIP \nJabatan \n: SY AHRUDDTN,S.Pd.,M.Pd \n: Pembina Tk.1 I llld \n: 19750519 200604 I 006 \n: Kepala Sekolah \nDengan ini menyatakan bahwa telal\\ melakukan replikasi \"lnova1·i Pe/ayanan P11blikllnova1·i Tata \nKeio/a Pemerintahan Daerahl lnovasi bentuk lainnya sesuai bidang urusan pemerintahan yang menjadi \nkewenangan DaeraJ, \", dalam rangka Peningkatan Pelayanan Publik di Lingkungan Pemerintahan Kabupaten \nGowa \nAdapun lnovasi yang direplikasi, sebagai berikut : \nNo. Nama Satuan Kerja Pemilik \nInovasi Inovasi \nl. Genting (Agen Anti Bullying) UPT SPF SD Inpres Tallo Tua 2 \nDemikian Surat Pemyataan ini dibuat untuk dipergunakan sebagaimana mestinya. \neptember 2025 \nIn pres Bonto T allasa, \n.M.Pd \n04 l 006",
   "field_tidak_ada": {
     "tanggal_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
-    "nama_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
-    "nip_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
+    "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
+    "nip_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
     "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },
   "verified": {

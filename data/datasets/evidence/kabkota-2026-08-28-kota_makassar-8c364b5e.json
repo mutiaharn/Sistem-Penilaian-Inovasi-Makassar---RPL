@@ -5,6 +5,22 @@
   "file_size_bytes": 276690,
   "page_count": 1,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "peraturan",
+    "label": "Peraturan (Perwali/Perda/Perbup)",
+    "keyakinan": 0.8
+  },
+  "wilayah": {
+    "kode": "luar_kota_makassar",
+    "nama": "KABUPATEN MOROWALI DINAS PENDIDIK"
+  },
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -25,6 +41,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.8,
         "instansi": 0.8,
@@ -49,7 +67,7 @@
     "instansi": "PEMERINTAH KABUPATEN MOROWALI DINAS PENDIDIKAN DAN KEBUDAYAAN DAERAH",
     "perihal": "Inovasi Daerah; Peraturan Menteri Dalam Negeri Republik Indonesia Nomor 104 tahun 2018 tentang",
     "tanggal_surat": "2025-10-08",
-    "nama_pejabat": "Nama   : Sutoyo, S.Pd., M.Pd",
+    "nama_pejabat": "Nama : Sutoyo, S.Pd., M.Pd",
     "jabatan_pejabat": "Kepala SDN Werea",
     "nip_pejabat": "199104012019031004",
     "verification_url": "",
@@ -61,22 +79,20 @@
     "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },
   "verified": {
-    "status": "TERVERIFIKASI",
-    "sumber": "anotasi_manual",
+    "status": "BELUM_DIVERIFIKASI",
+    "sumber": "",
     "verified_by": "",
     "verified_at": "",
     "values": {
-      "nomor_surat": "421.2/47/SDN.WRA/DISDIKDA/X/2025",
-      "instansi": "PEMERINTAH KABUPATEN MOROWALI DINAS PENDIDIKAN DAN KEBUDAYAAN DAERAH",
-      "perihal": "SURAT PERNYATAAN",
+      "nomor_surat": "",
+      "instansi": "",
+      "perihal": "",
       "tanggal_surat": "",
       "nama_pejabat": "",
       "jabatan_pejabat": "",
       "nip_pejabat": "",
       "verification_url": ""
     },
-    "berbeda_dari_mesin": [
-      "perihal"
-    ]
+    "berbeda_dari_mesin": []
   }
 }

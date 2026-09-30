@@ -46,29 +46,53 @@ def main() -> int:
 
     hasil = []
     for path in berkas:
-        teks = teks_penuh(path)
-        k = klasifikasi(teks, path.name)
-        w = deteksi_wilayah(teks)
         dataset = settings.extract_dir / f"{path.stem}.json"
-        mesin: dict = {}
+        dok_json: dict = {}
         if dataset.exists():
             with open(dataset, "r", encoding="utf-8") as f:
-                mesin = json.load(f).get("metadata", {})
+                dok_json = json.load(f)
+
+        mesin = dok_json.get("metadata", {})
+
+        # Utamakan hasil yang SUDAH dihitung pembangun dataset (memakai teks OCR
+        # bila ada). Kalau belum ada, baru hitung dari teks PDF mentah.
+        dt = dok_json.get("doc_type") or {}
+        wl = dok_json.get("wilayah") or {}
+        if dt.get("jenis"):
+            k_jenis, k_label, k_yakin = dt["jenis"], dt.get("label", ""), dt.get("keyakinan", 0.0)
+            relevan = dok_json.get("field_relevan") or []
+        else:
+            teks = teks_penuh(path)
+            k = klasifikasi(teks, path.name)
+            k_jenis, k_label, k_yakin, relevan = k.jenis, k.label, k.keyakinan, k.field_relevan
+
+        if wl.get("kode"):
+            w_kode, w_nama = wl["kode"], wl.get("nama", "")
+        else:
+            w = deteksi_wilayah(teks_penuh(path))
+            w_kode, w_nama = w.kode, w.nama
+
         terisi = [f for f in FIELD_SURAT if mesin.get(f)]
-        relevan_terisi = [f for f in terisi if f in k.field_relevan]
+        relevan_terisi = [f for f in terisi if f in relevan]
+
+        # Panjang teks: pakai cuplikan hasil ekstraksi (memuat teks OCR) bila ada,
+        # kalau tidak baru baca PDF-nya.
+        cuplikan = dok_json.get("text_excerpt") or ""
+        panjang_teks = len(cuplikan) if cuplikan else len(teks_penuh(path))
+
         hasil.append({
             "filename": path.name,
-            "jenis": k.jenis,
-            "label": k.label,
-            "keyakinan": k.keyakinan,
-            "panjang_teks": len(teks),
-            "wilayah": w.kode,
-            "wilayah_nama": w.nama,
-            "field_relevan": k.field_relevan,
+            "jenis": k_jenis,
+            "label": k_label,
+            "keyakinan": k_yakin,
+            "panjang_teks": panjang_teks,
+            "wilayah": w_kode,
+            "wilayah_nama": w_nama,
+            "field_relevan": relevan,
             "field_terisi": terisi,
             "field_relevan_terisi": relevan_terisi,
             "field_kosong_tapi_tidak_relevan": [f for f in FIELD_SURAT
-                                                if not mesin.get(f) and f not in k.field_relevan],
+                                                if not mesin.get(f) and f not in relevan],
         })
 
     sebaran = Counter(h["jenis"] for h in hasil)
