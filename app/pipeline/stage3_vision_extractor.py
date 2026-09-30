@@ -245,19 +245,13 @@ class Stage3VisionExtractor:
                     res.nomor_surat = kandidat
                     break
 
-        # 2. Instansi / Kop Surat (typically first 1-4 lines)
-        instansi_candidates = []
-        for line in lines[:8]:
-            if re.search(r'\b(?:jl|jalan|alamat|telepon|email|pos-el|fax|kode pos)\b', line, re.IGNORECASE):
-                continue
-            if re.search(r'PEMERINTAH|DINAS|UPT|BADAN|SEKOLAH|KOMUNITAS|KEMENTERIAN|KOTA|KABUPATEN|SDI', line, re.IGNORECASE):
-                instansi_candidates.append(line)
-        if instansi_candidates:
-            # Normalisasi penting untuk hasil OCR: "PEMERINTAHKABUPATENGOWA DINASPENDIDIKAN"
-            # -> "PEMERINTAH KABUPATEN GOWA DINAS PENDIDIKAN"
-            from app.pipeline.text_normalizer import normalisasi_instansi
+        # 2. Instansi / Kop Surat - ditambatkan ke kop (sebelum baris "Nomor"),
+        #    bukan "2 baris pertama yang memuat kata kunci". Lihat field_anchors.py:
+        #    kode lama sempat mengambil konsiderans ("a. bahwa ..."), tumpukan judul
+        #    peraturan, judul dokumen, dan header tangkapan layar.
+        from app.pipeline.field_anchors import instansi_dari_kop
 
-            res.instansi = normalisasi_instansi(" ".join(instansi_candidates[:2]))
+        res.instansi = instansi_dari_kop(lines) or None
 
         # 3. Perihal / Judul
         perihal_match = re.search(r'(?:Perihal|Hal|TENTANG)\s*[:.]?\s*([^\n\r]+(?:\n[^\n\r]+)?)', text, re.IGNORECASE)
@@ -289,9 +283,10 @@ class Stage3VisionExtractor:
                 res.nip_pejabat = "".join(nip_standalone.groups())
 
         # 6. Pejabat Nama & Jabatan
-        jabatan_match = re.search(r'(Kepala\s+[^\n,]+|Plt\.\s+Kepala\s+[^\n,]+|Lurah\s+[^\n,]+|Camat\s+[^\n,]+)', text, re.IGNORECASE)
-        if jabatan_match:
-            res.jabatan_pejabat = jabatan_match.group(1).strip()
+        #    Jabatan ditambatkan ke blok tanda tangan. Kode lama mengambil pola
+        #    "Kepala ..." pertama di seluruh teks, sehingga bisa berasal dari batang
+        #    tubuh ("kepala daerah dan DPRD dalam penyelenggaraan Urusan ...").
+        from app.pipeline.field_anchors import jabatan_dari_blok_tanda_tangan
 
         if res.nip_pejabat and lines:
             for idx, line in enumerate(lines):
@@ -301,6 +296,11 @@ class Stage3VisionExtractor:
                         if len(candidate_name) > 3 and not re.search(r'pembina|golongan|nip', candidate_name, re.IGNORECASE):
                             res.nama_pejabat = candidate_name
                     break
+
+        res.jabatan_pejabat = (
+            jabatan_dari_blok_tanda_tangan(lines, res.nip_pejabat or "", res.nama_pejabat or "")
+            or None
+        )
 
         # 6b. Rapikan nilai hasil OCR (derau ":nama", "Dacrah", spasi berlebih)
         from app.pipeline.text_normalizer import (
