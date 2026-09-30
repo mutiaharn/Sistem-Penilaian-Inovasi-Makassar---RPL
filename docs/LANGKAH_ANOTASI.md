@@ -28,13 +28,16 @@ Sistem sudah mengekstrak metadata dari PDF bukti secara otomatis. Yang belum ada
 **kebenaran acuan (ground truth)**: nilai yang benar menurut dokumennya, dibaca manusia.
 
 Anda satu-satunya anotator. Pekerjaan Anda: **memeriksa dan mengisi 8 kolom** untuk setiap
-dokumen. Dari 41 berkas, urutan yang paling menguntungkan:
+dokumen. Dari 33 berkas (8 dokumen luar daerah sudah dipindahkan), urutan yang paling
+menguntungkan:
 
-| Paket | Isi | Jumlah | Waktu |
+| Paket | Berkas lembar | Isi | Waktu |
 |---|---|---|---|
 | **1 (mulai di sini)** | `data/datasets/review_prioritas.csv` | 12 dokumen × 8 kolom = 96 sel | ±30–40 menit |
-| 2 | Semua dokumen Kota Makassar yang terbaca | 18 dokumen | ±1 jam |
-| 3 | Berkas scan (nilai OCR wajib diperiksa ekstra) | 15 berkas | ±1 jam |
+| 2 | `data/datasets/review_belum_diverifikasi.csv` | 24 dokumen sisanya | ±1,5 jam |
+
+Verifikasi di Excel untuk paket 1 sampai paket 2 selesai, `ground_truth.json` Anda berisi
+acuan untuk seluruh dokumen Kota Makassar — cukup kuat untuk dilaporkan.
 
 Delapan kolom yang diisi: `nomor_surat`, `instansi`, `perihal`, `tanggal_surat`,
 `nama_pejabat`, `jabatan_pejabat`, `nip_pejabat`, `verification_url`.
@@ -146,13 +149,18 @@ git push
 ## Bagian 3 — Setelah paket 1 selesai
 
 ```
-:: paket 2: dokumen terbaca yang belum terverifikasi
+:: paket 2: seluruh dokumen yang belum terverifikasi (24 dokumen)
+.venv\Scripts\python.exe scripts\make_review_sheet.py --hanya-belum --keluar review_belum_diverifikasi.csv
+
+:: kalau ingin dipecah per jenis dokumen
 .venv\Scripts\python.exe scripts\make_review_sheet.py --jenis surat_dinas
 .venv\Scripts\python.exe scripts\make_review_sheet.py --jenis keputusan
-
-:: paket 3: berkas scan (periksa nilai OCR dengan ekstra hati-hati)
-.venv\Scripts\python.exe scripts\make_review_sheet.py --status BELUM_TERBACA_SCAN --keluar review_scan.csv
+.venv\Scripts\python.exe scripts\make_review_sheet.py --jenis bukti_media
 ```
+
+Berkas scan (12 dari 33) sekarang sudah terbaca OCR, jadi tercampur di paket 2. Untuk
+berkas-berkas itu **bandingkan selalu dengan gambar PDF-nya**, karena OCR paling sering
+salah pada angka dan huruf (`4109` terbaca `4Io9`, `VII` terbaca `VI1`).
 
 Perintah bantuan lain:
 
@@ -174,8 +182,9 @@ Perintah bantuan lain:
 ## Catatan mutu yang perlu Anda sadari
 
 - **Nilai hasil OCR sering salah baca angka/huruf** (`4109` terbaca `4Io9`, `VII` terbaca
-  `VI1`). Untuk 15 berkas scan, bandingkan dengan gambar PDF-nya, jangan hanya dengan
+  `VI1`). Untuk 12 berkas scan, bandingkan dengan gambar PDF-nya, jangan hanya dengan
   teks mesin.
-- 8 dari 41 berkas ternyata **bukan Kota Makassar** (Gowa, Bone, Maros, Pangkep, Morowali,
-  Bungo, Tojo Una-Una, Mamuju). Semuanya dikecualikan dari acuan. Kalau memang tidak
-  seharusnya ada di korpus, beri tahu saya — bisa dipisahkan folder penyimpanannya.
+- 8 berkas yang ternyata **bukan Kota Makassar** (Gowa, Bone, Maros, Pangkep, Morowali,
+  Bungo, Tojo Una-Una, Mamuju) sudah dipindahkan ke `data/raw/evidence/luar_daerah/` dan
+  dikeluarkan dari dataset sesuai keputusan Anda. Korpus yang dinilai sekarang 33 berkas,
+  dan 1 di antaranya berkas ganda yang sudah ditandai.

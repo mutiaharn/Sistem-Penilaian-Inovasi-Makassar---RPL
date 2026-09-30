@@ -4,7 +4,7 @@
 > Metrik: exact match setelah normalisasi; field kosong dihitung SALAH.
 
 - Dokumen dievaluasi: **8**
-- Dokumen tanpa acuan (dilewati): **25**
+- Dokumen tanpa acuan (dilewati): **24**
 - Titik data: **35**
 - Akurasi: **78.6%** · Akurasi ketat: **74.3%**
 
@@ -36,7 +36,6 @@
 - `kabkota-2026-08-28-kota_makassar-46ef815f.pdf`
 - `kabkota-2026-08-28-kota_makassar-5076d0e4.pdf`
 - `kabkota-2026-08-28-kota_makassar-55f83d38.pdf`
-- `kabkota-2026-08-28-kota_makassar-5da21b32 (1).pdf`
 - `kabkota-2026-08-28-kota_makassar-89881820.pdf`
 - `kabkota-2026-08-28-kota_makassar-934158fb.pdf`
 - `kabkota-2026-08-28-kota_makassar-98ec227b.pdf`

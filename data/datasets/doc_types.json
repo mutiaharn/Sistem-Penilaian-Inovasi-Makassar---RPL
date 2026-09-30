@@ -72,20 +72,6 @@
       "verification_url"
     ]
   },
-  "kabkota-2026-08-28-kota_makassar-41051553.pdf": {
-    "jenis": "peraturan",
-    "label": "Peraturan (Perwali/Perda/Perbup)",
-    "keyakinan": 0.8,
-    "wilayah": "luar_kota_makassar",
-    "wilayah_nama": "KABUPATEN TOJOUNA",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "verification_url"
-    ]
-  },
   "kabkota-2026-08-28-kota_makassar-46ef815f.pdf": {
     "jenis": "sertifikat",
     "label": "Sertifikat",
@@ -161,37 +147,6 @@
       "verification_url"
     ]
   },
-  "kabkota-2026-08-28-kota_makassar-579f9f96.pdf": {
-    "jenis": "surat_pernyataan",
-    "label": "Surat Pernyataan / Keterangan",
-    "keyakinan": 0.8,
-    "wilayah": "luar_kota_makassar",
-    "wilayah_nama": "KABUPATEN BONE DINAS PENDIDIKAN UPT",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "nama_pejabat",
-      "jabatan_pejabat",
-      "nip_pejabat",
-      "verification_url"
-    ]
-  },
-  "kabkota-2026-08-28-kota_makassar-5b9de614.pdf": {
-    "jenis": "peraturan",
-    "label": "Peraturan (Perwali/Perda/Perbup)",
-    "keyakinan": 0.8,
-    "wilayah": "luar_kota_makassar",
-    "wilayah_nama": "KABUPATEN MAROS UPTD SON",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "verification_url"
-    ]
-  },
   "kabkota-2026-08-28-kota_makassar-5da21b32 (1).pdf": {
     "jenis": "surat_dinas",
     "label": "Surat Dinas / Undangan / Nota Dinas",
@@ -240,20 +195,6 @@
       "nama_pejabat",
       "jabatan_pejabat",
       "nip_pejabat",
-      "verification_url"
-    ]
-  },
-  "kabkota-2026-08-28-kota_makassar-8c364b5e.pdf": {
-    "jenis": "peraturan",
-    "label": "Peraturan (Perwali/Perda/Perbup)",
-    "keyakinan": 0.8,
-    "wilayah": "luar_kota_makassar",
-    "wilayah_nama": "KABUPATEN MOROWALI DINAS PENDIDIK",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
       "verification_url"
     ]
   },
@@ -333,20 +274,6 @@
       "verification_url"
     ]
   },
-  "kabkota-2026-08-28-kota_makassar-ae3f7791.pdf": {
-    "jenis": "peraturan",
-    "label": "Peraturan (Perwali/Perda/Perbup)",
-    "keyakinan": 0.8,
-    "wilayah": "luar_kota_makassar",
-    "wilayah_nama": "KABUPATEN BUNGO SD NEGERI NO",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "verification_url"
-    ]
-  },
   "kabkota-2026-08-28-kota_makassar-aecb1c05.pdf": {
     "jenis": "bukti_media",
     "label": "Bukti Media / Tangkapan Layar / Dokumentasi",
@@ -387,23 +314,6 @@
       "perihal"
     ]
   },
-  "kabkota-2026-08-28-kota_makassar-c93b5421.pdf": {
-    "jenis": "surat_pernyataan",
-    "label": "Surat Pernyataan / Keterangan",
-    "keyakinan": 0.65,
-    "wilayah": "luar_kota_makassar",
-    "wilayah_nama": "KABUPATEN GOWA DINAS PENDIDIKAN UPT",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "nama_pejabat",
-      "jabatan_pejabat",
-      "nip_pejabat",
-      "verification_url"
-    ]
-  },
   "kabkota-2026-08-28-kota_makassar-cccd1e77.pdf": {
     "jenis": "tidak_diketahui",
     "label": "Belum terklasifikasi",
@@ -435,20 +345,6 @@
       "nama_pejabat",
       "jabatan_pejabat",
       "nip_pejabat",
-      "verification_url"
-    ]
-  },
-  "kabkota-2026-08-28-kota_makassar-df8e5f96.pdf": {
-    "jenis": "peraturan",
-    "label": "Peraturan (Perwali/Perda/Perbup)",
-    "keyakinan": 0.8,
-    "wilayah": "luar_kota_makassar",
-    "wilayah_nama": "KABUPATEN PANGKAJENE DAN KEPULAUAN",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
       "verification_url"
     ]
   },
@@ -519,23 +415,6 @@
     "wilayah_nama": "KOTA MAKASSAR",
     "field_relevan": [
       "instansi"
-    ]
-  },
-  "kabkota-2026-08-31-kota_makassar-3371a005.pdf": {
-    "jenis": "surat_pernyataan",
-    "label": "Surat Pernyataan / Keterangan",
-    "keyakinan": 0.8,
-    "wilayah": "luar_kota_makassar",
-    "wilayah_nama": "KABUPATEN MAMUJU BADAN PERENCANAAN",
-    "field_relevan": [
-      "nomor_surat",
-      "instansi",
-      "perihal",
-      "tanggal_surat",
-      "nama_pejabat",
-      "jabatan_pejabat",
-      "nip_pejabat",
-      "verification_url"
     ]
   },
   "kabkota-2026-08-31-kota_makassar-ac411c1a.pdf": {

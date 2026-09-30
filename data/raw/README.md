@@ -8,6 +8,7 @@ karena totalnya ±60 MB dan data ini milik BRIDA, bukan aset publik repo.
 ```
 data/raw/
 ├── evidence/   # berkas bukti PDF hasil ekspor SIGAP (Kab/Kota Makassar)
+│   └── luar_daerah/   # PDF yang terdeteksi bukan Kota Makassar (dikeluarkan dari dataset)
 └── output/      # berkas sementara hasil pemrosesan pipeline
 ```
 

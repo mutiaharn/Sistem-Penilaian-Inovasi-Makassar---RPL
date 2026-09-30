@@ -83,7 +83,7 @@
     "nama_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama"
   },
   "verified": {
-    "status": "BELUM_TERBACA_SCAN",
+    "status": "BELUM_DIVERIFIKASI",
     "sumber": "",
     "verified_by": "",
     "verified_at": "",

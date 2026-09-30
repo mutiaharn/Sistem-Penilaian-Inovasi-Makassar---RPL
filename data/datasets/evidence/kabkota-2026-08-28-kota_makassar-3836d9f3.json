@@ -89,7 +89,7 @@
     "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },
   "verified": {
-    "status": "BELUM_TERBACA_SCAN",
+    "status": "BELUM_DIVERIFIKASI",
     "sumber": "",
     "verified_by": "",
     "verified_at": "",

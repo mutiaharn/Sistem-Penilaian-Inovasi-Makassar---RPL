@@ -113,19 +113,26 @@ tetap pilih `TERPENUHI`/`TIDAK_TERPENUHI` dan jelaskan keraguannya di `alasan`.
 
 ### 4.4 Batasan acuan: hanya Kota Makassar
 
-Keputusan tim: **ground truth hanya memakai dokumen Kota Makassar.** Korpus memuat
-dokumen dari daerah lain — terdeteksi dari **isi** dokumen, bukan nama berkas (nama
-berkas dari portal selalu memuat "kota_makassar" walau isinya daerah lain):
+Keputusan tim: **ground truth hanya memakai dokumen Kota Makassar.** Korpus awalnya
+memuat dokumen dari daerah lain — terdeteksi dari **isi** dokumen, bukan nama berkas
+(nama berkas dari portal selalu memuat "kota_makassar" walau isinya daerah lain).
+Delapan berkas itu sudah **dipindahkan ke `data/raw/evidence/luar_daerah/`** dan
+dikeluarkan dari dataset:
 
-| Berkas | Entitas terdeteksi | Perlakuan |
-|---|---|---|
-| `…c93b5421.pdf` | KABUPATEN GOWA | tidak dipakai sebagai acuan |
-| `…8c364b5e.pdf` | KABUPATEN MOROWALI | sudah dikeluarkan dari `ground_truth.json` |
-| `…3371a005.pdf` | KABUPATEN MAMUJU | tidak dipakai sebagai acuan |
+| Berkas | Entitas terdeteksi |
+|---|---|
+| `…41051553.pdf` | KABUPATEN TOJO UNA-UNA |
+| `…579f9f96.pdf` | KABUPATEN BONE |
+| `…5b9de614.pdf` | KABUPATEN MAROS |
+| `…8c364b5e.pdf` | KABUPATEN MOROWALI |
+| `…ae3f7791.pdf` | KABUPATEN BUNGO |
+| `…c93b5421.pdf` | KABUPATEN GOWA |
+| `…df8e5f96.pdf` | KABUPATEN PANGKAJENE DAN KEPULAUAN |
+| `…3371a005.pdf` | KABUPATEN MAMUJU |
 
-Dokumen-dokumen itu tetap ada di dataset (berguna sebagai uji ketahanan sistem), hanya
-**tidak dihitung** dalam akurasi. Deteksi berjalan otomatis lewat `deteksi_wilayah()`,
-hasilnya tercatat di field `wilayah` pada setiap record, dan daftarnya ditampilkan saat
+Berkas di folder `luar_daerah/` tidak lagi masuk dataset maupun evaluasi. Deteksi berjalan
+otomatis lewat `deteksi_wilayah()`, hasilnya tercatat di field `wilayah` pada setiap record,
+dan daftarnya ditampilkan saat
 menjalankan `eval_extraction.py` maupun di `REPORT_JENIS_DOKUMEN.md`.
 
 Praktiknya saat mengisi lembar verifikasi: bila menemukan dokumen dari daerah lain,

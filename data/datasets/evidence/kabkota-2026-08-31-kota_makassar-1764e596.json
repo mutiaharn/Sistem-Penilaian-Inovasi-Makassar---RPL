@@ -79,7 +79,7 @@
     "verification_url": "tidak berlaku untuk jenis dokumen ini (Manual Book / Petunjuk Operasional) - bukan kegagalan ekstraksi"
   },
   "verified": {
-    "status": "BELUM_TERBACA_SCAN",
+    "status": "BELUM_DIVERIFIKASI",
     "sumber": "",
     "verified_by": "",
     "verified_at": "",

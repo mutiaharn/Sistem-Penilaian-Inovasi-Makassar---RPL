@@ -185,8 +185,17 @@ def finalize(payload: dict, gt: dict) -> dict:
             "berbeda_dari_mesin": beda,
         }
     else:
+        # "BELUM_TERBACA_SCAN" hanya untuk dokumen yang MEMANG belum punya teks sama
+        # sekali. Berkas scan yang sudah dibaca OCR bukan lagi "belum terbaca" - ia
+        # menunggu verifikasi manusia, sama seperti dokumen lain.
+        sumber_teks = payload.get("pipeline", {}).get("stage3_extraction", {}).get("text_source", "")
+        ada_teks = bool((payload.get("text_excerpt") or "").strip()) or bool(sumber_teks)
+        if ada_teks:
+            status = "BELUM_DIVERIFIKASI"
+        else:
+            status = "BELUM_TERBACA_SCAN" if scanned else "BELUM_DIVERIFIKASI"
         verified = {
-            "status": "BELUM_TERBACA_SCAN" if scanned else "BELUM_DIVERIFIKASI",
+            "status": status,
             "sumber": "",
             "verified_by": "",
             "verified_at": "",

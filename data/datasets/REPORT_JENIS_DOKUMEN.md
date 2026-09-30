@@ -3,9 +3,9 @@
 > Dihasilkan otomatis oleh `python scripts/report_doc_types.py`.
 > Menjawab: apakah field yang diekstrak memang ADA di dokumen itu.
 
-- Berkas diperiksa: **41**
+- Berkas diperiksa: **33**
 - Tanpa lapisan teks (perlu OCR): **0**
-- Sel metadata tidak relevan untuk jenis dokumennya: **36 dari 328 (11.0%)**
+- Sel metadata tidak relevan untuk jenis dokumennya: **33 dari 264 (12.5%)**
 - Berkas belum terklasifikasi: **7** (seluruh field dihitung relevan - konservatif, sama dengan `app/evaluation/metrics.py`)
 
 ## Sebaran wilayah (acuan ground truth: Kota Makassar)
@@ -13,32 +13,17 @@
 | Wilayah | Jumlah |
 |---|---|
 | `kota_makassar` | 31 |
-| `luar_kota_makassar` | 8 |
 | `tidak_diketahui` | 2 |
-
-Dokumen dari luar Kota Makassar (tidak dipakai sebagai ground truth):
-
-| Berkas | Entitas terdeteksi |
-|---|---|
-| `kabkota-2026-08-28-kota_makassar-41051553.pdf` | KABUPATEN TOJOUNA |
-| `kabkota-2026-08-28-kota_makassar-579f9f96.pdf` | KABUPATEN BONE DINAS PENDIDIKAN UPT |
-| `kabkota-2026-08-28-kota_makassar-5b9de614.pdf` | KABUPATEN MAROS UPTD SON |
-| `kabkota-2026-08-28-kota_makassar-8c364b5e.pdf` | KABUPATEN MOROWALI DINAS PENDIDIK |
-| `kabkota-2026-08-28-kota_makassar-ae3f7791.pdf` | KABUPATEN BUNGO SD NEGERI NO |
-| `kabkota-2026-08-28-kota_makassar-c93b5421.pdf` | KABUPATEN GOWA DINAS PENDIDIKAN UPT |
-| `kabkota-2026-08-28-kota_makassar-df8e5f96.pdf` | KABUPATEN PANGKAJENE DAN KEPULAUAN |
-| `kabkota-2026-08-31-kota_makassar-3371a005.pdf` | KABUPATEN MAMUJU BADAN PERENCANAAN |
 
 ## Sebaran jenis dokumen
 
 | Jenis | Jumlah | Sel relevan | Terisi |
 |---|---|---|---|
-| `peraturan` | 9 | 45 | 25 |
 | `keputusan` | 8 | 64 | 45 |
 | `tidak_diketahui` | 7 | 56 | 32 |
 | `bukti_media` | 5 | 10 | 6 |
 | `surat_dinas` | 5 | 40 | 33 |
-| `surat_pernyataan` | 3 | 24 | 19 |
+| `peraturan` | 4 | 20 | 7 |
 | `sertifikat` | 1 | 4 | 2 |
 | `laporan` | 1 | 3 | 1 |
 | `manual_book` | 1 | 1 | 1 |
@@ -66,12 +51,7 @@ Dokumen dari luar Kota Makassar (tidak dipakai sebagai ground truth):
 | `31-1764e596.pdf` | manual_book | 0.95 | instansi | nomor_surat, verification_url |
 | `28-103081cb.pdf` | peraturan | 1.0 | instansi, perihal | nama_pejabat, nip_pejabat |
 | `28-3836d9f3.pdf` | peraturan | 1.0 | perihal | nama_pejabat, nip_pejabat |
-| `28-41051553.pdf` | peraturan | 0.8 | nomor_surat, instansi, perihal | nama_pejabat |
-| `28-5b9de614.pdf` | peraturan | 0.8 | nomor_surat, instansi, perihal | nama_pejabat, nip_pejabat |
-| `28-8c364b5e.pdf` | peraturan | 0.8 | nomor_surat, instansi, perihal, tanggal_surat | — |
 | `28-98ec227b.pdf` | peraturan | 0.95 | instansi, perihal | nama_pejabat, nip_pejabat |
-| `28-ae3f7791.pdf` | peraturan | 0.8 | nomor_surat, instansi, perihal, tanggal_surat | — |
-| `28-df8e5f96.pdf` | peraturan | 0.8 | nomor_surat, instansi, perihal, tanggal_surat | — |
 | `28-f72169a9.pdf` | peraturan | 0.95 | instansi, perihal | nama_pejabat, nip_pejabat |
 | `28-46ef815f.pdf` | sertifikat | 0.8 | tanggal_surat, jabatan_pejabat | nip_pejabat, verification_url |
 | `28-5da21b32 (1).pdf` | surat_dinas | 0.8 | nomor_surat, instansi, perihal, tanggal_surat, nama_pejabat, nip_pejabat | — |
@@ -79,9 +59,6 @@ Dokumen dari luar Kota Makassar (tidak dipakai sebagai ground truth):
 | `28-92ade882.pdf` | surat_dinas | 0.8 | nomor_surat, instansi, perihal, tanggal_surat, nama_pejabat, jabatan_pejabat, nip_pejabat | — |
 | `28-f4a30b5c.pdf` | surat_dinas | 0.8 | nomor_surat, instansi, perihal, tanggal_surat, jabatan_pejabat, nip_pejabat, verification_url | — |
 | `31-dabaa261.pdf` | surat_dinas | 0.8 | nomor_surat, instansi, perihal, tanggal_surat, jabatan_pejabat, nip_pejabat, verification_url | — |
-| `28-579f9f96.pdf` | surat_pernyataan | 0.8 | nomor_surat, instansi, perihal, nama_pejabat, jabatan_pejabat, nip_pejabat | — |
-| `28-c93b5421.pdf` | surat_pernyataan | 0.65 | nomor_surat, instansi, perihal, nama_pejabat, jabatan_pejabat, nip_pejabat | — |
-| `31-3371a005.pdf` | surat_pernyataan | 0.8 | nomor_surat, instansi, perihal, tanggal_surat, nama_pejabat, jabatan_pejabat, nip_pejabat | — |
 | `28-50c5af16.pdf` | tidak_diketahui | 0.0 | instansi, tanggal_surat, nama_pejabat, jabatan_pejabat, nip_pejabat | — |
 | `28-89881820.pdf` | tidak_diketahui | 0.0 | instansi, perihal, tanggal_surat, nama_pejabat, jabatan_pejabat, nip_pejabat | — |
 | `28-c08ae061.pdf` | tidak_diketahui | 0.0 | nomor_surat, instansi, perihal, tanggal_surat, nama_pejabat, jabatan_pejabat, nip_pejabat | — |

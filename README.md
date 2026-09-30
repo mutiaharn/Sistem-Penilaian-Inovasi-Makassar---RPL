@@ -7,8 +7,9 @@ Pipeline *Intelligent Document Processing* (IDP) + mesin penilaian indikator ber
 dengan arsitektur **Human-in-the-Loop**: AI mengusulkan, manusia memutuskan.
 
 > **Statusnya apa sekarang?** Ekstraksi dokumen (pipeline 5 tahap) sudah jalan dan
-> sudah diuji pada 41 berkas bukti nyata. Mesin penilaian indikator dan dasbor
-> verifikasi masih dalam pengerjaan. Baca [Status implementasi](#status-implementasi)
+> sudah diuji pada 33 berkas bukti Kota Makassar (dari 41 berkas awal — 8 dokumen luar
+> daerah dipindahkan ke `data/raw/evidence/luar_daerah/`). Mesin penilaian indikator dan
+> dasbor verifikasi masih dalam pengerjaan. Baca [Status implementasi](#status-implementasi)
 > sebelum mulai bekerja — jangan berasumsi fitur yang tertulis di SRS sudah ada.
 
 ---
@@ -33,15 +34,15 @@ menimpa keputusan verifikator — alasan rancangan ini ada di `docs/DATA_MODEL.m
 
 | Komponen | Status | Keterangan |
 |---|---|---|
-| Pipeline IDP 5 tahap (inspector, CV 300 DPI, ekstraksi, QR/TTE, validasi) | ✅ jalan | Teruji pada 41 PDF bukti nyata |
+| Pipeline IDP 5 tahap (inspector, CV 300 DPI, ekstraksi, QR/TTE, validasi) | ✅ jalan | Teruji pada 33 PDF bukti nyata |
 | Database & fallback PostgreSQL → SQLite | ✅ jalan | `storage/idp_local.db` untuk pengembangan lokal |
 | Benchmark multi-iterasi + metrik P/R/F1 | ✅ jalan | Lihat catatan di [Masalah yang diketahui](#masalah-yang-diketahui) |
 | Dashboard pemantauan (statistik, tabel hasil ekstraksi, upload) | ✅ jalan | `app/templates/index.html` |
 | Katalog indikator & parameter (19 indikator × 3 parameter) | ✅ data siap | `data/reference/indikator_2026.json` |
 | Skema JSON + skrip pembangun dataset | ✅ jalan | `data/schemas/`, `scripts/build_dataset_json.py` |
-| Dataset JSON 41 berkas bukti (tanpa `null`) | ✅ jalan | `data/datasets/evidence/` — memuat `doc_type`, `wilayah`, `field_relevan`, dan blok `verified` |
+| Dataset JSON 33 berkas bukti (tanpa `null`) | ✅ jalan | `data/datasets/evidence/` — memuat `doc_type`, `wilayah`, `field_relevan`, dan blok `verified`; 1 berkas ganda ditandai `duplikat_dari` |
 | Klasifikasi jenis dokumen (11 jenis) | ✅ jalan | `app/pipeline/doc_classifier.py` — menentukan field mana yang **wajar** ada di tiap jenis dokumen |
-| OCR lokal offline (di dalam `.venv`) | ✅ jalan | `app/pipeline/ocr.py` (rapidocr); 8 berkas scan kini terbaca |
+| OCR lokal offline (di dalam `.venv`) | ✅ jalan | `app/pipeline/ocr.py` (rapidocr); seluruh 12 berkas scan Kota Makassar kini terbaca |
 | Normalisasi derau OCR | ✅ jalan | `app/pipeline/text_normalizer.py` (spasi hilang, `Dacrah`→`Daerah`) |
 | Penjaga privasi AI Vision | ✅ jalan | `app/pipeline/vision_ai.py` — dokumen digital-native tidak pernah dikirim |
 | Metrik evaluasi jujur (exact match, kosong = salah) | ✅ jalan | `app/evaluation/metrics.py` + `scripts/eval_extraction.py` |
@@ -280,9 +281,10 @@ Dicatat jujur supaya tidak terulang dan supaya bisa ditelusuri saat pengujian:
 1. **`GEMINI_API_KEY` kosong** → Stage 3 selalu jatuh ke heuristik, sehingga hasil
    "Iterasi 3 (Full Multimodal AI)" pada benchmark **identik** dengan "Iterasi 2".
    Jangan mengklaim ada peningkatan dari AI sebelum kunci diisi dan benchmark dijalankan ulang.
-2. **Dokumen hasil scan belum tertangani** — 15 dari 41 berkas terdeteksi scan dan
-   seluruhnya menghasilkan confidence ≤ 25%. Pipeline hanya membaca lapisan teks,
-   belum ada OCR.
+2. **Mutu OCR belum sempurna** — OCR lokal sudah terpasang dan 12 berkas scan kini
+   terbaca, tetapi hasilnya sering salah baca angka/huruf (`4109` → `4Io9`, `VII` → `VI1`)
+   dan sebagian kata masih menempel. Field hasil OCR **wajib diverifikasi manusia**
+   sebelum dipakai sebagai angka resmi. Lihat [LANGKAH_ANOTASI.md](docs/LANGKAH_ANOTASI.md).
 3. **Hanya 2 halaman yang dirasterisasi** (halaman 1 dan terakhir) oleh pipeline produksi,
    dan Stage 1 hanya membaca teks 3 halaman pertama. Bukti indikator yang berada di halaman
    tengah (RKAS 13 hlm, manual book 22 hlm, Perwali 20 hlm) belum terbaca dari sisi citra.
