@@ -24,6 +24,13 @@ class Settings(BaseModel):
     GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
 
+    # Kebijakan privasi pengiriman ke AI Vision: scanned_only | off | all
+    # (lihat app/pipeline/vision_ai.py - dokumen digital-native tidak dikirim)
+    GEMINI_VISION_POLICY: str = os.getenv("GEMINI_VISION_POLICY", "scanned_only")
+
+    # Mesin OCR lokal: auto | rapidocr | tesseract | none
+    OCR_ENGINE: str = os.getenv("OCR_ENGINE", "auto")
+
     # Storage & directories
     BASE_DIR: Path = BASE_DIR
     STORAGE_DIR: Path = BASE_DIR / "storage"

@@ -178,6 +178,14 @@ task sebelum dipakai banyak pengguna.
 
 ---
 
+## 6. Yang perlu keputusan institusi (lihat juga `docs/PRIVASI_DATA.md`)
+
+- **`GEMINI_VISION_POLICY=scanned_only` (bawaan):** hanya halaman dokumen hasil scan yang
+  boleh dikirim ke API. Dokumen digital-native selalu diproses lokal. PDF utuh tidak pernah dikirim.
+- Setiap pengiriman/penolakan tercatat di `storage/audit_kirim_api.jsonl` dan bisa ditunjukkan saat audit.
+- Free tier Google dapat memakai data untuk pelatihan → untuk data sungguhan BRIDA sebaiknya
+  gunakan tier berbayar atau `GEMINI_VISION_POLICY=off` (mode lokal penuh).
+
 ## 7. Batas yang diketahui
 
 1. Dokumen scan belum diproses (tanpa OCR).

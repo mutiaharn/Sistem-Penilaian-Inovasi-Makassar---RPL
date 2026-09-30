@@ -19,6 +19,7 @@ Pemakaian:
 
 import argparse
 import json
+import logging
 import sys
 import time
 from pathlib import Path
@@ -31,8 +32,25 @@ from app.pipeline.stage2_preprocessor import Stage2Preprocessor
 from app.pipeline.stage3_vision_extractor import Stage3VisionExtractor
 from app.pipeline.stage4_qr_detector import Stage4QrDetector
 from app.pipeline.stage5_post_validator import Stage5PostValidator
+from app.pipeline.ocr import ocr_default
+
+logger = logging.getLogger("idp.dataset_builder")
 
 TEXT_EXCERPT_CHARS = 1500
+
+
+def pilih_halaman_ocr(page_count: int, batas: int) -> list[int]:
+    """Halaman mana yang di-OCR: awal dokumen, ditambah halaman terakhir.
+
+    Nama pejabat/NIP/tanggal hampir selalu di halaman terakhir, sedangkan kop dan
+    nomor surat di awal. batas=0 berarti semua halaman.
+    """
+    if batas <= 0 or batas >= page_count:
+        return list(range(page_count))
+    awal = list(range(min(batas, page_count)))
+    if page_count - 1 not in awal:
+        awal.append(page_count - 1)
+    return awal
 
 
 def read_all_text(pdf_path: Path) -> str:
@@ -169,7 +187,12 @@ def finalize(payload: dict, gt: dict) -> dict:
     return payload
 
 
-def build_one(pdf_path: Path, manifest_map: dict[str, dict]) -> dict:
+def build_one(
+    pdf_path: Path,
+    manifest_map: dict[str, dict],
+    ocr_aktif: bool = True,
+    ocr_halaman: int = 3,
+) -> dict:
     """Jalankan pipeline 5 tahap untuk satu PDF dan susun payload sesuai skema."""
     inspector = Stage1Inspector()
     preprocessor = Stage2Preprocessor(target_dpi=300)
@@ -181,6 +204,30 @@ def build_one(pdf_path: Path, manifest_map: dict[str, dict]) -> dict:
 
     # Teks seluruh halaman (bukan hanya 3 halaman pertama seperti pipeline produksi)
     full_text = read_all_text(pdf_path) or meta["extracted_text"]
+    text_source = "pdf_text_layer" if full_text.strip() else ""
+    ocr_engine = ""
+
+    # --- OCR lokal untuk dokumen tanpa lapisan teks (hasil scan) ---------------
+    # Hanya dijalankan bila memang tidak ada teks sama sekali, dan hanya pada
+    # jendela halaman tertentu (default 3) supaya waktu proses tetap wajar.
+    if not full_text.strip() and ocr_aktif:
+        ocr = ocr_default()
+        if ocr.siap():
+            indeks = pilih_halaman_ocr(meta["page_count"], ocr_halaman)
+            teks_ocr, gambar_ocr = "", []
+            for idx in indeks:
+                try:
+                    hasil = preprocessor.process(pdf_path, page_index=idx)
+                    gambar_ocr.append(hasil["pil_image"])
+                except Exception as exc:  # noqa: BLE001
+                    logger.debug(f"halaman {idx + 1} gagal diraster: {exc}")
+            if gambar_ocr:
+                keluaran = ocr.proses_banyak(gambar_ocr)
+                teks_ocr = keluaran.teks
+                ocr_engine = keluaran.mesin
+            full_text = teks_ocr.strip()
+            text_source = "ocr" if full_text else ""
+            meta["_ocr_halaman"] = [i + 1 for i in indeks]
 
     # --- Stage 2: rasterisasi halaman 1 dan halaman terakhir -------------------
     pages_rasterized: list[int] = [1]
@@ -254,6 +301,8 @@ def build_one(pdf_path: Path, manifest_map: dict[str, dict]) -> dict:
             },
             "stage3_extraction": {
                 "engine": extracted.source_engine,
+                "text_source": text_source,          # pdf_text_layer | ocr | "" (tanpa teks)
+                "ocr_engine": ocr_engine,            # rapidocr | tesseract | ""
                 "field_confidence": _field_confidence(extracted, iso_date, healed_nip),
             },
             "stage4_qr": {
@@ -299,7 +348,13 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=0, help="Batasi jumlah berkas (0 = semua)")
     parser.add_argument("--force", action="store_true", help="Proses ulang walau JSON sudah ada")
     parser.add_argument("--dir", default=str(settings.DOCUMENTS_DIR), help="Direktori berkas PDF")
+    parser.add_argument("--satu", default="", help="Hanya berkas yang namanya memuat teks ini")
+    parser.add_argument("--no-ocr", action="store_true", help="Matikan OCR untuk dokumen scan")
+    parser.add_argument("--ocr-halaman", type=int, default=3,
+                        help="Jumlah halaman awal yang di-OCR (0 = semua halaman)")
     args = parser.parse_args()
+
+    ocr_aktif = not args.no_ocr
 
     src_dir = Path(args.dir)
     pdfs = sorted(src_dir.glob("*.pdf"))
@@ -310,12 +365,22 @@ def main() -> int:
 
     if args.limit:
         pdfs = pdfs[: args.limit]
+    if args.satu:
+        pdfs = [p for p in pdfs if args.satu in p.name]
+        if not pdfs:
+            print(f"[!] Tidak ada berkas yang cocok dengan --satu '{args.satu}'")
+            return 1
 
     out_dir = settings.extract_dir
     out_dir.mkdir(parents=True, exist_ok=True)
 
     manifest_map = load_manifest()
     gt_map = load_human_ground_truth()
+    if ocr_aktif:
+        from app.pipeline.ocr import status_ocr
+
+        st = status_ocr()
+        print(f"OCR             : {st['mesin'] if st['siap'] else 'TIDAK TERSEDIA (dokumen scan akan dilewati)'}")
     if gt_map:
         print(f"Anotasi manusia terbaca: {len(gt_map)} berkas -> blok `verified` akan diisi")
     if manifest_map:
@@ -338,15 +403,25 @@ def main() -> int:
             print(f"{i:>3}  {pdf.name[:52]:<52} {'':>4} {'':>5} {'':>5} {'':>11}  (sudah ada, dilewati)")
             continue
         try:
-            payload = finalize(build_one(pdf, manifest_map), gt_map.get(pdf.name, {}))
+            payload = finalize(
+                build_one(pdf, manifest_map, ocr_aktif=ocr_aktif, ocr_halaman=args.ocr_halaman),
+                gt_map.get(pdf.name, {}),
+            )
             with open(out_file, "w", encoding="utf-8") as f:
                 json.dump(payload, f, ensure_ascii=False, indent=2)
 
             md = payload["metadata"]
             st5 = payload["pipeline"]["stage5_validation"]
-            note = "SCAN -> perlu OCR" if payload["is_scanned"] else ""
-            if st5["needs_manual_review"] and not note:
+            stage3 = payload["pipeline"]["stage3_extraction"]
+            sumber_teks = stage3.get("text_source", "")
+            if payload["is_scanned"] and sumber_teks == "ocr":
+                note = f"SCAN -> OCR ({stage3.get('ocr_engine') or '?'})"
+            elif payload["is_scanned"]:
+                note = "SCAN -> perlu OCR"
+            elif st5["needs_manual_review"]:
                 note = "perlu review"
+            else:
+                note = ""
             print(
                 f"{i:>3}  {pdf.name[:52]:<52} {payload['page_count']:>4} "
                 f"{('ya' if payload['is_scanned'] else 'tidak'):>5} "

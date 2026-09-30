@@ -65,6 +65,16 @@
           "type": "object",
           "properties": {
             "engine": { "type": "string", "enum": ["gemini_flash", "smart_heuristics"] },
+            "text_source": {
+              "type": "string",
+              "enum": ["pdf_text_layer", "ocr", ""],
+              "description": "Asal teks yang diekstrak. 'ocr' berarti isi dokumen dibaca mesin OCR lokal."
+            },
+            "ocr_engine": {
+              "type": "string",
+              "enum": ["rapidocr", "tesseract", ""],
+              "description": "Mesin OCR lokal yang dipakai (kosong bila tidak perlu OCR)"
+            },
             "field_confidence": { "type": "object" }
           }
         },

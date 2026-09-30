@@ -204,6 +204,9 @@ docker compose up -d --build
 | `python scripts/build_dataset_json.py --limit 3` | Ubah 3 PDF pertama menjadi JSON (uji cepat) |
 | `python scripts/build_dataset_json.py` | Ubah semua PDF menjadi dataset JSON |
 | `python scripts/report_dataset_gaps.py` | Laporan: field mana yang kosong dan mengapa |
+| `python scripts/eval_extraction.py --simpan` | **Akurasi ekstraksi** dengan metrik jujur (exact match, kosong = salah) |
+| `python scripts/make_review_sheet.py --status BELUM_DIVERIFIKASI` | Buat lembar verifikasi CSV untuk anotator |
+| `python scripts/apply_review_sheet.py --masuk <berkas>.csv --anotator MAF` | Impor lembar yang sudah diisi → blok `verified` + ground truth |
 | `python scripts/seed_reference.py` | Muat ulang katalog indikator ke database |
 | `python scripts/make_annotation_template.py --kode INV-2026-001 --nama "..." --opd "..."` | Buat kerangka anotasi |
 | `python scripts/validate_dataset.py --strict` | Validasi dataset + kelengkapan label |
