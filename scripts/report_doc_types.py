@@ -66,6 +66,13 @@ def main() -> int:
             k = klasifikasi(teks, path.name)
             k_jenis, k_label, k_yakin, relevan = k.jenis, k.label, k.keyakinan, k.field_relevan
 
+        # Dokumen yang belum terklasifikasi: kita TIDAK TAHU field mana yang wajar ada,
+        # jadi jangan mengklaim apa pun "tidak relevan" - perlakukan semua field sebagai
+        # relevan (konservatif). Ini juga membuat angka laporan sama dengan yang dipakai
+        # app/evaluation/metrics.py, supaya tidak ada dua definisi akurasi yang berbeda.
+        if k_jenis == "tidak_diketahui" or not relevan:
+            relevan = list(FIELD_SURAT)
+
         if wl.get("kode"):
             w_kode, w_nama = wl["kode"], wl.get("nama", "")
         else:
@@ -182,6 +189,9 @@ def main() -> int:
     lines.append(f"- Tanpa lapisan teks (perlu OCR): **{tanpa_teks}**")
     lines.append(f"- Sel metadata tidak relevan untuk jenis dokumennya: "
                  f"**{total_kosong} dari {total_sel_surat} ({ringkasan['persen_sel_tidak_relevan']}%)**")
+    lines.append(f"- Berkas belum terklasifikasi: **{sebaran.get('tidak_diketahui', 0)}** "
+                 f"(seluruh field dihitung relevan - konservatif, sama dengan "
+                 f"`app/evaluation/metrics.py`)")
     lines.append("")
     lines.append("## Sebaran wilayah (acuan ground truth: Kota Makassar)")
     lines.append("")
