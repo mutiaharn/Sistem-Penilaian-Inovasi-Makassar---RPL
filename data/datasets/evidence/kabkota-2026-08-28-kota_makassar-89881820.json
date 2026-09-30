@@ -1,0 +1,84 @@
+{
+  "document_id": "",
+  "filename": "kabkota-2026-08-28-kota_makassar-89881820.pdf",
+  "sha256": "3c048cbcbc21656699347916988f44308a60a0cd5fef8049c913b470c4f01966",
+  "file_size_bytes": 567072,
+  "page_count": 3,
+  "is_scanned": false,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 35,
+      "is_scanned": false,
+      "text_pages_read": 3
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1,
+        3
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "field_confidence": {
+        "nomor_surat": 0.0,
+        "instansi": 0.8,
+        "perihal": 0.6,
+        "tanggal_surat": 0.8,
+        "nip_pejabat": 0.9
+      }
+    },
+    "stage4_qr": {
+      "verification_url": "",
+      "detector": ""
+    },
+    "stage5_validation": {
+      "is_valid_nip": true,
+      "confidence_score": 0.65,
+      "needs_manual_review": true,
+      "validation_flags": [
+        "Missing or incomplete Nomor Surat"
+      ]
+    }
+  },
+  "metadata": {
+    "nomor_surat": "",
+    "instansi": "PEMERINTAH KOTA MAKASSAR UPT SPF SD INPRES TALLO TUA 2",
+    "perihal": "Sosialisasi Tim Penggerak Genting",
+    "tanggal_surat": "2026-07-13",
+    "nama_pejabat": "Ernawati, S.Pd.., M.Pd.",
+    "jabatan_pejabat": "Kepala UPT SPF SD Inpres Tallo Tua 2",
+    "nip_pejabat": "198610142010012029",
+    "verification_url": "",
+    "ada_stempel_basah": false,
+    "ada_tanda_tangan": false
+  },
+  "text_excerpt": "PEMERINTAH KOTA MAKASSAR \nUPT SPF SD INPRES TALLO TUA 2 \nJalan Sultan Abdullah 1 No.16 Kelurahan Tallo Kecamatan Tallo Kota Makassar, \nKode Pos 90212, Email: uptsditallotua2@gmail.com \n \n \nSOSIALISASI TIM PENGGERAK GENTING \nKEPADA GURU DAN TENAGA KEPENDIDIKAN \n \n \n \n\nLAUNCHING INOVASI GENTING SAAT MPLS \nDI UPT SPF SD INPRES TALLO TUA 2 KOTA MAKASSAR \n \n \n \n \nPEMILIHAN DUTA GENTING  \nDI UPT SPF SD INPRES TALLO TUA 2 KOTA MAKASSAR \n \n \n \n\n \n \n \n \nMakassar, 13 Juli 2026 \nKepala UPT SPF SD Inpres Tallo Tua 2 \n \n \n \n \n \nErnawati, S.Pd.., M.Pd.  \nNIP. 19861014 201001 2 029 \n \nAlat kerja yang digunakan : \n• Sound system \n• Mikrofon \n• Selempang Agen Anti Bullying \n• Selempang Duta Anti Bullying \n• Kotak Suara",
+  "field_tidak_ada": {
+    "nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "BELUM_DIVERIFIKASI",
+    "sumber": "",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "",
+      "perihal": "",
+      "tanggal_surat": "",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": []
+  }
+}

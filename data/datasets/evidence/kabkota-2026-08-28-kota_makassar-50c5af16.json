@@ -1,0 +1,87 @@
+{
+  "document_id": "",
+  "filename": "kabkota-2026-08-28-kota_makassar-50c5af16.pdf",
+  "sha256": "beac5c5b59ce8f53d049c719c572388417264371fce46797dbb38270c351efbf",
+  "file_size_bytes": 201686,
+  "page_count": 1,
+  "is_scanned": false,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 59,
+      "is_scanned": false,
+      "text_pages_read": 1
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "field_confidence": {
+        "nomor_surat": 0.0,
+        "instansi": 0.8,
+        "perihal": 0.0,
+        "tanggal_surat": 0.8,
+        "nip_pejabat": 0.9
+      }
+    },
+    "stage4_qr": {
+      "verification_url": "",
+      "detector": ""
+    },
+    "stage5_validation": {
+      "is_valid_nip": true,
+      "confidence_score": 0.5,
+      "needs_manual_review": true,
+      "validation_flags": [
+        "Missing or incomplete Nomor Surat",
+        "Missing Perihal"
+      ]
+    }
+  },
+  "metadata": {
+    "nomor_surat": "",
+    "instansi": "PEMERINTAH KOTA MAKASSAR UPT SPF SD INPRES TALLO TUA 2",
+    "perihal": "",
+    "tanggal_surat": "2026-07-06",
+    "nama_pejabat": "Ernawati, S.Pd.., M.Pd.",
+    "jabatan_pejabat": "Kepala UPT SPF SD Inpres Tallo Tua 2",
+    "nip_pejabat": "198610142010012029",
+    "verification_url": "",
+    "ada_stempel_basah": false,
+    "ada_tanda_tangan": false
+  },
+  "text_excerpt": "PEMERINTAH KOTA MAKASSAR \nUPT SPF SD INPRES TALLO TUA 2 \nJl Sultan Abdullah I No.16. Kel Tallo. Kec. Tallo Kota  Makassar Sulawesi Selatan Kode Pos 90212 \n NSS : 101196002013 Pos-el: sditallotuadua@gmail.com  \n          \n \nMenggunakan sistem informasi secara hotline \n \nMenggunakan email \n \n \n \n \n \nMakassar, 6 Juli 2026 \nKepala UPT SPF SD Inpres Tallo Tua 2 \n \n \n \n \n \nErnawati, S.Pd.., M.Pd.  \nNIP. 19861014 201001 2 029 \n  \nsditallotuadua@gmail.com",
+  "field_tidak_ada": {
+    "nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "perihal": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
+    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "TERVERIFIKASI",
+    "sumber": "anotasi_manual",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "PEMERINTAH KOTA MAKASSAR UPT SPF SD INPRES TALLO TUA 2",
+      "perihal": "LAYANAN INFORMASI",
+      "tanggal_surat": "2026-07-06",
+      "nama_pejabat": "Ernawati, S.Pd.., M.Pd.",
+      "jabatan_pejabat": "Kepala UPT SPF SD Inpres Tallo Tua 2",
+      "nip_pejabat": "198610142010012029",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": [
+      "perihal"
+    ]
+  }
+}

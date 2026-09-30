@@ -1,9 +1,9 @@
 {
   "document_id": "",
-  "filename": "kabkota-2026-08-28-kota_makassar-103081cb.pdf",
-  "sha256": "3bf46f3a29ab08548489eb2c306be4b654f222ec844643d7bcb23a5870264578",
-  "file_size_bytes": 3660543,
-  "page_count": 20,
+  "filename": "kabkota-2026-08-28-kota_makassar-5076d0e4.pdf",
+  "sha256": "3d160dfc67439a72749dc386403ba76f0bfd4247b197e771cc12ae51028d6040",
+  "file_size_bytes": 1267274,
+  "page_count": 5,
   "is_scanned": true,
   "manifest": {
     "inovasi_id": "",
@@ -14,13 +14,13 @@
     "stage1_inspector": {
       "words_page_1": 0,
       "is_scanned": true,
-      "text_pages_read": 20
+      "text_pages_read": 5
     },
     "stage2_preprocessing": {
       "target_dpi": 300,
       "pages_rasterized": [
         1,
-        20
+        5
       ],
       "skew_angle_deg": 0.0
     },
@@ -28,8 +28,8 @@
       "engine": "smart_heuristics",
       "field_confidence": {
         "nomor_surat": 0.0,
-        "instansi": 0.8,
-        "perihal": 0.6,
+        "instansi": 0.0,
+        "perihal": 0.0,
         "tanggal_surat": 0.0,
         "nip_pejabat": 0.0
       }
@@ -40,31 +40,36 @@
     },
     "stage5_validation": {
       "is_valid_nip": false,
-      "confidence_score": 0.35,
+      "confidence_score": 0.05,
       "needs_manual_review": true,
       "validation_flags": [
         "Missing or incomplete Nomor Surat",
+        "Missing Instansi",
+        "Missing Perihal",
         "Missing or invalid date"
       ]
     }
   },
   "metadata": {
     "nomor_surat": "",
-    "instansi": "WALi KOTA MAKASSAR PERA TU RAN W ALI KOTA MAKASSAR",
-    "perihal": "RENCANA KERJA PEMERINTAH DAERAH TAHUN 2026 DENGAN RAHMAT TUHAN YANG MAHA ESA",
+    "instansi": "",
+    "perihal": "",
     "tanggal_surat": "",
     "nama_pejabat": "",
-    "jabatan_pejabat": "kepala \ndaerah dan DPRD dalam penyelenggaraan Urusan",
+    "jabatan_pejabat": "",
     "nip_pejabat": "",
     "verification_url": "",
     "ada_stempel_basah": false,
     "ada_tanda_tangan": false
   },
-  "text_excerpt": "-------------------------------------------� \nWALi KOTA MAKASSAR \nPROVINS! SULAWESI SELATAN \nPERA TU RAN W ALI KOTA MAKASSAR \nNOMOR 1S TAHUN 2025 \nTENTANG \nRENCANA KERJA PEMERINTAH DAERAH TAHUN 2026 \nDENGAN RAHMAT TUHAN YANG MAHA ESA \nWALi KOTA MAKASSAR, \nMenirnbang \nMengingat \nbahwa untuk rnelaksanakan ketentuan Pasal 26 ayat (2) \nUndang-Undang Norn.or 25 Tahun 2004 tentang Sistem \nPerencanaan Pembangunan Nasional dan ketentuan Pasal \n264 ayat (2) Undang-Undang 23 Tahun 2014 tentang \nPernerintahan Daerah sebagairnana telah diubah beberapa \nkali terakhir dengan Undang-Undang 6 Tahun 2023 \ntentang Penetapan Peraturan Pemerintah Pengganti \nr _.-. TT _. 1 .- r .--=.%. t nr _ 1 .-.- tot t-.- 4-.- - 4' ..4or.' UIudIUIIUAll INOIIIUI A IAuun 4u44 uci~ii pa hcijd \nmenjadi Undang-Undang, perlu menetapkan Peraturan \nWali Kota tentang Rencana Kerja Pemerintah Daerah \nTahun 2026; \n1. Pasal 18 ayat (6) Undang-Undang Dasar Negara \nRepublik Indonesia Tahun 1945; \n2. Undang-Undang Nomor 25 Tahun 2004 tentang \nSistern Perencanaan Pembangunan Nasional \n(Lembaran Negara Republik Indonesia Tahun 2004 \nNomor 104, Tambahan Lembaran Negara Republik \nIndonesia Nomor 4421) ; \n3. Undang-Undang Nomor 23 Tahun 2014 tentang \nPemerintahan Daerah (1Lembaran Negara Republik \nIndonesia Tahun 2014 Nomor 244, Tambahan \nLembaran Negara Republik Indonesia Nomor 5587) \nsebagaimana telah diubah beberapa ali terakhir \ndengan Undang-Undang Nomor 6 Tahun 2023 tentang \nPenetapan Peraturan Pemerintah Pengganti Undang­ ",
+  "text_excerpt": "0",
   "field_tidak_ada": {
     "nomor_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "instansi": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
+    "perihal": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
     "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
     "nama_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
+    "jabatan_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: jabatan tidak selalu ditulis di bawah tanda tangan",
     "nip_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
     "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },

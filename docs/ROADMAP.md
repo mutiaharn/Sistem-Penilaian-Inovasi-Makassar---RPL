@@ -66,17 +66,22 @@ Pekerjaan:
 1. Kumpulkan pemetaan bukti → indikator untuk seluruh inovasi
    (`check_data.py --write-draft` lalu konfirmasi manusia → `evidence_manifest.json`).
 2. Bangun `data/datasets/evidence/*.json` untuk semua berkas bukti.
-3. Buat ground truth **strategi A (manual penuh)** untuk 3–5 inovasi
+   → **selesai: 41/41 berkas** (bentuk final, tanpa `null`, blok `verified` tersedia).
+3. Verifikasi ekstraksi: isi blok `verified` untuk 17 berkas `BELUM_DIVERIFIKASI`
+   dan tangani 15 berkas `BELUM_TERBACA_SCAN` (perlu OCR).
+4. Buat ground truth **strategi A (manual penuh)** untuk 3–5 inovasi
    (lihat `ANNOTATION_GUIDE.md`).
-4. Verifikasi ganda 15–20% sampel, hitung Cohen's kappa.
-5. Perbaiki metrik evaluasi ekstraksi (hilangkan pencocokan substring, hitung field
+5. Verifikasi ganda 15–20% sampel, hitung Cohen's kappa.
+6. Perbaiki metrik evaluasi ekstraksi (hilangkan pencocokan substring, hitung field
    kosong sebagai salah).
 
 Kriteria selesai:
-- [ ] 100% berkas bukti punya `indicator_id` dan `evidence_tag`
+- [ ] 100% berkas bukti punya `indicator_id` dan `evidence_tag` (sekarang 0 dari 41)
+- [x] Dataset JSON seluruh berkas bukti terbentuk
+- [ ] Blok `verified` terisi untuk semua berkas yang bisa dibaca
 - [ ] ≥ 3 inovasi punya ground truth lengkap (171 label per inovasi)
 - [ ] κ antar anotator dilaporkan (target ≥ 0,6)
-- [ ] `validate_dataset.py --strict` hijau
+- [x] `validate_dataset.py --strict` hijau
 
 ---
 

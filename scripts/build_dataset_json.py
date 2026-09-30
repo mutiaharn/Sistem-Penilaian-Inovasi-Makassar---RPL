@@ -33,7 +33,23 @@ from app.pipeline.stage4_qr_detector import Stage4QrDetector
 from app.pipeline.stage5_post_validator import Stage5PostValidator
 
 TEXT_EXCERPT_CHARS = 1500
-TEXT_PAGES_READ = 3  # Stage 1 saat ini membaca maksimum 3 halaman pertama
+
+
+def read_all_text(pdf_path: Path) -> str:
+    """Baca teks dari SELURUH halaman.
+
+    Stage 1 (pipeline produksi) sengaja hanya membaca 3 halaman pertama agar cepat,
+    tetapi untuk dataset hal itu membuang informasi penting: nama pejabat, NIP, dan
+    tanggal tanda tangan hampir selalu berada di halaman terakhir. Membaca semua
+    halaman di sini menghilangkan penyebab null yang paling besar.
+    """
+    from pypdf import PdfReader
+
+    try:
+        reader = PdfReader(str(pdf_path))
+        return "\n".join((p.extract_text() or "") for p in reader.pages).strip()
+    except Exception:  # noqa: BLE001
+        return ""
 
 
 def load_manifest() -> dict[str, dict]:
@@ -46,6 +62,113 @@ def load_manifest() -> dict[str, dict]:
     return {e["filename"]: e for e in data.get("evidences", [])}
 
 
+def load_human_ground_truth() -> dict[str, dict]:
+    """Anotasi manusia yang SUDAH ada (app/evaluation/ground_truth.json).
+
+    Dipakai mengisi blok `verified` - bukan hasil karangan, melainkan anotasi
+    yang memang sudah dikerjakan tim.
+    """
+    path = settings.BASE_DIR / "app" / "evaluation" / "ground_truth.json"
+    if not path.exists():
+        return {}
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+METADATA_FIELDS = [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "nama_pejabat",
+    "jabatan_pejabat",
+    "nip_pejabat",
+    "verification_url",
+]
+
+# Petunjuk mengapa sebuah field wajar tidak ada, supaya alasan tidak sekadar
+# "tidak ditemukan" dan reviewer berikutnya tahu apa yang harus diperiksa.
+FIELD_HINT = {
+    "nomor_surat": "surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "nip_pejabat": "surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
+    "nama_pejabat": "dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
+    "jabatan_pejabat": "jabatan tidak selalu ditulis di bawah tanda tangan",
+    "verification_url": "hanya dokumen ber-TTE/QR yang punya URL verifikasi",
+    "instansi": "kop surat tidak terbaca / dokumen tanpa kop",
+    "perihal": "banyak nota dinas dan lampiran tidak menuliskan perihal",
+    "tanggal_surat": "tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
+}
+
+
+def _teks(nilai) -> str:
+    """Normalisasi ke string; None menjadi string kosong (dataset tanpa null)."""
+    return "" if nilai is None else str(nilai).strip()
+
+
+def finalize(payload: dict, gt: dict) -> dict:
+    """Rapikan satu record: tanpa null, ada alasan untuk field kosong, ada blok `verified`.
+
+    Pemisahan `metadata` (output mesin) dan `verified` (nilai benar) disengaja:
+    tanpa pemisahan itu, akurasi ekstraksi tidak bisa diukur lagi.
+    """
+    md_mesin = payload.get("metadata", {})
+    scanned = bool(payload.get("is_scanned"))
+
+    metadata: dict = {}
+    tidak_ada: dict = {}
+    for f in METADATA_FIELDS:
+        metadata[f] = _teks(md_mesin.get(f))
+        if not metadata[f]:
+            sebab = (
+                "dokumen hasil scan tanpa lapisan teks - belum ada OCR"
+                if scanned
+                else "tidak ditemukan pada teks dokumen - perlu verifikasi manusia"
+            )
+            hint = FIELD_HINT.get(f)
+            tidak_ada[f] = f"{sebab}. Catatan: {hint}" if hint else sebab
+    metadata["ada_stempel_basah"] = bool(md_mesin.get("ada_stempel_basah"))
+    metadata["ada_tanda_tangan"] = bool(md_mesin.get("ada_tanda_tangan"))
+
+    payload["metadata"] = metadata
+    payload["field_tidak_ada"] = tidak_ada
+    payload["document_id"] = payload.get("document_id") if payload.get("document_id") else ""
+    payload["text_excerpt"] = payload.get("text_excerpt") or ""
+    payload["manifest"] = payload.get("manifest") or {
+        "inovasi_id": "",
+        "indicator_id": "",
+        "evidence_tag": "",
+    }
+
+    s4 = payload.get("pipeline", {}).get("stage4_qr", {})
+    s4["verification_url"] = _teks(s4.get("verification_url"))
+    s4["detector"] = _teks(s4.get("detector"))
+
+    # --- Blok verified: hanya diisi dari anotasi manusia yang sudah ada --------
+    if gt:
+        values = {f: _teks(gt.get(f)) for f in METADATA_FIELDS}
+        beda = [f for f in METADATA_FIELDS if values[f] and values[f] != metadata[f]]
+        verified = {
+            "status": "TERVERIFIKASI",
+            "sumber": "anotasi_manual",
+            "verified_by": "",
+            "verified_at": "",
+            "values": values,
+            "berbeda_dari_mesin": beda,
+        }
+    else:
+        verified = {
+            "status": "BELUM_TERBACA_SCAN" if scanned else "BELUM_DIVERIFIKASI",
+            "sumber": "",
+            "verified_by": "",
+            "verified_at": "",
+            "values": {f: "" for f in METADATA_FIELDS},
+            "berbeda_dari_mesin": [],
+        }
+
+    payload["verified"] = verified
+    return payload
+
+
 def build_one(pdf_path: Path, manifest_map: dict[str, dict]) -> dict:
     """Jalankan pipeline 5 tahap untuk satu PDF dan susun payload sesuai skema."""
     inspector = Stage1Inspector()
@@ -55,6 +178,9 @@ def build_one(pdf_path: Path, manifest_map: dict[str, dict]) -> dict:
     validator = Stage5PostValidator()
 
     meta = inspector.inspect(pdf_path)
+
+    # Teks seluruh halaman (bukan hanya 3 halaman pertama seperti pipeline produksi)
+    full_text = read_all_text(pdf_path) or meta["extracted_text"]
 
     # --- Stage 2: rasterisasi halaman 1 dan halaman terakhir -------------------
     pages_rasterized: list[int] = [1]
@@ -74,7 +200,7 @@ def build_one(pdf_path: Path, manifest_map: dict[str, dict]) -> dict:
 
     # --- Stage 3: ekstraksi semantik -------------------------------------------
     extracted = extractor.extract(
-        text=meta["extracted_text"],
+        text=full_text,
         pil_image=images[0] if images else None,
     )
 
@@ -83,7 +209,7 @@ def build_one(pdf_path: Path, manifest_map: dict[str, dict]) -> dict:
 
     # --- Stage 5: validasi & skor keyakinan ------------------------------------
     is_valid_nip, healed_nip = validator.validate_and_heal_nip(
-        raw_nip=extracted.nip_pejabat, full_text=meta["extracted_text"]
+        raw_nip=extracted.nip_pejabat, full_text=full_text
     )
     iso_date = validator.normalize_indonesian_date(extracted.tanggal_surat)
     confidence, needs_review, flags = validator.evaluate_confidence(
@@ -105,7 +231,7 @@ def build_one(pdf_path: Path, manifest_map: dict[str, dict]) -> dict:
             "evidence_tag": manifest.get("evidence_tag"),
         }
 
-    excerpt = meta["extracted_text"][:TEXT_EXCERPT_CHARS] or None
+    excerpt = full_text[:TEXT_EXCERPT_CHARS] or None
 
     return {
         "document_id": None,  # diisi bila diproses lewat API/DB
@@ -119,7 +245,7 @@ def build_one(pdf_path: Path, manifest_map: dict[str, dict]) -> dict:
             "stage1_inspector": {
                 "words_page_1": meta["words_page_1"],
                 "is_scanned": meta["is_scanned"],
-                "text_pages_read": min(TEXT_PAGES_READ, meta["page_count"]),
+                "text_pages_read": meta["page_count"],
             },
             "stage2_preprocessing": {
                 "target_dpi": 300,
@@ -189,6 +315,9 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     manifest_map = load_manifest()
+    gt_map = load_human_ground_truth()
+    if gt_map:
+        print(f"Anotasi manusia terbaca: {len(gt_map)} berkas -> blok `verified` akan diisi")
     if manifest_map:
         print(f"Manifest terbaca: {len(manifest_map)} entri (pemetaan bukti -> indikator aktif)")
     else:
@@ -209,7 +338,7 @@ def main() -> int:
             print(f"{i:>3}  {pdf.name[:52]:<52} {'':>4} {'':>5} {'':>5} {'':>11}  (sudah ada, dilewati)")
             continue
         try:
-            payload = build_one(pdf, manifest_map)
+            payload = finalize(build_one(pdf, manifest_map), gt_map.get(pdf.name, {}))
             with open(out_file, "w", encoding="utf-8") as f:
                 json.dump(payload, f, ensure_ascii=False, indent=2)
 

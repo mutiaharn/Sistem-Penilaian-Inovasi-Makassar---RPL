@@ -11,6 +11,48 @@ from typing import Optional
 
 logger = logging.getLogger("idp.stage3")
 
+# Kata yang menandakan potongan ALAMAT/kop, bukan nomor naskah dinas.
+# Nomor naskah dinas Indonesia hampir selalu berbentuk kode berslash seperti
+# 421.2/125/KBH/UPT.SPF.SDI.TT2/XII/2024 - bukan angka pendek atau nama jalan.
+_ADDRESS_WORDS = re.compile(
+    r"(kelurahan|kel\.|kecamatan|kec\.|jalan|jl\.|kota|kabupaten|provinsi|"
+    r"telepon|telp\.?|fax|email|pos-el|kode\s*pos|website|www\.|http|"
+    r"\brt\b|\brw\b|\bnpsn\b|nip\b)",
+    re.IGNORECASE,
+)
+
+
+def looks_like_document_number(candidate: str) -> bool:
+    """Saring kandidat nomor surat: harus berkode resmi, bukan potongan alamat.
+
+    Contoh yang DITERIMA : 421.2/125/KBH/UPT.SPF.SDI.TT2/XII/2024
+                           400.3.10/2/S.Kep/Disdik/VIII/2026
+                           500.10.30.3/2/VII/2026
+    Contoh yang DITOLAK  : "16", "2 Makassar 90111",
+                           "16 Kelurahan Tallo Kecamatan Tallo Kota Makassar"
+    """
+    if not candidate:
+        return False
+    nilai = candidate.strip(" .;,")
+    if len(nilai) > 80 or len(nilai) < 5:
+        return False
+    # Nomor naskah dinas wajib memuat garis miring sebagai pemisah kode
+    if "/" not in nilai:
+        return False
+    if _ADDRESS_WORDS.search(nilai):
+        return False
+    # Harus ada angka DAN huruf (kode instansi/kategori), bukan sekadar "12/34"
+    if not re.search(r"\d", nilai) or not re.search(r"[A-Za-z]", nilai):
+        return False
+    # Nomor naskah dinas memuat kode berhuruf besar (SDN, KBH, UPT.SPF, VIII, S.Kep).
+    # Pola serba huruf kecil seperti "sdi-tallo-tua-2-makassar-hadirkan" adalah
+    # potongan URL berita, bukan nomor surat.
+    if not re.search(r"[A-Z]", nilai):
+        return False
+    if re.search(r"[a-z]{3,}-[a-z]{3,}", nilai):
+        return False
+    return True
+
 class ExtractedMetadata(BaseModel):
     nomor_surat: Optional[str] = None
     instansi: Optional[str] = None
@@ -108,18 +150,29 @@ class Stage3VisionExtractor:
         res = ExtractedMetadata()
         lines = [line.strip() for line in text.split("\n") if line.strip()]
 
-        # 1. Nomor Surat (Exclude street addresses like 'Jl. ... No. 16')
-        # Official document numbers typically contain slashes '/' or dots and uppercase codes
+        # 1. Nomor Surat - kandidat disaring ketat supaya tidak menangkap alamat
         for line in lines:
-            if re.search(r'\b(?:jl|jalan|alamat)\b', line, re.IGNORECASE):
+            nomor_match = re.search(r'\b(?:Nomor|NOMOR|No)\s*[:.]?\s*(.{3,90})', line)
+            if not nomor_match:
                 continue
-            nomor_match = re.search(r'\b(?:Nomor|NOMOR|No)\s*[:.]\s*([0-9a-zA-Z\.\/\-_ ]+)', line)
-            if nomor_match:
-                candidate = nomor_match.group(1).strip()
-                # Must look like an official document code (contains slash or hyphen with alphanumeric)
-                if "/" in candidate or "-" in candidate:
-                    candidate = re.split(r'\s{2,}|Lampiran|Sifat|Perihal|Hal|TENTANG', candidate, flags=re.IGNORECASE)[0]
-                    res.nomor_surat = candidate.strip(" .;")
+            candidate = nomor_match.group(1)
+            # Potong sebelum kata kunci yang jelas bukan bagian nomor
+            candidate = re.split(
+                r'\s{2,}|Lampiran|Sifat|Perihal|Hal|TENTANG|Tanggal|Tgl|Tentang',
+                candidate, flags=re.IGNORECASE
+            )[0].strip(" .;,")
+            if looks_like_document_number(candidate):
+                res.nomor_surat = candidate
+                break
+
+        # 1b. Fallback: cari pola nomor naskah dinas langsung (tanpa kata "Nomor")
+        if not res.nomor_surat:
+            for match in re.finditer(
+                r'\b(\d{1,4}(?:\.\d{1,4}){0,3}/[0-9A-Za-z.\-]+(?:/[0-9A-Za-z.\-]+){1,5})\b', text
+            ):
+                kandidat = match.group(1).strip(" .;,")
+                if looks_like_document_number(kandidat):
+                    res.nomor_surat = kandidat
                     break
 
         # 2. Instansi / Kop Surat (typically first 1-4 lines)

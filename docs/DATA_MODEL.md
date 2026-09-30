@@ -131,6 +131,69 @@ Semua ada di `data/schemas/`:
 
 Validasi: `python scripts/validate_dataset.py --strict`
 
+## 4. Bentuk keluaran dataset (`data/datasets/evidence/*.json`)
+
+Satu berkas = satu PDF bukti. Bentuknya dibagi tiga blok dengan pembagian tugas yang tegas:
+
+```
+metadata          <- OUTPUT MESIN. Boleh berisi string kosong. JANGAN diisi manual.
+field_tidak_ada   <- ALASAN setiap field yang kosong pada metadata
+verified          <- NILAI YANG SUDAH DIPASTIKAN BENAR (label / ground truth)
+```
+
+### Aturan: tidak ada `null`
+
+Field kosong ditulis sebagai string kosong `""`, dan alasannya wajib tercatat di
+`field_tidak_ada`. Tujuannya: **"kosong" tidak boleh ambigu** antara
+"pipeline gagal membaca" dan "dokumennya memang tidak memuat field itu".
+
+```json
+"metadata": {
+  "nomor_surat": "500.10.30/186/BRIDA/VII/2026",
+  "nip_pejabat": "",
+  "verification_url": ""
+},
+"field_tidak_ada": {
+  "nip_pejabat": "surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
+  "verification_url": "hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+}
+```
+
+### Kenapa output mesin dan nilai benar dipisah
+
+Kalau nilai yang sudah dibetulkan manusia ditulis ke `metadata`, jejak kesalahan mesin
+hilang dan **akurasi ekstraksi tidak bisa diukur lagi**. Karena itu dipisah:
+
+```json
+"verified": {
+  "status": "TERVERIFIKASI",          // TERVERIFIKASI | BELUM_DIVERIFIKASI | BELUM_TERBACA_SCAN
+  "sumber": "anotasi_manual",          // anotasi_manual | pembacaan_ulang | ""
+  "verified_by": "MAF",
+  "verified_at": "2026-09-29T10:00:00+08:00",
+  "values": { "nomor_surat": "500.10.30/186/BRIDA/VII/2026", "nip_pejabat": "" },
+  "berbeda_dari_mesin": ["instansi"]   // field yang nilai benar != nilai mesin
+}
+```
+
+`berbeda_dari_mesin` adalah **sinyal error per field**. Akurasi ekstraksi dihitung dari
+sini — bukan dari `metadata` — sehingga bisa dilaporkan per field dan per jenis dokumen:
+
+```
+akurasi(field) = jumlah field yang cocok / jumlah field yang punya nilai benar
+```
+
+Arti setiap status:
+
+| Status | Arti | Tindakan berikutnya |
+|---|---|---|
+| `TERVERIFIKASI` | Sudah dibaca ulang manusia dan `values`-nya terisi | — |
+| `BELUM_DIVERIFIKASI` | Ada teks, tapi belum diperiksa manusia | Periksa `metadata`, isi `values` |
+| `BELUM_TERBACA_SCAN` | Tidak ada lapisan teks (scan) — belum ada OCR | Perlu OCR atau pembacaan visual |
+
+Skema lengkapnya: `data/schemas/idp_extraction.schema.json`.
+Laporan kondisi terkini: `python scripts/report_dataset_gaps.py` →
+`data/datasets/REPORT_KELENGKAPAN.md`.
+
 ## 5. Utang teknis yang diketahui pada lapisan data
 
 1. **Belum ada migrasi** (Alembic). Tabel dibuat via `create_all()`, sehingga perubahan

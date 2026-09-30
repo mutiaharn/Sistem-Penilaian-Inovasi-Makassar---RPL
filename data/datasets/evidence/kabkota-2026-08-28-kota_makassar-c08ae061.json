@@ -1,0 +1,81 @@
+{
+  "document_id": "",
+  "filename": "kabkota-2026-08-28-kota_makassar-c08ae061.pdf",
+  "sha256": "7b266fa3a15d3b62e1fa14d3dbfa9575e500687f86904f8c70edd491be25b6f7",
+  "file_size_bytes": 209364,
+  "page_count": 2,
+  "is_scanned": false,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 301,
+      "is_scanned": false,
+      "text_pages_read": 2
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1,
+        2
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "field_confidence": {
+        "nomor_surat": 0.8,
+        "instansi": 0.8,
+        "perihal": 0.6,
+        "tanggal_surat": 0.8,
+        "nip_pejabat": 0.9
+      }
+    },
+    "stage4_qr": {
+      "verification_url": "",
+      "detector": ""
+    },
+    "stage5_validation": {
+      "is_valid_nip": true,
+      "confidence_score": 0.95,
+      "needs_manual_review": false,
+      "validation_flags": []
+    }
+  },
+  "metadata": {
+    "nomor_surat": "421.2/046/UPT.SPF.SDI. TT.2/VII/2025",
+    "instansi": "PEMERINTAH KOTA MAKASSAR UPT SPF SEKOLAH DASAR INPRES TALLO TUA 2",
+    "perihal": "bullying dan mendorong interaksi sosial yang positif. Tim Genting dibentuk dengan memilih murid yang memiliki potensi kepemimpinan dan empati",
+    "tanggal_surat": "2025-07-15",
+    "nama_pejabat": "Salvia Salmawati, S.Pd.I., Gr., M.Pd",
+    "jabatan_pejabat": "Kepala Sekolah",
+    "nip_pejabat": "198706092010012033",
+    "verification_url": "",
+    "ada_stempel_basah": false,
+    "ada_tanda_tangan": false
+  },
+  "text_excerpt": "PEMERINTAH KOTA MAKASSAR \nUPT SPF SEKOLAH DASAR INPRES TALLO TUA 2 \nJl. Sultan Abdullah 1 No. Kelurahan Tallo Kecamtan Tallo Kota Makassar, \nKode Pos 90212 Email: uptsditallotua2@gmail.com \n \n \nPROSES PEMBUATAN INOVASI GENTING (AGEN ANTI-BULLYING) \nNo: 421.2/046/UPT.SPF.SDI. TT.2/VII/2025 \n \nNo. Uraian Kegiatan Bulan 2025 \nMei Juni Juli \n1. Sosialisasi ke Stakeholder    \n2. Identifikasi dan Asessmen    \n3. Pembentukan Tim    \n4. Pendampingan Pembina    \n5. Penentuan Tugas Tim    \n6. Pelaksanaan Inovasi    \n7. Sosialisasi Ke Luar    \n \n \nKecepatan Inovasi \nWaktu yang digunakan untuk menciptakan inovasi Genting (Agen Anti -Bullying) berlangsung \ndengan cepat dan efisien. UPT SPF SD Inpres Tallo Tua 2 mulai mengembangkan ide pada bulan Mei \n2025 dan meluncurkannya secara resmi pada 15 Juli 2025). Dalam kurun waktu yang relatif singkat, \nsekolah berhasil menyusun perencanaan, membentuk tim, hingga melaksanakan inovasi di \nlapangan. \n \nTahapan Pengembangan \n1. Identifikasi Kebutuhan (14 – 16 Mei 2025): \nPada tahap ini, sekolah melakukan survei dan observasi untuk menganalisis masalah bullying di \nsekolah. Sekolah mengidentifikasi murid yang rentan terhadap bullying dan mengumpulkan \ndata untuk memahami kondisi yang terjadi. Analisis ini menjadi dasar untuk menentukan \nkebutuhan intervensi anti-bullying di sekolah. \n2. Perumusan Ide dan Konsep (19 – 23 Mei 2025): \nBerdasarkan hasil identifikasi, Genting (Agen Anti -Bullying) mulai dirumuskan sebagai konsep \ninovasi kepemimpinan mur",
+  "field_tidak_ada": {
+    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "BELUM_DIVERIFIKASI",
+    "sumber": "",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "",
+      "perihal": "",
+      "tanggal_surat": "",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": []
+  }
+}

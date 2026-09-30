@@ -1,0 +1,84 @@
+{
+  "document_id": "",
+  "filename": "kabkota-2026-08-31-kota_makassar-ba3721c8.pdf",
+  "sha256": "814b31d2434392941942c14f262ac19698ee80941e73cef1e7cbc9ecbdf8e91e",
+  "file_size_bytes": 2082658,
+  "page_count": 9,
+  "is_scanned": false,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 226,
+      "is_scanned": false,
+      "text_pages_read": 9
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1,
+        9
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "field_confidence": {
+        "nomor_surat": 0.0,
+        "instansi": 0.8,
+        "perihal": 0.6,
+        "tanggal_surat": 0.8,
+        "nip_pejabat": 0.9
+      }
+    },
+    "stage4_qr": {
+      "verification_url": "",
+      "detector": ""
+    },
+    "stage5_validation": {
+      "is_valid_nip": true,
+      "confidence_score": 0.65,
+      "needs_manual_review": true,
+      "validation_flags": [
+        "Missing or incomplete Nomor Surat"
+      ]
+    }
+  },
+  "metadata": {
+    "nomor_surat": "",
+    "instansi": "UPT SPF SD INPRES TALLO TUA 2",
+    "perihal": "IPAH 33 8 Genting Fase B Kelas IVA Risma Eka Damayanti, S.Pd ZAM ZAM 39",
+    "tanggal_surat": "2026-08-27",
+    "nama_pejabat": "Ernawati, S.Pd.., M.Pd.",
+    "jabatan_pejabat": "Kepala UPT SPF SD Inpres Tallo Tua 2",
+    "nip_pejabat": "198610142010012029",
+    "verification_url": "",
+    "ada_stempel_basah": false,
+    "ada_tanda_tangan": false
+  },
+  "text_excerpt": "DAFTAR PENERIMAAN MANFAAT KEGIATAN INOVASI GENTING (AGEN ANTI BULLYING) \nUPT SPF SD INPRES TALLO TUA 2 \nSAMPAI AGUSTUS 2026 \n \nNO PROGRAM \nKEGIATAN/ SUB \nKEGIATAN \nNAMA \nKELOMPOK \nSASARAN \nNAMA PENGURUS NAMA PETUGAS JUMLAH ANGGOTA \n(ORANG) \n1 Tim Penggerak Genting Guru dan Tenaga \nKependidikan \nErnawati, S.Pd., M.Pd Hardiyanti, S.Pd.I., M.Pd 18 \n2 Genting Fase A Kelas IA Sri Wahyuni, S.Pd., M.Pd RIFKA SAHARANI 28 \n3 Genting Fase A Kelas IB Rezky Amaliah, S.Pd NURAENI 28 \n4 Genting Fase A Kelas IIA Megawati, S.Pd MUHAMMAD KHAIRUL ANAS 28 \n5 Genting Fase A Kelas IIB Eka Mustikawati, S.Pd HAERUL HABIBI 28 \n6 Genting Fase B Kelas IIIA Hasriati, S.Pd BILQIS KHADIJAH PUTRI 32 \n7 Genting Fase B Kelas IIIB Ardi, S.Pd HALIPAH 33 \n8 Genting Fase B Kelas IVA Risma Eka Damayanti, S.Pd ZAM ZAM 39 \n9 Genting Fase B Kelas IVB Mardiana Rusdi, S.Pd., Gr FIKRAM 36 \n10 Genting Fase C Kelas VA Musdalifah, S.Pd ZIDAN 38 \n11 Genting Fase C Kelas VB Andi Cholilah RS, S.Pd., Gr A. DHALILUN 38 \n12 Genting Fase C Kelas VIA Hasri Ainun Efendi, S.Pd KARINA 45 \n13 Genting Fase C Kelas VIB Nur Alim, S.Pd \n \nISMAIL 40 \n14 Genting Paguyuban Orangtua Siswa   Hasanuddin Lestaluhu   Ardi Darmawansyah, S.Pd., M.Pd 205 \nJUMLAH  636 Orang \n \nMakassar, 27 Agustus 2026 \nKepala UPT SPF SD Inpres Tallo Tua 2 \n \n \n \n \n \nErnawati, S.Pd.., M.Pd.  \nNIP. 19861014 201001 2 029\n \nDOKUMENTASI PENERIMA MANFAAT \nINOVASI GENTING (AGEN ANTI-BULLYING) \nUPT SPF SD INPRES TALLO TUA 2",
+  "field_tidak_ada": {
+    "nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "BELUM_DIVERIFIKASI",
+    "sumber": "",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "",
+      "perihal": "",
+      "tanggal_surat": "",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": []
+  }
+}

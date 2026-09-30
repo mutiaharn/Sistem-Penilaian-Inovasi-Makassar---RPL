@@ -39,6 +39,7 @@ menimpa keputusan verifikator — alasan rancangan ini ada di `docs/DATA_MODEL.m
 | Dashboard pemantauan (statistik, tabel hasil ekstraksi, upload) | ✅ jalan | `app/templates/index.html` |
 | Katalog indikator & parameter (19 indikator × 3 parameter) | ✅ data siap | `data/reference/indikator_2026.json` |
 | Skema JSON + skrip pembangun dataset | ✅ jalan | `data/schemas/`, `scripts/build_dataset_json.py` |
+| Dataset JSON 41 berkas bukti (tanpa `null`) | ✅ jalan | `data/datasets/evidence/` — 9 berkas sudah `TERVERIFIKASI`, 17 belum diverifikasi, 15 scan belum terbaca |
 | Model data domain penilaian (usulan, indikator, bukti, keputusan, audit) | 🚧 baru kerangka | `app/database/assessment_models.py` |
 | **Mesin penilaian indikator (AI penilai parameter)** | ❌ belum | Belum ada kode. Ini pekerjaan utama berikutnya. |
 | **Dasbor Verifikasi Evaluasi (HITL)** | ❌ belum | Panel indikator + keputusan Lolos/Revisi/Tolak belum ada |
@@ -143,6 +144,7 @@ sip-brida/
 │
 ├── scripts/
 │   ├── build_dataset_json.py     ← PDF → JSON (prioritas: bahan ML)
+│   ├── report_dataset_gaps.py    ← laporan: field kosong & penyebabnya
 │   ├── check_data.py             ← cek data bukti + usulan pemetaan indikator
 │   ├── seed_reference.py         ← muat katalog indikator ke database
 │   ├── make_annotation_template.py ← kerangka anotasi submission & ground truth
@@ -201,6 +203,7 @@ docker compose up -d --build
 | `python scripts/check_data.py --write-draft` | Tulis draf `evidence_manifest.draft.json` |
 | `python scripts/build_dataset_json.py --limit 3` | Ubah 3 PDF pertama menjadi JSON (uji cepat) |
 | `python scripts/build_dataset_json.py` | Ubah semua PDF menjadi dataset JSON |
+| `python scripts/report_dataset_gaps.py` | Laporan: field mana yang kosong dan mengapa |
 | `python scripts/seed_reference.py` | Muat ulang katalog indikator ke database |
 | `python scripts/make_annotation_template.py --kode INV-2026-001 --nama "..." --opd "..."` | Buat kerangka anotasi |
 | `python scripts/validate_dataset.py --strict` | Validasi dataset + kelengkapan label |
@@ -264,13 +267,18 @@ Dicatat jujur supaya tidak terulang dan supaya bisa ditelusuri saat pengujian:
 2. **Dokumen hasil scan belum tertangani** — 15 dari 41 berkas terdeteksi scan dan
    seluruhnya menghasilkan confidence ≤ 25%. Pipeline hanya membaca lapisan teks,
    belum ada OCR.
-3. **Hanya 2 halaman yang dirasterisasi** (halaman 1 dan terakhir) dan hanya 3 halaman
-   pertama yang teksnya dibaca. Bukti indikator yang berada di halaman tengah
-   (RKAS 13 hlm, manual book 22 hlm, Perwali 20 hlm) belum terbaca.
-4. **Ekstraksi nomor surat rawan salah tangkap**: regex saat ini mengambil potongan
-   alamat (`"16 Kelurahan Tallo..."`, `"2 Makassar 90111"`) dari baris alamat.
-5. **Ground truth hanya 10 dari 41 dokumen** dan mencakup 1 dokumen luar kota
-   (Kabupaten Morowali) pada dataset Kota Makassar.
+3. **Hanya 2 halaman yang dirasterisasi** (halaman 1 dan terakhir) oleh pipeline produksi,
+   dan Stage 1 hanya membaca teks 3 halaman pertama. Bukti indikator yang berada di halaman
+   tengah (RKAS 13 hlm, manual book 22 hlm, Perwali 20 hlm) belum terbaca dari sisi citra.
+   *Catatan:* `build_dataset_json.py` sudah membaca teks **seluruh halaman**; yang belum
+   diperluas adalah rasterisasi citra di pipeline produksi.
+4. ~~Ekstraksi nomor surat rawan salah tangkap~~ → **sudah diperbaiki.** Kandidat nomor surat
+   kini disaring ketat (`looks_like_document_number`): wajib berkode berslash, memuat huruf
+   besar, dan ditolak bila mengandung kata alamat (`kelurahan`, `kecamatan`, `jalan`, dst)
+   atau berbentuk slug URL. 17 nomor surat yang terekstraksi seluruhnya berbentuk kode resmi.
+5. **Ground truth ekstraksi baru 9 dari 41 dokumen** (isian `app/evaluation/ground_truth.json`)
+   dan mencakup 1 dokumen luar kota (Kabupaten Morowali) pada dataset Kota Makassar.
+   Statusnya di dataset: 9 berkas `TERVERIFIKASI`, 17 `BELUM_DIVERIFIKASI`, 15 `BELUM_TERBACA_SCAN`.
 6. **Cara pencocokan metrik terlalu longgar** (substring) sehingga akurasi
    cenderung menggelembung; field yang ground truth-nya kosong tidak dihitung sama sekali.
 7. **`POST /api/process` menulis berkas memakai nama dari klien** dan belum
@@ -280,6 +288,13 @@ Dicatat jujur supaya tidak terulang dan supaya bisa ditelusuri saat pengujian:
 9. `scripts/seed_and_process.py` menulis ulang baris ekstraksi setiap dijalankan
    sehingga tabel `document_extractions` bisa berisi duplikat. Gunakan
    `build_dataset_json.py` untuk membangun dataset.
+10. **15 berkas hasil scan belum terbaca** — tidak punya lapisan teks, jadi seluruh
+    metadata-nya kosong. Sudah ditandai `verified.status = BELUM_TERBACA_SCAN`;
+    perlu OCR atau pembacaan visual sebelum bisa dipakai sebagai bahan ML.
+11. **Penanda `is_scanned` belum akurat** — ditentukan hanya dari jumlah kata halaman 1,
+    sehingga dokumen campuran (halaman 1 gambar, sisanya teks) bisa salah ditandai.
+    Contoh: `kabkota-2026-08-31-kota_makassar-dabaa261.pdf` ditandai scan tetapi
+    metadata-nya justru terbaca lengkap dengan confidence 100%.
 
 ## Roadmap
 

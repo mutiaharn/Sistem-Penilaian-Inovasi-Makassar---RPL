@@ -1,0 +1,84 @@
+{
+  "document_id": "",
+  "filename": "kabkota-2026-08-31-kota_makassar-1764e596.pdf",
+  "sha256": "205ce18081a126d1d919dcfba00191588c82e186cc61b7a0f1e75fb6503abd43",
+  "file_size_bytes": 9083975,
+  "page_count": 22,
+  "is_scanned": true,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 16,
+      "is_scanned": true,
+      "text_pages_read": 22
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1,
+        22
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "field_confidence": {
+        "nomor_surat": 0.0,
+        "instansi": 0.8,
+        "perihal": 0.6,
+        "tanggal_surat": 0.8,
+        "nip_pejabat": 0.9
+      }
+    },
+    "stage4_qr": {
+      "verification_url": "",
+      "detector": ""
+    },
+    "stage5_validation": {
+      "is_valid_nip": true,
+      "confidence_score": 0.65,
+      "needs_manual_review": true,
+      "validation_flags": [
+        "Missing or incomplete Nomor Surat"
+      ]
+    }
+  },
+  "metadata": {
+    "nomor_surat": "",
+    "instansi": "UPT SPF SD INPRES TALLO TUA 2",
+    "perihal": "ang oleh satu persoalan yang masih menghantui banyak sekolah, yakni bullying atau perundungan.",
+    "tanggal_surat": "2026-06-29",
+    "nama_pejabat": "Ernawati, S.Pd., M.Pd",
+    "jabatan_pejabat": "Kepala Dinas",
+    "nip_pejabat": "198610142010012029",
+    "verification_url": "",
+    "ada_stempel_basah": false,
+    "ada_tanda_tangan": false
+  },
+  "text_excerpt": "MANUAL BOOK\nGENTING \nUPT SPF SD INPRES TALLO TUA 2\nSTOP PERUNDUNGAN! MARI BERKAWAN!\n(AGEN \nANTI-BULLYING)\nPuji syukur kami panjatkan ke hadirat Allah SWT, atas rahmat\ndan karunia-Nya sehingga Buku Panduan (Manual Book)\nProgram GENTING – Agen Anti Bullying ini dapat disusun.\nBuku ini hadir sebagai pedoman praktis untuk seluruh warga\nsekolah dalam memahami, mengimplementasikan, dan\nmengevaluasi program pencegahan perundungan secara\nsistematis.\nProgram GENTING merupakan inovasi sekolah yang berfokus\npada pemberdayaan murid sebagai agen sebaya untuk\nmenciptakan iklim sekolah yang aman, ramah anak, dan\nmendukung pembelajaran mendalam. Melalui program ini,\nmurid dibekali pengetahuan dasar mengenai bullying, nilai\nempati, komunikasi asertif, prosedur pelaporan, hingga etika\nmenjadi agen sebaya.\nBuku panduan ini juga terintegrasi dengan nilai-nilai 7\nKebiasaan Anak Indonesia Hebat dan mendukung\nterwujudnya lingkungan pendidikan yang cerdas\nberkarakter. \nKami berharap buku panduan ini menjadi referensi\nbermanfaat bagi guru, murid, dan orang tua untuk\nbersama-sama mewujudkan sekolah yang bebas bullying,\nramah anak, dan membentuk generasi unggul.\nKata\nPengantar\nAssalamu ‘alaikum Warahmatullahi Wabarakatuh\nSalam Hangat,\nUPT SPF SD Inpres Tallo Tua 2\nPendahuluan\nTujuan Program\nDasar Hukum\nProfil Program GENTING\nMekanisme Pelaksanaan\nTugas & Tanggung Jawab\nMateri Pelatihan Agen\nTata Cara Pelaporan\nMonitoring & Evaluasi\nPenutup\nDAFTAR ISI\nPendahuluan,\nTujuan\nProgram, dan\nDasar Hukum\n\nPendah",
+  "field_tidak_ada": {
+    "nomor_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "BELUM_TERBACA_SCAN",
+    "sumber": "",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "",
+      "perihal": "",
+      "tanggal_surat": "",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": []
+  }
+}

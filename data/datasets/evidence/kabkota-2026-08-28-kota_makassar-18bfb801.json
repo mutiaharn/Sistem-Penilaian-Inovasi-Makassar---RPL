@@ -1,16 +1,20 @@
 {
-  "document_id": null,
+  "document_id": "",
   "filename": "kabkota-2026-08-28-kota_makassar-18bfb801.pdf",
   "sha256": "aa170353dc256da6c5482307f857fb0fdc1628e898716c181682afa757e457da",
   "file_size_bytes": 3836567,
   "page_count": 4,
   "is_scanned": false,
-  "manifest": null,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
   "pipeline": {
     "stage1_inspector": {
       "words_page_1": 48,
       "is_scanned": false,
-      "text_pages_read": 3
+      "text_pages_read": 4
     },
     "stage2_preprocessing": {
       "target_dpi": 300,
@@ -31,8 +35,8 @@
       }
     },
     "stage4_qr": {
-      "verification_url": null,
-      "detector": null
+      "verification_url": "",
+      "detector": ""
     },
     "stage5_validation": {
       "is_valid_nip": false,
@@ -45,16 +49,43 @@
     }
   },
   "metadata": {
-    "nomor_surat": null,
+    "nomor_surat": "",
     "instansi": "SDI Tallo Tua 2 Makassar 9/27/25, 6:21 PM Pemilihan Duta Genting: Agen Anti Bully sebagai Penguat Karakter Siswa di SDI Tallo Tua 2 Makassar - BN Nasional",
-    "perihal": null,
+    "perihal": "",
     "tanggal_surat": "2025-06-24",
-    "nama_pejabat": null,
+    "nama_pejabat": "",
     "jabatan_pejabat": "Kepala Sekolah",
-    "nip_pejabat": null,
+    "nip_pejabat": "",
+    "verification_url": "",
     "ada_stempel_basah": false,
-    "ada_tanda_tangan": false,
-    "verification_url": null
+    "ada_tanda_tangan": false
   },
-  "text_excerpt": "Beranda PENDIDIKAN\nPENDIDIKAN\nPemilihan Duta Genting: Agen Anti Bully sebagai Penguat Karakter Siswa di\nSDI Tallo Tua 2 Makassar\nBN Klasik\nJuni 24, 2025\n9/27/25, 6:21 PM Pemilihan Duta Genting: Agen Anti Bully sebagai Penguat Karakter Siswa di SDI Tallo Tua 2 Makassar - BN Nasional\nhttps://bidiknasional.id/2025/06/24/pemilihan-duta-genting-agen-anti-bully-sebagai-penguat-karakter-siswa-di-sdi-tallo-tua-2-makassar/ 1/7\nBN Online, Makassar– Dalam upaya memperkuat karakter peserta didik, UPT SPF SDI Tallo Tua 2 Makassar menggelar\nkegiatan inovatif bertajuk Pemilihan Duta Genting (Agen Anti Bully) pada hari Selasa, 24 Juni 2025. Kegiatan ini\nberlangsung meriah dan penuh makna, dihadiri oleh Kepala Sekolah, guru, staf, siswa, serta para orang tua siswa.\nKegiatan ini merupakan bagian dari inisiatif sekolah dalam menciptakan lingkungan belajar yang aman, positif, dan\nmendukung perkembangan karakter peserta didik. Dalam sambutannya, Kepala UPT SPF SDI Tallo Tua 2 Makassar, Salvia\nSalmawati, S.Pd., menekankan pentingnya peran siswa sebagai agen perubahan di lingkungan sekolah.\n“Pemilihan Duta Genting ini bukan sekadar seleksi formalitas, melainkan langkah nyata untuk membentuk siswa yang\ntidak hanya unggul secara akademik, tetapi juga memiliki karakter kuat dalam menolak dan mencegah tindakan\nperundungan,” ujarnya.\nTemukan lebih banyak Media Koran Cetak Makassar Kota Makassar\n9/27/25, 6:21 PM Pemilihan Duta Genting: Agen Anti Bully sebagai Penguat Karakter Siswa di SDI Tallo Tua 2 Mak"
+  "text_excerpt": "Beranda PENDIDIKAN\nPENDIDIKAN\nPemilihan Duta Genting: Agen Anti Bully sebagai Penguat Karakter Siswa di\nSDI Tallo Tua 2 Makassar\nBN Klasik\nJuni 24, 2025\n9/27/25, 6:21 PM Pemilihan Duta Genting: Agen Anti Bully sebagai Penguat Karakter Siswa di SDI Tallo Tua 2 Makassar - BN Nasional\nhttps://bidiknasional.id/2025/06/24/pemilihan-duta-genting-agen-anti-bully-sebagai-penguat-karakter-siswa-di-sdi-tallo-tua-2-makassar/ 1/7\nBN Online, Makassar– Dalam upaya memperkuat karakter peserta didik, UPT SPF SDI Tallo Tua 2 Makassar menggelar\nkegiatan inovatif bertajuk Pemilihan Duta Genting (Agen Anti Bully) pada hari Selasa, 24 Juni 2025. Kegiatan ini\nberlangsung meriah dan penuh makna, dihadiri oleh Kepala Sekolah, guru, staf, siswa, serta para orang tua siswa.\nKegiatan ini merupakan bagian dari inisiatif sekolah dalam menciptakan lingkungan belajar yang aman, positif, dan\nmendukung perkembangan karakter peserta didik. Dalam sambutannya, Kepala UPT SPF SDI Tallo Tua 2 Makassar, Salvia\nSalmawati, S.Pd., menekankan pentingnya peran siswa sebagai agen perubahan di lingkungan sekolah.\n“Pemilihan Duta Genting ini bukan sekadar seleksi formalitas, melainkan langkah nyata untuk membentuk siswa yang\ntidak hanya unggul secara akademik, tetapi juga memiliki karakter kuat dalam menolak dan mencegah tindakan\nperundungan,” ujarnya.\nTemukan lebih banyak Media Koran Cetak Makassar Kota Makassar\n9/27/25, 6:21 PM Pemilihan Duta Genting: Agen Anti Bully sebagai Penguat Karakter Siswa di SDI Tallo Tua 2 Mak",
+  "field_tidak_ada": {
+    "nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "perihal": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
+    "nama_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
+    "nip_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
+    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "TERVERIFIKASI",
+    "sumber": "anotasi_manual",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "SDI Tallo Tua 2 Makassar",
+      "perihal": "Pemilihan Duta Genting: Agen Anti Bully sebagai Penguat Karakter Siswa",
+      "tanggal_surat": "2025-06-24",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": [
+      "instansi",
+      "perihal"
+    ]
+  }
 }

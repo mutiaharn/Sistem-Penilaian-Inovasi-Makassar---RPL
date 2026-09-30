@@ -1,0 +1,91 @@
+{
+  "document_id": "",
+  "filename": "kabkota-2026-08-28-kota_makassar-c17624b9.pdf",
+  "sha256": "f8fa520b6f548cd8921496511033b0f252540d7f8b5e5b922b628a948eb3e0bf",
+  "file_size_bytes": 417007,
+  "page_count": 6,
+  "is_scanned": false,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 193,
+      "is_scanned": false,
+      "text_pages_read": 6
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1,
+        6
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "field_confidence": {
+        "nomor_surat": 0.0,
+        "instansi": 0.0,
+        "perihal": 0.0,
+        "tanggal_surat": 0.8,
+        "nip_pejabat": 0.0
+      }
+    },
+    "stage4_qr": {
+      "verification_url": "",
+      "detector": ""
+    },
+    "stage5_validation": {
+      "is_valid_nip": false,
+      "confidence_score": 0.25,
+      "needs_manual_review": true,
+      "validation_flags": [
+        "Missing or incomplete Nomor Surat",
+        "Missing Instansi",
+        "Missing Perihal"
+      ]
+    }
+  },
+  "metadata": {
+    "nomor_surat": "",
+    "instansi": "",
+    "perihal": "",
+    "tanggal_surat": "2025-07-22",
+    "nama_pejabat": "",
+    "jabatan_pejabat": "",
+    "nip_pejabat": "",
+    "verification_url": "",
+    "ada_stempel_basah": false,
+    "ada_tanda_tangan": false
+  },
+  "text_excerpt": "𝑱𝒖𝒎𝒍𝒂𝒉 𝑩𝒐𝒃𝒐𝒕 \n 𝟏 \n𝑩𝒐𝒃𝒐𝒕 𝑵𝒊𝒍𝒂𝒊 𝒓𝒂𝒕𝒂 − 𝒓𝒂𝒕𝒂 𝒕𝒆𝒓𝒕𝒊𝒎𝒃𝒂𝒏𝒈 = 𝑱𝒖𝒎𝒍𝒂𝒉 𝑼𝒏𝒔𝒖𝒓 = 𝟏𝟎 = 𝟎, 𝟏 \n𝑰𝑲𝑴 = \n 𝑻𝒐𝒕𝒂𝒍 𝑵𝒊𝒍𝒂𝒊 𝑷𝒆𝒓𝒔𝒆𝒑𝒔𝒊 𝑷𝒆𝒓𝒖𝒏𝒔𝒖𝒓 \n𝑻𝒐𝒕𝒂𝒍 𝑲𝒖𝒐𝒔𝒊𝒐𝒏𝒆𝒓 𝒕𝒆𝒓𝒊𝒔𝒊 \n 𝒙 𝑩𝒐𝒃𝒐𝒕 𝑵𝒊𝒍𝒂𝒊 𝑷𝒆𝒏𝒎𝒊𝒃𝒂𝒏𝒈 \n𝑰𝑲𝑴 𝑼𝒏𝒊𝒕 𝑷𝒆𝒍𝒂𝒚𝒂𝒏𝒂𝒏 𝒙 𝟐𝟓 \n \nLAPORAN HASIL PENELITIAN ANALISIS KEPUASAN \nMASYARAKAT TERHADAP INOVASI \n \nJenis Layanan : Inovasi Genting (Agen Anti Bullying) \nInstansi Pelayanan : Badan Penelitian dan Pengembangan Daerah Kota Makassar \nAlamat : Kantor Balaikota Makassar Jl. Jend. Ahmad Yani No.2 \nWaktu Survey : 22 Juli 2025 – 26 Agustus 2025 \nJumlah Responden : 95 Orang \n \nA. METODE PENGOLAHAN DATA \nPengolahan data IKM dilaksananakan dengan menghitung data hasil jawaban \nResponden yang merupakan persepsi terhadap masing -masing unsur  \npelayanan dan diisikan dalam tabel pengolahan. Nilai IKM dihitung \nmenggunakan “nilai rata -rata tertimbang“ masing -masing unsur pelayanan. \nDalam penghitungan IKM terhadap 9 unsur pelayanan (Peraturan Kementrian \nPendayagunaan Aparatur Negara dan Reformasi Birokrasi Nomor 14 Tahun \n2017), setiap unsur pelayanan memiliki penimbang yang sama dengan rumus \nsebagai berikut: \n \n \nUntuk memperoleh nilai Indeks Kepuasan Masyarakat, digunakan \npendekatan nilai rata-rata tertimbang dengam rumus : \n \n \nAgar dapat memudahkan dalam melihat hasil penilaian IKM untuk \ndiinterpretasikan, maka hasil penilaian IKM dikonversikan dengan nilai dasar 25, \ndengan rumus sebagai berikut : \n \n\nUntuk mengetahui interval pengukuran kualitas pelayanan digunakan tabel \nnilai sebagai berikut : \nNilai \nPersep",
+  "field_tidak_ada": {
+    "nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "instansi": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
+    "perihal": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
+    "nama_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
+    "jabatan_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: jabatan tidak selalu ditulis di bawah tanda tangan",
+    "nip_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
+    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "BELUM_DIVERIFIKASI",
+    "sumber": "",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "",
+      "perihal": "",
+      "tanggal_surat": "",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": []
+  }
+}

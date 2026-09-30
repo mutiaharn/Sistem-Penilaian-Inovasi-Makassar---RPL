@@ -1,0 +1,85 @@
+{
+  "document_id": "",
+  "filename": "kabkota-2026-08-28-kota_makassar-46ef815f.pdf",
+  "sha256": "2db50348d0b88c4095c70224f9b9be2668c5234bff58576d451e0a744296d9d6",
+  "file_size_bytes": 100687,
+  "page_count": 1,
+  "is_scanned": false,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 436,
+      "is_scanned": false,
+      "text_pages_read": 1
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "field_confidence": {
+        "nomor_surat": 0.8,
+        "instansi": 0.0,
+        "perihal": 0.6,
+        "tanggal_surat": 0.8,
+        "nip_pejabat": 0.0
+      }
+    },
+    "stage4_qr": {
+      "verification_url": "",
+      "detector": ""
+    },
+    "stage5_validation": {
+      "is_valid_nip": false,
+      "confidence_score": 0.7,
+      "needs_manual_review": true,
+      "validation_flags": [
+        "Missing Instansi"
+      ]
+    }
+  },
+  "metadata": {
+    "nomor_surat": "421.2/148/SK/UPT.SPF.SDI.TT.2/TL/XI/2025",
+    "instansi": "",
+    "perihal": "bullying kepada semua siswa melalui mading, pojok baca, dan media digital",
+    "tanggal_surat": "2026-07-06",
+    "nama_pejabat": "",
+    "jabatan_pejabat": "Kepala Sekolah untuk pelaksanaan program Genting",
+    "nip_pejabat": "",
+    "verification_url": "",
+    "ada_stempel_basah": false,
+    "ada_tanda_tangan": false
+  },
+  "text_excerpt": "1. 1.\n2.\n3. 2.\n4.\n5. 3.\n6.\n7.\n8.\n9.\n10.\n11.\nPeralatan / Perlengkapan:\n1. 1.\n2. 2.\n1.\nKepsek Tim Persyaratan / \nPerlengkapan Waktu Output\n1. Meminta izin Kepala Sekolah untuk pelaksanaan program Genting\nProposal Program \nGenting 10 Menit Persetujuan \nKepala Sekolah\n2. Membentuk Tim Agen Genting\nSelempang \nidentitas Agen 60 Menit Terbentuknya \nTim Genting\n3. Setiap kelas memilih 2 siswa sebagai Agen Genting\nSelempang \nidentitas Agen 120 Menit Terpilihnya 2 \nsiswa per kelas\n4. Pelatihan agen terkait pencegahan bullying dan cara menolong teman Modul pelatihan 120 Menit Sertifikat agen\n5. Genting membantu siswa yang mengalami perundungan\nBuku Catatan \nAgen\nSesuai \nKebutuhan \n(10-120 \nmenit)\nPencatatan Kasus \nBullying\n6. Sosialisasi tentang bullying kepada semua siswa melalui mading, pojok baca, \ndan media digital\nMading Sekolah, \nMedia Digital 60 menit \t Poster, Artikel \nEdukasi\n7. Genting membuat laporan bulanan kepada Kepala Sekolah Laporan Bulanan 30 menit\nLaporan \npencegahan \nbullying\n8. \t Evaluasi program Genting setiap akhir semester Laporan Bulanan 30 menit\nLaporan \npencegahan \nbullying\n9. Penghargaan bagi agen terbaik yang aktif mencegah bullying\nSertifikat & \nReward 60 Menit Penghargaan \n\"Agen Terbaik\"\nUndang-Undang Nomor 20 Tahun 2003 tentang Sistem Pendidikan Nasional\nDasar Hukum : Kualifikasi Pelaksanaan:\nKeterangan: \n                     Mulai/Selesai                                                                   Proses                                     Pengambil",
+  "field_tidak_ada": {
+    "instansi": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
+    "nama_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
+    "nip_pejabat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
+    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "BELUM_DIVERIFIKASI",
+    "sumber": "",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "",
+      "perihal": "",
+      "tanggal_surat": "",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": []
+  }
+}

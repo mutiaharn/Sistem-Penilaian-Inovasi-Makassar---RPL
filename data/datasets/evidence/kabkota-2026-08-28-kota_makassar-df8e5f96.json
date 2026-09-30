@@ -1,0 +1,80 @@
+{
+  "document_id": "",
+  "filename": "kabkota-2026-08-28-kota_makassar-df8e5f96.pdf",
+  "sha256": "cb44f6a093e163916d81ccc603d958684fed523244a39cacde0ac0abcc4db55b",
+  "file_size_bytes": 182525,
+  "page_count": 1,
+  "is_scanned": false,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 203,
+      "is_scanned": false,
+      "text_pages_read": 1
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "field_confidence": {
+        "nomor_surat": 0.8,
+        "instansi": 0.8,
+        "perihal": 0.6,
+        "tanggal_surat": 0.8,
+        "nip_pejabat": 0.9
+      }
+    },
+    "stage4_qr": {
+      "verification_url": "",
+      "detector": ""
+    },
+    "stage5_validation": {
+      "is_valid_nip": true,
+      "confidence_score": 0.95,
+      "needs_manual_review": false,
+      "validation_flags": []
+    }
+  },
+  "metadata": {
+    "nomor_surat": "422/77/SDN45/X/2025",
+    "instansi": "PEMERINTAH KABUPATEN PANGKAJENE DAN KEPULAUAN DINAS PENDIDIKAN DAN KEPUDAYAAN",
+    "perihal": "Inovasi Daerah; Peraturan Menteri Dalam Negeri Republik Indonesia Nomor 104 tahun 2018 tentang Penilaian dan Pemberian Penghargaan dan/atau Insentif Inovasi",
+    "tanggal_surat": "2025-10-06",
+    "nama_pejabat": "HARIATI, S.Pd., M.Pd.",
+    "jabatan_pejabat": "Kepala Sekolah",
+    "nip_pejabat": "197702252006042024",
+    "verification_url": "",
+    "ada_stempel_basah": false,
+    "ada_tanda_tangan": false
+  },
+  "text_excerpt": "PEMERINTAH KABUPATEN PANGKAJENE DAN KEPULAUAN \nDINAS PENDIDIKAN DAN KEPUDAYAAN \nUPT SD NEGERI 45 PACCELANG \nJalan Maccini Baji Kel. Anrong Appaka Kec. Pangkajene Kode Pos: 90612 \n \n \n \nSURAT PERNYATAAN \nNOMOR : 422/77/SDN45/X/2025 \n \n \nDalam rangka  pelaksanaan  Peraturan  Pemerintah  Nomor 38  Tahun  2017 \ntentang Inovasi Daerah; Peraturan Menteri Dalam Negeri Republik Indonesia Nomor \n104 tahun 2018 tentang Penilaian dan Pemberian Penghargaan dan/atau Insentif Inovasi \nDaerah serta Peraturan Bupati Pangkajene dan Kepulauan  Nomor : 5 Tahun 202 3 tentang \nInovasi Daerah, dengan ini saya yang bertanda tangan di bawah ini :  \nN a m a : HARIATI S.Pd., M.Pd. \nN I P 19770225 200604 2 024 \nPangkat / Gol. : Penata Tingkat I, III/d \nJabatan  : Kepala Sekolah \nDengan ini  menyatakan bahwa telah melakukan replikasi “Inovasi Pelayanan \nPublik/Inovasi Tata Kelola Pemerintahan  Daerah/ Inovasi bentuk lainnya sesuai bidang \nurusan pemerintahan yang menjadi kewenangan Daerah”, dalam rangka Peningkatan \nPelayanan Publik di Lingkungan Pemerintahan Kabupaten Pangkajene dan Kepulauan. \nAdapun Inovasi yang direplikasi, sebagai berikut : \n \nNo. Nama \nInovasi \nSatuan Kerja Pemilik \nInovasi \n1. Genting (Agen Anti Bullying UPT SPF SD Inpres Tallo Tua 2 \n \nDemikian Surat Pernyataan ini dibuat untuk dipergunakan sebagaimana \nmestinya. \n \nPangkajene, 6 Oktober 2025 \nKEPALA UPT SDN 45 Paccelang \n \n \nHARIATI, S.Pd., M.Pd. \nNIP . 19770225 200604 2 024",
+  "field_tidak_ada": {
+    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "BELUM_DIVERIFIKASI",
+    "sumber": "",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "",
+      "perihal": "",
+      "tanggal_surat": "",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": []
+  }
+}

@@ -78,18 +78,18 @@ def test_contoh_payload_extraction_lolos_validasi(schemas):
     jsonschema = pytest.importorskip("jsonschema")
 
     contoh = {
-        "document_id": None,
+        "document_id": "",
         "filename": "contoh.pdf",
         "sha256": "a" * 64,
         "file_size_bytes": 1024,
         "page_count": 1,
         "is_scanned": False,
-        "manifest": None,
+        "manifest": {"inovasi_id": "", "indicator_id": "", "evidence_tag": ""},
         "pipeline": {
             "stage1_inspector": {"words_page_1": 120, "is_scanned": False, "text_pages_read": 1},
             "stage2_preprocessing": {"target_dpi": 300, "pages_rasterized": [1], "skew_angle_deg": 0.0},
             "stage3_extraction": {"engine": "smart_heuristics", "field_confidence": {}},
-            "stage4_qr": {"verification_url": None, "detector": None},
+            "stage4_qr": {"verification_url": "", "detector": ""},
             "stage5_validation": {
                 "is_valid_nip": False,
                 "confidence_score": 0.5,
@@ -98,21 +98,70 @@ def test_contoh_payload_extraction_lolos_validasi(schemas):
             },
         },
         "metadata": {
-            "nomor_surat": None,
-            "instansi": None,
-            "perihal": None,
-            "tanggal_surat": None,
-            "nama_pejabat": None,
-            "jabatan_pejabat": None,
-            "nip_pejabat": None,
+            "nomor_surat": "",
+            "instansi": "",
+            "perihal": "",
+            "tanggal_surat": "",
+            "nama_pejabat": "",
+            "jabatan_pejabat": "",
+            "nip_pejabat": "",
+            "verification_url": "",
             "ada_stempel_basah": False,
             "ada_tanda_tangan": False,
-            "verification_url": None,
         },
-        "text_excerpt": None,
+        "field_tidak_ada": {"nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia"},
+        "verified": {
+            "status": "BELUM_DIVERIFIKASI",
+            "sumber": "",
+            "verified_by": "",
+            "verified_at": "",
+            "values": {f: "" for f in [
+                "nomor_surat", "instansi", "perihal", "tanggal_surat",
+                "nama_pejabat", "jabatan_pejabat", "nip_pejabat", "verification_url",
+            ]},
+            "berbeda_dari_mesin": [],
+        },
+        "text_excerpt": "",
     }
 
     jsonschema.Draft7Validator(schemas["idp_extraction.schema.json"]).validate(contoh)
+
+
+def test_dataset_tidak_memuat_nilai_null(schemas):
+    """Aturan tim: dataset tidak boleh berisi null.
+
+    Field kosong harus berupa string kosong supaya 'kosong' tidak ambigu, dan
+    alasannya wajib tercatat di field_tidak_ada.
+    """
+    jsonschema = pytest.importorskip("jsonschema")
+
+    def cari_null(obj, jalur="") -> list[str]:
+        temuan = []
+        if obj is None:
+            temuan.append(jalur or "<root>")
+        elif isinstance(obj, dict):
+            for k, v in obj.items():
+                temuan += cari_null(v, f"{jalur}.{k}" if jalur else k)
+        elif isinstance(obj, list):
+            for i, v in enumerate(obj):
+                temuan += cari_null(v, f"{jalur}[{i}]")
+        return temuan
+
+    diperiksa = 0
+    for file in sorted(settings.extract_dir.glob("*.json")):
+        with open(file, "r", encoding="utf-8") as f:
+            payload = json.load(f)
+        nulls = cari_null(payload)
+        assert not nulls, f"{file.name} masih memuat null di: {nulls[:5]}"
+
+        # setiap field kosong harus punya alasan
+        kosong = [f for f in payload["metadata"] if f not in ("ada_stempel_basah", "ada_tanda_tangan") and payload["metadata"][f] == ""]
+        for f in kosong:
+            assert f in payload["field_tidak_ada"], f"{file.name}: field '{f}' kosong tapi tanpa alasan"
+        diperiksa += 1
+
+    if diperiksa == 0:
+        pytest.skip("belum ada dataset untuk diperiksa")
 
 
 def test_dataset_yang_ada_sesuai_skema(schemas):

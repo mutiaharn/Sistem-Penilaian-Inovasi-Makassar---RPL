@@ -2,23 +2,39 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://sip-brida/schemas/idp_extraction.schema.json",
   "title": "IDP Extraction - keluaran pipeline 5 tahap untuk satu berkas PDF",
-  "description": "Ini format keluaran scripts/build_dataset_json.py. Satu file = satu PDF. Menjadi bahan baku tahap penilaian indikator dan bahan latih/evaluasi ML.",
+  "description": "Format keluaran scripts/build_dataset_json.py. Satu file = satu PDF. TIDAK ADA nilai null: field yang kosong diisi string kosong dan alasannya dicatat di field_tidak_ada. Nilai yang sudah dipastikan benar disimpan terpisah di blok `verified` supaya output mesin dan label manusia tidak tercampur.",
   "type": "object",
-  "required": ["document_id", "filename", "sha256", "page_count", "pipeline", "metadata"],
+  "required": [
+    "document_id",
+    "filename",
+    "sha256",
+    "page_count",
+    "is_scanned",
+    "manifest",
+    "pipeline",
+    "metadata",
+    "field_tidak_ada",
+    "verified",
+    "text_excerpt"
+  ],
   "additionalProperties": false,
   "properties": {
-    "document_id": { "type": ["integer", "null"] },
+    "document_id": {
+      "type": ["integer", "string"],
+      "description": "ID di tabel documents; string kosong bila belum pernah masuk database"
+    },
     "filename": { "type": "string" },
     "sha256": { "type": "string" },
     "file_size_bytes": { "type": "integer" },
     "page_count": { "type": "integer" },
     "is_scanned": {
       "type": "boolean",
-      "description": "true = PDF hasil scan tanpa lapisan teks. Tanpa OCR, isinya tidak terbaca."
+      "description": "true = halaman 1 tanpa lapisan teks (kemungkinan scan). Perlu diperiksa manual: dokumen campuran bisa keliru ditandai."
     },
     "manifest": {
-      "type": ["object", "null"],
-      "description": "Kaitan ke innovation/indikator (diisi dari evidence manifest)",
+      "type": "object",
+      "description": "Kaitan ke indikator. Diisi dari data/reference/evidence_manifest.json; string kosong bila belum dipetakan.",
+      "required": ["inovasi_id", "indicator_id", "evidence_tag"],
       "properties": {
         "inovasi_id": { "type": "string" },
         "indicator_id": { "type": "string" },
@@ -34,7 +50,7 @@
           "properties": {
             "words_page_1": { "type": "integer" },
             "is_scanned": { "type": "boolean" },
-            "text_pages_read": { "type": "integer", "description": "Jumlah halaman yang teksnya diekstrak (saat ini maksimum 3)" }
+            "text_pages_read": { "type": "integer", "description": "Jumlah halaman yang teksnya dibaca oleh pembangun dataset" }
           }
         },
         "stage2_preprocessing": {
@@ -55,8 +71,8 @@
         "stage4_qr": {
           "type": "object",
           "properties": {
-            "verification_url": { "type": ["string", "null"] },
-            "detector": { "type": ["string", "null"], "enum": ["pyzbar", "opencv", null] }
+            "verification_url": { "type": "string", "description": "String kosong bila tidak ada QR verifikasi" },
+            "detector": { "type": "string", "enum": ["pyzbar/opencv", "pyzbar", "opencv", ""] }
           }
         },
         "stage5_validation": {
@@ -72,23 +88,78 @@
     },
     "metadata": {
       "type": "object",
-      "description": "Metadata naskah dinas hasil ekstraksi",
+      "description": "OUTPUT MESIN. Boleh berisi string kosong. JANGAN diisi manual - nilai yang sudah dipastikan benar ada di blok `verified`.",
+      "required": [
+        "nomor_surat",
+        "instansi",
+        "perihal",
+        "tanggal_surat",
+        "nama_pejabat",
+        "jabatan_pejabat",
+        "nip_pejabat",
+        "verification_url",
+        "ada_stempel_basah",
+        "ada_tanda_tangan"
+      ],
       "properties": {
-        "nomor_surat": { "type": ["string", "null"] },
-        "instansi": { "type": ["string", "null"] },
-        "perihal": { "type": ["string", "null"] },
-        "tanggal_surat": { "type": ["string", "null"], "description": "ISO-8601 YYYY-MM-DD bila berhasil dinormalisasi" },
-        "nama_pejabat": { "type": ["string", "null"] },
-        "jabatan_pejabat": { "type": ["string", "null"] },
-        "nip_pejabat": { "type": ["string", "null"] },
+        "nomor_surat": { "type": "string" },
+        "instansi": { "type": "string" },
+        "perihal": { "type": "string" },
+        "tanggal_surat": { "type": "string", "description": "ISO-8601 YYYY-MM-DD bila berhasil dinormalisasi" },
+        "nama_pejabat": { "type": "string" },
+        "jabatan_pejabat": { "type": "string" },
+        "nip_pejabat": { "type": "string" },
+        "verification_url": { "type": "string" },
         "ada_stempel_basah": { "type": "boolean" },
-        "ada_tanda_tangan": { "type": "boolean" },
-        "verification_url": { "type": ["string", "null"] }
+        "ada_tanda_tangan": { "type": "boolean" }
+      }
+    },
+    "field_tidak_ada": {
+      "type": "object",
+      "description": "Field pada `metadata` yang kosong beserta ALASANNYA. Kunci = nama field, nilai = alasan. Tujuannya supaya 'kosong' tidak ambigu antara pipeline gagal dan dokumen memang tidak memuatnya.",
+      "additionalProperties": { "type": "string" }
+    },
+    "verified": {
+      "type": "object",
+      "description": "NILAI YANG SUDAH DIPASTIKAN BENAR (label / ground truth). Kosong berarti belum diverifikasi - BUKAN berarti salah.",
+      "required": ["status", "sumber", "verified_by", "verified_at", "values", "berbeda_dari_mesin"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["TERVERIFIKASI", "BELUM_DIVERIFIKASI", "BELUM_TERBACA_SCAN"],
+          "description": "TERVERIFIKASI = sudah dibaca ulang manusia; BELUM_TERBACA_SCAN = tidak ada lapisan teks, perlu OCR"
+        },
+        "sumber": {
+          "type": "string",
+          "enum": ["anotasi_manual", "pembacaan_ulang", ""],
+          "description": "Asal nilai pada `values`"
+        },
+        "verified_by": { "type": "string" },
+        "verified_at": { "type": "string" },
+        "values": {
+          "type": "object",
+          "description": "Nilai benar per field (string kosong bila tidak ada / belum diisi)",
+          "properties": {
+            "nomor_surat": { "type": "string" },
+            "instansi": { "type": "string" },
+            "perihal": { "type": "string" },
+            "tanggal_surat": { "type": "string" },
+            "nama_pejabat": { "type": "string" },
+            "jabatan_pejabat": { "type": "string" },
+            "nip_pejabat": { "type": "string" },
+            "verification_url": { "type": "string" }
+          }
+        },
+        "berbeda_dari_mesin": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Field yang nilainya berbeda dari output mesin. Inilah sinyal error untuk mengukur akurasi ekstraksi per field."
+        }
       }
     },
     "text_excerpt": {
-      "type": ["string", "null"],
-      "description": "Cuplikan teks mentah untuk inspeksi manual / fitur"
+      "type": "string",
+      "description": "Cuplikan teks mentah untuk inspeksi manual; string kosong bila tidak ada teks"
     }
   }
 }

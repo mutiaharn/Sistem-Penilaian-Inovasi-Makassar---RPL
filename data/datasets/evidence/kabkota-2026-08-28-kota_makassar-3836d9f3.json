@@ -1,16 +1,20 @@
 {
-  "document_id": null,
+  "document_id": "",
   "filename": "kabkota-2026-08-28-kota_makassar-3836d9f3.pdf",
   "sha256": "6c9470f080eb752a8d2bc60fe0ecbfc74af972396c3f6f25a4e5e41f322dfc7b",
   "file_size_bytes": 1230920,
   "page_count": 10,
   "is_scanned": true,
-  "manifest": null,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
   "pipeline": {
     "stage1_inspector": {
       "words_page_1": 0,
       "is_scanned": true,
-      "text_pages_read": 3
+      "text_pages_read": 10
     },
     "stage2_preprocessing": {
       "target_dpi": 300,
@@ -25,38 +29,62 @@
       "field_confidence": {
         "nomor_surat": 0.0,
         "instansi": 0.0,
-        "perihal": 0.0,
+        "perihal": 0.6,
         "tanggal_surat": 0.0,
         "nip_pejabat": 0.0
       }
     },
     "stage4_qr": {
-      "verification_url": null,
-      "detector": null
+      "verification_url": "",
+      "detector": ""
     },
     "stage5_validation": {
       "is_valid_nip": false,
-      "confidence_score": 0.05,
+      "confidence_score": 0.2,
       "needs_manual_review": true,
       "validation_flags": [
         "Missing or incomplete Nomor Surat",
         "Missing Instansi",
-        "Missing Perihal",
         "Missing or invalid date"
       ]
     }
   },
   "metadata": {
-    "nomor_surat": null,
-    "instansi": null,
-    "perihal": null,
-    "tanggal_surat": null,
-    "nama_pejabat": null,
-    "jabatan_pejabat": null,
-    "nip_pejabat": null,
+    "nomor_surat": "",
+    "instansi": "",
+    "perihal": "pembentukan Daerah Tingkat II di Sulawesi (Lembaran Negara Republik Indonesia Tahun 1959",
+    "tanggal_surat": "",
+    "nama_pejabat": "",
+    "jabatan_pejabat": "kepala \ndaerah dan DPRD dalam pen yelenggaraan Urusan",
+    "nip_pejabat": "",
+    "verification_url": "",
     "ada_stempel_basah": false,
-    "ada_tanda_tangan": false,
-    "verification_url": null
+    "ada_tanda_tangan": false
   },
-  "text_excerpt": null
+  "text_excerpt": "1. Pasal 18 ayat (6) Undang -Undang Dasar Negara \nRepublik Indon esia Tahun 1945 ; \n2. Undang -Undang Nomor 29 Tahun 1959 tentang \npembentukan Daerah Tingkat II di Sulawesi \n(Lembaran Negara Republik Indonesia Tahun 1959 \nNomor 74, Tambahan Lembaran Negara Republik \nIndonesia Nomor 1822 ); \n3. Undang-Undang Nomor 25 Tahun 2004 tentang \nSistem Perencanaan Pembangunan Nasional \n(Lembaran Negara Republik Indonesia Tahun 2004 \nNomor 104, Tambahan Lembaran Negara Republik \nIndonesia Nomor 4421); \n4. Undang-Undang Nomor 23 Tahun 2014 tentang \nPemerintahan Daerah (Lembaran Negara Republik \nIndonesia Tahun 2014 Nomor 244 , Tambahan \nLembaran Negara Republik Indonesia Nomor 5587) \nsebagaimana telah diubah beberapa ali terakhir \ndengan Undang -Undang Nomor 6 Tahun 2023 tentang \nPen etap an Peraturan Pemerintah Pengg anti Undang - \nUndang Nomor 2 Tahun 2022 tent an g Cipt a Kerja \nmenjadi Undang -Undang (Lembaran Negara Republik \nIndonesia No. 41 Tahun 2023 , Tambahan Lembaran \nNegara Republik Indonesia Nomor 6856) ; \nbahwa untuk melaksanakan ketentuan Pasal 26 ayat (2) \nUndang-Undang Nomor 25 Tahun 2004 tentang Sistem \nPerencanaan Pembangunan Nasional dan Pasal 264 a yat (2) \nUndang-Undang 23 Tahun 2014 tentang Pemerintahan \nDaerah sebagaimana telah diubah beberapa kali terakhir \ndengan Undang-Undang 6 Tahun 2023 tentang Penetapan \nPeraturan Pemerintah Pengganti Undang -Undang Nomor 2 \nTahun 2022 ten tang Cipta Kerja m enjad i Undang -Undang , \nperlu men et apkan Peraturan Wali Kota te",
+  "field_tidak_ada": {
+    "nomor_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "instansi": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
+    "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
+    "nama_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
+    "nip_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
+    "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "BELUM_TERBACA_SCAN",
+    "sumber": "",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "",
+      "perihal": "",
+      "tanggal_surat": "",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": []
+  }
 }

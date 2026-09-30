@@ -1,0 +1,86 @@
+{
+  "document_id": "",
+  "filename": "kabkota-2026-08-28-kota_makassar-934158fb.pdf",
+  "sha256": "2d61b46704459141bba823dedd2dbd67cf69c675a2fa0536e3f1a30dd9bd3022",
+  "file_size_bytes": 865058,
+  "page_count": 2,
+  "is_scanned": false,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 37,
+      "is_scanned": false,
+      "text_pages_read": 2
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1,
+        2
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "field_confidence": {
+        "nomor_surat": 0.0,
+        "instansi": 0.8,
+        "perihal": 0.0,
+        "tanggal_surat": 0.8,
+        "nip_pejabat": 0.9
+      }
+    },
+    "stage4_qr": {
+      "verification_url": "",
+      "detector": ""
+    },
+    "stage5_validation": {
+      "is_valid_nip": true,
+      "confidence_score": 0.5,
+      "needs_manual_review": true,
+      "validation_flags": [
+        "Missing or incomplete Nomor Surat",
+        "Missing Perihal"
+      ]
+    }
+  },
+  "metadata": {
+    "nomor_surat": "",
+    "instansi": "PEMERINTAH KOTA MAKASSAR UPT SPF SD INPRES TALLO TUA 2",
+    "perihal": "",
+    "tanggal_surat": "2026-07-13",
+    "nama_pejabat": "Ernawati, S.Pd.., M.Pd.",
+    "jabatan_pejabat": "Kepala UPT SPF SD Inpres Tallo Tua 2",
+    "nip_pejabat": "198610142010012029",
+    "verification_url": "",
+    "ada_stempel_basah": false,
+    "ada_tanda_tangan": false
+  },
+  "text_excerpt": "PEMERINTAH KOTA MAKASSAR \nUPT SPF SD INPRES TALLO TUA 2 \nJalan Sultan Abdullah 1 No.16 Kelurahan Tallo Kecamatan Tallo Kota Makassar, \nKode Pos 90212, Email: uptsditallotua2@gmail.com \n \n \nKemudahan Informasi Layanan melalui metode Media Sosial \n \nInstagram: \n \n     \n \nhttps://www.instagram.com/uptspfsditallotua2.official/ \nFacebook: \n \n \n \n \n \n \n \n \n \n \n \nhttps://www.facebook.com/profile.php?id=61592992080602 \n \n\nTiktok: \n \n  \nhttps://www.tiktok.com/@upt.spf.sdi_tallotua2?_t=8qU103WAeRD&_r=1 \nYoutube: \n \n  \nhttps://youtube.com/@sditallotua2?si=VReYyh5risDctHyI \nMakassar, 13 Juli 2026 \nKepala UPT SPF SD Inpres Tallo Tua 2 \n \n \n \n \n \nErnawati, S.Pd.., M.Pd.  \nNIP. 19861014 201001 2 029",
+  "field_tidak_ada": {
+    "nomor_surat": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
+    "perihal": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
+    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "BELUM_DIVERIFIKASI",
+    "sumber": "",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "",
+      "instansi": "",
+      "perihal": "",
+      "tanggal_surat": "",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": []
+  }
+}

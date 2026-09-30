@@ -1,0 +1,81 @@
+{
+  "document_id": "",
+  "filename": "kabkota-2026-08-28-kota_makassar-92ade882.pdf",
+  "sha256": "283e1cf88df24b57bcd38768403bfc4b681657153c0057db701524d6476cf2f2",
+  "file_size_bytes": 782507,
+  "page_count": 3,
+  "is_scanned": false,
+  "manifest": {
+    "inovasi_id": "",
+    "indicator_id": "",
+    "evidence_tag": ""
+  },
+  "pipeline": {
+    "stage1_inspector": {
+      "words_page_1": 124,
+      "is_scanned": false,
+      "text_pages_read": 3
+    },
+    "stage2_preprocessing": {
+      "target_dpi": 300,
+      "pages_rasterized": [
+        1,
+        3
+      ],
+      "skew_angle_deg": 0.0
+    },
+    "stage3_extraction": {
+      "engine": "smart_heuristics",
+      "field_confidence": {
+        "nomor_surat": 0.8,
+        "instansi": 0.8,
+        "perihal": 0.6,
+        "tanggal_surat": 0.8,
+        "nip_pejabat": 0.9
+      }
+    },
+    "stage4_qr": {
+      "verification_url": "",
+      "detector": ""
+    },
+    "stage5_validation": {
+      "is_valid_nip": true,
+      "confidence_score": 0.95,
+      "needs_manual_review": false,
+      "validation_flags": []
+    }
+  },
+  "metadata": {
+    "nomor_surat": "421.2/110/UPT.SPF.SDI.TT.2/TL/IX/2025",
+    "instansi": "PEMERINTAH KOTA MAKASSAR UPT SPF SD INPRES TALLO TUA 2",
+    "perihal": "Undangan Peserta Pelatihan",
+    "tanggal_surat": "2025-09-11",
+    "nama_pejabat": "Salvia Salmawati, S.Pd.I., M.Pd.",
+    "jabatan_pejabat": "Kepala Sekolah",
+    "nip_pejabat": "198706092010012033",
+    "verification_url": "",
+    "ada_stempel_basah": false,
+    "ada_tanda_tangan": false
+  },
+  "text_excerpt": "PEMERINTAH KOTA MAKASSAR \nUPT SPF SD INPRES TALLO TUA 2 \nJalan Sultan Abdullah 1 No.16 Kelurahan Tallo Kecamatan Tallo Kota Makassar, \nKode Pos 90212, Email: uptsditallotua2@gmail.com \n \n \n \nNomor : 421.2/110/UPT.SPF.SDI.TT.2/TL/IX/2025 \nLampiran : - \nPerihal : Undangan Peserta Pelatihan \n \n \nKepada Yth. \nBapak/Ibu Guru UPT SPF SD Inpres Tallo Tua 2 \nDi \nTempat \n \n \nDengan Hormat, \nSehubungan dengan pelaksanaan In House Training (IHT) dalam rangka peningkatan kompetensi guru, \ndengan ini kami memohon kesediaan Bapak/Ibu Guru untuk mengikuti kegiatan yang akan dilaksanakan \npada : \n \nHari/Tanggal : Kamis, 11 September 2025 \nWaktu : 09.00 Wita – selesai \nTempat : Aula UPT SPF SD Inpres Tallo Tua 2 \nAtas kesediaan dan kerjasamanya kamu ucapkan terima kasih. \nMakassar, 08 September 2025 \nKepala Sekolah, \n \n \n \nSalvia Salmawati, S.Pd.I., M.Pd. \nNIP. 19870609 201001 2 033 \n \n\nPEMERINTAH KOTA MAKASSAR \nUPT SPF SD INPRES TALLO TUA 2 \nJalan Sultan Abdullah 1 No.16 Kelurahan Tallo Kecamatan Tallo Kota Makassar,  \nKode Pos 90212, Email: uptsditallotua2@gmail.com \n \nDAFTAR HADIR PESERTA \nIn House Training (IHT) \n \n \n \n\nPEMERINTAH KOTA MAKASSAR \nUPT SPF SD INPRES TALLO TUA 2 \nJalan Sultan Abdullah 1 No.16 Kelurahan Tallo Kecamatan Tallo Kota Makassar, \nKode Pos 90212, Email: uptsditallotua2@gmail.com \n \nDOKUMENTASI \nIn House Training (IHT)",
+  "field_tidak_ada": {
+    "verification_url": "tidak ditemukan pada teks dokumen - perlu verifikasi manusia. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
+  },
+  "verified": {
+    "status": "TERVERIFIKASI",
+    "sumber": "anotasi_manual",
+    "verified_by": "",
+    "verified_at": "",
+    "values": {
+      "nomor_surat": "421.2/110/UPT.SPF.SDI.TT.2/TL/IX/2025",
+      "instansi": "PEMERINTAH KOTA MAKASSAR UPT SPF SD INPRES TALLO TUA 2",
+      "perihal": "Undangan Peserta Pelatihan",
+      "tanggal_surat": "",
+      "nama_pejabat": "",
+      "jabatan_pejabat": "",
+      "nip_pejabat": "",
+      "verification_url": ""
+    },
+    "berbeda_dari_mesin": []
+  }
+}

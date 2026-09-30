@@ -157,6 +157,48 @@ parameter yang terlewat **terdeteksi** oleh `--strict`, bukan diam-diam hilang.
 
 ---
 
+## 6. Mengisi blok `verified` pada dataset JSON
+
+Selain ground truth penilaian (bagian 3), ada juga **verifikasi ekstraksi**: memastikan
+nilai metadata di `data/datasets/evidence/*.json` memang benar menurut dokumennya.
+
+Alurnya:
+
+```bash
+python scripts/report_dataset_gaps.py          # lihat field mana yang kosong & mengapa
+# buka berkas PDF + JSON berdampingan, mis.:
+#   data/raw/evidence/kabkota-2026-08-28-kota_makassar-f4a30b5c.pdf
+#   data/datasets/evidence/kabkota-2026-08-28-kota_makassar-f4a30b5c.json
+python scripts/validate_dataset.py --strict    # periksa hasil
+```
+
+Yang diisi hanya blok `verified`, **jangan** `metadata`:
+
+| Field | Isi |
+|---|---|
+| `verified.status` | `TERVERIFIKASI` setelah selesai memeriksa; `BELUM_TERBACA_SCAN` untuk dokumen scan |
+| `verified.sumber` | `anotasi_manual` (Anda membaca dokumennya) atau `pembacaan_ulang` |
+| `verified.verified_by` | Inisial Anda, mis. `MAF` |
+| `verified.verified_at` | Waktu pemeriksaan, format ISO-8601 |
+| `verified.values` | Nilai benar per field; pakai `""` bila memang tidak ada di dokumen |
+| `verified.berbeda_dari_mesin` | Diisi otomatis oleh skrip saat rebuild; boleh diperbarui manual |
+
+Aturan yang wajib dipatuhi:
+
+1. **Jangan mengisi `metadata`.** Itu jejak output mesin; mengubahnya mematikan
+   kemampuan mengukur akurasi.
+2. **Jangan mengisi `values` tanpa membuka PDF-nya.** Sama seperti anotasi penilaian:
+   label yang diisi tanpa memeriksa sumber tidak bisa dipertanggungjawabkan.
+3. Untuk dokumen scan yang belum di-OCR, biarkan `status = BELUM_TERBACA_SCAN` dan
+   `values` kosong. Itu catatan yang jujur, bukan kegagalan.
+4. Setelah `build_dataset_json.py` dijalankan ulang, blok `verified` yang berasal dari
+   `app/evaluation/ground_truth.json` akan terisi otomatis untuk berkas yang cocok;
+   berkas lain di-reset ke `BELUM_DIVERIFIKASI`. Jadi: **pakai `--force` hanya bila Anda
+   siap memeriksa ulang**, atau simpan hasil verifikasi Anda di
+   `app/evaluation/ground_truth.json` supaya tidak hilang.
+
+---
+
 ## 7. Cara memakai label ini nanti
 
 | Tahap pengembangan | Data yang dipakai | Angka yang dilaporkan |
