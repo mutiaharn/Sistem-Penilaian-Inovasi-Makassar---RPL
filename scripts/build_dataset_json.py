@@ -391,39 +391,14 @@ def _field_confidence(extracted, iso_date, healed_nip) -> dict:
 
 
 def tandai_duplikat(out_dir: Path) -> list[tuple[str, str]]:
-    """Tandai dataset dengan isi identik (sha256 sama).
+    """Tandai dataset dengan isi identik (deteksi lengkap ada di scripts/tandai_duplikat.py).
 
-    Berkas bukti dari portal kadang terunduh dua kali (nama berakhiran " (1)"),
-    sehingga satu dokumen ikut dihitung dua kali saat evaluasi. Yang dipertahankan
-    sebagai acuan adalah berkas tanpa akhiran ganda.
+    Dipanggil di akhir pembangunan dataset supaya hasilnya bertahan saat rebuild.
     """
-    import hashlib  # noqa: F401  (sha sudah tersimpan di dataset, ini hanya jaga-jaga)
+    from scripts.tandai_duplikat import tandai as _tandai
 
-    per_isi: dict[str, list[Path]] = {}
-    for path in sorted(out_dir.glob("*.json")):
-        try:
-            with open(path, "r", encoding="utf-8") as f:
-                dok = json.load(f)
-        except (json.JSONDecodeError, OSError):
-            continue
-        per_isi.setdefault(dok.get("sha256", ""), []).append(path)
-
-    hasil: list[tuple[str, str]] = []
-    for _, paths in per_isi.items():
-        if len(paths) < 2:
-            continue
-        paths.sort(key=lambda p: ("(" in p.name, len(p.name), p.name))
-        utama = paths[0]
-        with open(utama, "r", encoding="utf-8") as f:
-            dok_utama = json.load(f)
-        for turunan in paths[1:]:
-            with open(turunan, "r", encoding="utf-8") as f:
-                dok = json.load(f)
-            dok["duplikat_dari"] = dok_utama["filename"]
-            with open(turunan, "w", encoding="utf-8") as f:
-                json.dump(dok, f, ensure_ascii=False, indent=2)
-            hasil.append((dok_utama["filename"], dok["filename"]))
-    return hasil
+    hasil = _tandai(out_dir, settings.DOCUMENTS_DIR, tulis=True)
+    return [(utama, salinan) for utama, salinan, _ in hasil]
 
 
 def main() -> int:

@@ -40,7 +40,9 @@ menimpa keputusan verifikator — alasan rancangan ini ada di `docs/DATA_MODEL.m
 | Dashboard pemantauan (statistik, tabel hasil ekstraksi, upload) | ✅ jalan | `app/templates/index.html` |
 | Katalog indikator & parameter (19 indikator × 3 parameter) | ✅ data siap | `data/reference/indikator_2026.json` |
 | Skema JSON + skrip pembangun dataset | ✅ jalan | `data/schemas/`, `scripts/build_dataset_json.py` |
-| Dataset JSON 33 berkas bukti (tanpa `null`) | ✅ jalan | `data/datasets/evidence/` — memuat `doc_type`, `wilayah`, `field_relevan`, dan blok `verified`; 1 berkas ganda ditandai `duplikat_dari` |
+| Dataset JSON 33 berkas / **26 dokumen unik** (tanpa `null`) | ✅ jalan | `data/datasets/evidence/` — memuat `doc_type`, `wilayah`, `field_relevan`, blok `verified`; 7 salinan isi ditandai `duplikat_dari` |
+| Deteksi dokumen berisi sama (`tandai_duplikat.py`) | ✅ jalan | Menangkap satu dokumen yang discan/terunduh berulang (sha256 berkas saja tidak cukup) |
+| Audit nilai ekstraksi vs isi dokumen | ✅ jalan | `scripts/audit_nilai_ekstraksi.py` — bisa jalan pada dokumen tanpa anotasi |
 | Klasifikasi jenis dokumen (11 jenis) | ✅ jalan | `app/pipeline/doc_classifier.py` — menentukan field mana yang **wajar** ada di tiap jenis dokumen |
 | OCR lokal offline (di dalam `.venv`) | ✅ jalan | `app/pipeline/ocr.py` (rapidocr); seluruh 12 berkas scan Kota Makassar kini terbaca |
 | Normalisasi derau OCR | ✅ jalan | `app/pipeline/text_normalizer.py` (spasi hilang, `Dacrah`→`Daerah`) |
@@ -213,7 +215,9 @@ docker compose up -d --build
 | `python scripts/report_dataset_gaps.py` | Laporan: field mana yang kosong dan mengapa |
 | `python scripts/report_doc_types.py` | Laporan: jenis dokumen, wilayah, dan relevansi field |
 | `python scripts/eval_extraction.py --simpan` | **Akurasi ekstraksi** dengan metrik jujur (exact match, kosong = salah) |
-| `python scripts/make_review_sheet.py --prioritas --tanpa-luar-makassar` | Lembar verifikasi CSV bentuk **lebar** (1 baris = 1 dokumen), 12 dokumen prioritas |
+| `python scripts/audit_nilai_ekstraksi.py --hanya-uji` | Audit: apakah nilai yang keluar benar-benar ada di dokumennya (bisa jalan tanpa anotasi) |
+| `python scripts/tandai_duplikat.py` | Tandai berkas dengan isi sama (dokumen discan/terunduh berulang) |
+| `python scripts/make_review_sheet.py --prioritas --tanpa-luar-makassar` | Lembar verifikasi CSV bentuk **lebar** (1 baris = 1 dokumen), **6 dokumen prioritas** |
 | `python scripts/make_review_sheet.py --status BELUM_DIVERIFIKASI` | Lembar verifikasi semua dokumen yang belum terverifikasi |
 | `python scripts/apply_review_sheet.py --masuk <berkas>.csv --anotator MAF --uji` | Lihat rencana impor tanpa mengubah berkas |
 | `python scripts/apply_review_sheet.py --masuk <berkas>.csv --anotator MAF` | Impor lembar yang sudah diisi → blok `verified` + ground truth |

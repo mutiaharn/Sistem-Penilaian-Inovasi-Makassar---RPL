@@ -28,16 +28,21 @@ Sistem sudah mengekstrak metadata dari PDF bukti secara otomatis. Yang belum ada
 **kebenaran acuan (ground truth)**: nilai yang benar menurut dokumennya, dibaca manusia.
 
 Anda satu-satunya anotator. Pekerjaan Anda: **memeriksa dan mengisi 8 kolom** untuk setiap
-dokumen. Dari 33 berkas (8 dokumen luar daerah sudah dipindahkan), urutan yang paling
-menguntungkan:
+dokumen.
+
+**Penting — korpus sebenarnya lebih kecil dari yang terlihat.** Dari 33 berkas, hanya
+**26 dokumen unik**: 7 berkas adalah salinan dokumen yang sama (satu SK discan 4 kali,
+satu berkas terunduh 2 kali). Salinan sudah ditandai otomatis (field `duplikat_dari`) dan
+**tidak perlu Anda anotasi dua kali** — lembar verifikasi sudah mengeluarkannya.
 
 | Paket | Berkas lembar | Isi | Waktu |
 |---|---|---|---|
-| **1 (mulai di sini)** | `data/datasets/review_prioritas.csv` | 12 dokumen × 8 kolom = 96 sel | ±30–40 menit |
-| 2 | `data/datasets/review_belum_diverifikasi.csv` | 24 dokumen sisanya | ±1,5 jam |
+| **1 (mulai di sini)** | `data/datasets/review_prioritas.csv` | **6 dokumen** (4 surat dinas + 2 keputusan) × 8 kolom = 48 sel | ±20 menit |
+| 2 | `data/datasets/review_belum_diverifikasi.csv` | **18 dokumen** sisanya | ±1 jam |
 
-Verifikasi di Excel untuk paket 1 sampai paket 2 selesai, `ground_truth.json` Anda berisi
-acuan untuk seluruh dokumen Kota Makassar — cukup kuat untuk dilaporkan.
+Kalau paket 1 dan 2 selesai, `ground_truth.json` Anda berisi acuan untuk seluruh dokumen
+Kota Makassar yang unik (24 dari 26; 2 sisanya belum terklasifikasi jenisnya) — cukup kuat
+untuk dilaporkan.
 
 Delapan kolom yang diisi: `nomor_surat`, `instansi`, `perihal`, `tanggal_surat`,
 `nama_pejabat`, `jabatan_pejabat`, `nip_pejabat`, `verification_url`.
@@ -186,5 +191,8 @@ Perintah bantuan lain:
   teks mesin.
 - 8 berkas yang ternyata **bukan Kota Makassar** (Gowa, Bone, Maros, Pangkep, Morowali,
   Bungo, Tojo Una-Una, Mamuju) sudah dipindahkan ke `data/raw/evidence/luar_daerah/` dan
-  dikeluarkan dari dataset sesuai keputusan Anda. Korpus yang dinilai sekarang 33 berkas,
-  dan 1 di antaranya berkas ganda yang sudah ditandai.
+  dikeluarkan dari dataset sesuai keputusan Anda.
+- **7 berkas adalah salinan** dokumen yang sudah ada (isi sama, byte berbeda). Sudah
+  ditandai `duplikat_dari` lewat `scripts/tandai_duplikat.py`, dikeluarkan dari lembar
+  verifikasi dan dari perhitungan akurasi. Kalau Anda menjumpai dokumen yang isinya sama
+  dengan yang pernah Anda isi, laporkan ke saya — jangan diisi dua kali.

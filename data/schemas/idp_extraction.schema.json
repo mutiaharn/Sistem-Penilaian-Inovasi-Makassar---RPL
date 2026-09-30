@@ -207,8 +207,12 @@
       }
     },
     "text_excerpt": {
-      "type": "string",
-      "description": "Cuplikan teks mentah untuk inspeksi manual; string kosong bila tidak ada teks"
+    "type": "string",
+    "description": "Cuplikan teks mentah untuk inspeksi manual; string kosong bila tidak ada teks"
+    },
+    "text_sha256": {
+    "type": "string",
+    "description": "sha256 dari teks dokumen yang sudah dinormalisasi. Dipakai mendeteksi berkas dengan isi sama (dokumen discan/terunduh berulang). Kosong bila dokumen tidak punya teks."
     }
   }
 }
