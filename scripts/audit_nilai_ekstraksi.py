@@ -130,6 +130,26 @@ def periksa_nilai(field: str, nilai: str, teks_norm: str) -> str:
     return cari(nilai, teks_norm)
 
 
+def teks_dokumen(dok: dict, documents_dir: Path) -> tuple[str, str]:
+    """Seluruh teks dokumen + sumbernya.
+
+    PENTING: jangan memakai `text_excerpt` saja. Cuplikan itu hanya 1500 karakter
+    pertama, sehingga NIP/jabatan di blok tanda tangan (halaman akhir) selalu
+    dianggap "tidak ditemukan" - angka audit jadi terlalu pesimis.
+    """
+    pdf = documents_dir / dok.get("filename", "")
+    if pdf.exists():
+        try:
+            import pypdf
+
+            teks = " ".join((p.extract_text() or "") for p in pypdf.PdfReader(str(pdf)).pages)
+            if len(normalisasi(teks)) >= 200:
+                return teks, "lapisan_pdf"
+        except Exception:  # noqa: BLE001
+            pass
+    return dok.get("text_excerpt") or "", "cuplikan_ocr"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Audit nilai ekstraksi vs isi dokumen")
     parser.add_argument("--hanya-uji", action="store_true",
@@ -144,6 +164,7 @@ def main() -> int:
             gt = json.load(f)
 
     hitung: dict[str, Counter] = defaultdict(Counter)
+    hitung_sumber: Counter = Counter()
     contoh_buruk: dict[str, list[str]] = defaultdict(list)
     jumlah_dok = 0
 
@@ -155,13 +176,13 @@ def main() -> int:
         if args.hanya_uji and dok["filename"] in gt:
             continue
 
-        teks = dok.get("text_excerpt") or ""
+        teks, sumber_teks = teks_dokumen(dok, settings.DOCUMENTS_DIR)
         if not teks.strip():
             continue
         teks_norm = normalisasi(teks)
         jumlah_dok += 1
+        hitung_sumber[sumber_teks] += 1
 
-        sumber = dok["pipeline"]["stage3_extraction"].get("text_source") or "(tanpa teks)"
         for field in FIELDS:
             nilai = dok.get("metadata", {}).get(field, "")
             if not nilai:
@@ -173,7 +194,7 @@ def main() -> int:
             hitung[field][hasil] += 1
             if hasil == "TIDAK DITEMUKAN":
                 contoh_buruk[field].append(
-                    f"{dok['filename'][-12:-5]} [{sumber}] {nilai[:58]}"
+                    f"{dok['filename'][-12:-5]} [{sumber_teks}] {nilai[:58]}"
                 )
 
     if not jumlah_dok:
@@ -184,6 +205,7 @@ def main() -> int:
     print("AUDIT NILAI EKSTRAKSI TERHADAP ISI DOKUMEN")
     print(f"{'Dokumen diperiksa':<24}: {jumlah_dok}"
           f"{' (hanya yang belum dianotasi)' if args.hanya_uji else ''}")
+    print(f"{'Sumber teks':<24}: " + ", ".join(f"{k}={v}" for k, v in hitung_sumber.items()))
     print("=" * 92)
     print(f"{'field':<18}{'ADA':>6}{'MIRIP':>7}{'TIDAK':>7}{'kosong':>8}{'luar relevan':>14}")
     print("-" * 92)
