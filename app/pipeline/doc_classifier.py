@@ -124,6 +124,12 @@ def deteksi_wilayah(teks: str) -> HasilWilayah:
     if not isi.strip():
         return HasilWilayah("tidak_diketahui", "", "tidak ada teks")
 
+    # Hasil OCR sering kehilangan spasi: "PEMERINTAHKABUPATENGOWA". Pisahkan dulu
+    # istilah naskah dinas yang menempel supaya pola PEMERINTAH KABUPATEN ... cocok.
+    from app.pipeline.text_normalizer import pisah_kata_menempel
+
+    isi = pisah_kata_menempel(isi)
+
     for m in _ENTITAS.finditer(isi):
         jenis, nama = m.group(1).upper(), " ".join(m.group(2).split())
         entitas = f"{jenis} {nama}".strip()

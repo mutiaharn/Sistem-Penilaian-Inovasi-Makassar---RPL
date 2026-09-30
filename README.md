@@ -317,6 +317,19 @@ Dicatat jujur supaya tidak terulang dan supaya bisa ditelusuri saat pengujian:
 14. **Model AI Vision jangan di-pin ke nomor versi.** `gemini-2.5-flash` ditolak
     (HTTP 404, "no longer available to new users"). Sistem memakai alias
     `gemini-flash-latest`; ganti hanya lewat `GEMINI_MODEL` di `.env`.
+15. **Mutu OCR bervariasi dan salah baca angka/huruf.** Contoh nyata:
+    `421.1/4Io9/INOVASI/DP/VI1/2025` — seharusnya kemungkinan besar
+    `421.1/4109/INOVASI/DP/VII/2025` (angka 1 dibaca huruf I, VII dibaca VI1).
+    Artinya **field hasil OCR wajib diverifikasi manusia** sebelum dipakai sebagai
+    angka resmi (skor, nomor, NIP). Normalisasi teks belum menangani kasus digit↔huruf
+    karena risikonya mengubah nilai yang sudah benar.
+16. **Sebagian kata hasil OCR masih menempel** (mis. `PENETAPANINOVASIDANTIMINOVASI`).
+    Penyisir istilah sengaja hanya memecah istilah naskah dinas yang panjang dan
+    tidak ambigu; menambahkan kata pendek seperti "DAN"/"TIM" berisiko memotong nama
+    tempat (mis. BANDUNG). Lebih baik dibiarkan dan diverifikasi manusia.
+17. **Pemicu OCR memakai ambang** (`--ocr-min-teks`, bawaan 40 karakter). Sebelum
+    ambang ini dipakai, 4 berkas scan yang hanya berisi pecahan teks (nomor halaman)
+    lolos dari OCR dan metadata-nya tetap kosong.
 
 ## Roadmap
 

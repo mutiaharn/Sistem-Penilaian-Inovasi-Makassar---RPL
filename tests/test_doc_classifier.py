@@ -23,6 +23,16 @@ def test_dokumen_kota_makassar():
     assert "MAKASSAR" in h.nama
 
 
+def test_wilayah_tetap_terdeteksi_walau_spasi_ocr_hilang():
+    """Kasus nyata: hasil OCR berkas c93b5421 - 'PEMERINTAHKABUPATENGOWA'."""
+    h = deteksi_wilayah(
+        "PEMERINTAHKABUPATENGOWA\nDINASPENDIDIKAN\nUPT SDNEGERIROMANGLASA\n"
+        "Alamat:Romanglasa Desa Romanglasa Kec.Bontonompo"
+    )
+    assert h.kode == "luar_kota_makassar"
+    assert "GOWA" in h.nama
+
+
 def test_dokumen_kabupaten_gowa_terdeteksi_luar_makassar():
     """Nilai nyata dari berkas scan kabkota-...-c93b5421.pdf."""
     h = deteksi_wilayah(
