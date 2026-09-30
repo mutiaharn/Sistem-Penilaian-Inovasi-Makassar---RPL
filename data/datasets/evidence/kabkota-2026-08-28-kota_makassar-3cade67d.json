@@ -5,6 +5,25 @@
   "file_size_bytes": 94586,
   "page_count": 6,
   "is_scanned": false,
+  "doc_type": {
+    "jenis": "keputusan",
+    "label": "Keputusan (SK/SKB)",
+    "keyakinan": 1.0
+  },
+  "wilayah": {
+    "kode": "kota_makassar",
+    "nama": "KOTA MAKASSAR"
+  },
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "nama_pejabat",
+    "jabatan_pejabat",
+    "nip_pejabat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -26,6 +45,8 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "pdf_text_layer",
+      "ocr_engine": "",
       "field_confidence": {
         "nomor_surat": 0.8,
         "instansi": 0.8,

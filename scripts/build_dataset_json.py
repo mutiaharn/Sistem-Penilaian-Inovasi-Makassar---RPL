@@ -33,6 +33,7 @@ from app.pipeline.stage3_vision_extractor import Stage3VisionExtractor
 from app.pipeline.stage4_qr_detector import Stage4QrDetector
 from app.pipeline.stage5_post_validator import Stage5PostValidator
 from app.pipeline.ocr import ocr_default
+from app.pipeline.doc_classifier import deteksi_wilayah, klasifikasi
 
 logger = logging.getLogger("idp.dataset_builder")
 
@@ -137,13 +138,23 @@ def finalize(payload: dict, gt: dict) -> dict:
     for f in METADATA_FIELDS:
         metadata[f] = _teks(md_mesin.get(f))
         if not metadata[f]:
-            sebab = (
-                "dokumen hasil scan tanpa lapisan teks - belum ada OCR"
-                if scanned
-                else "tidak ditemukan pada teks dokumen - perlu verifikasi manusia"
-            )
+            relevan = payload.get("field_relevan")
+            jenis_label = (payload.get("doc_type") or {}).get("label", "")
+            if relevan is not None and f not in relevan:
+                # Penyesuaian per jenis dokumen: RKAS memang tidak punya nomor surat,
+                # manual book tidak punya NIP. Ini BUKAN kegagalan ekstraksi.
+                sebab = (
+                    f"tidak berlaku untuk jenis dokumen ini ({jenis_label or 'jenis tak dikenal'}) "
+                    "- bukan kegagalan ekstraksi"
+                )
+            elif scanned:
+                sebab = "dokumen hasil scan tanpa lapisan teks - belum ada OCR"
+            else:
+                sebab = "tidak ditemukan pada teks dokumen - perlu verifikasi manusia"
             hint = FIELD_HINT.get(f)
-            tidak_ada[f] = f"{sebab}. Catatan: {hint}" if hint else sebab
+            tidak_ada[f] = f"{sebab}. Catatan: {hint}" if hint and not (
+                relevan is not None and f not in relevan
+            ) else sebab
     metadata["ada_stempel_basah"] = bool(md_mesin.get("ada_stempel_basah"))
     metadata["ada_tanda_tangan"] = bool(md_mesin.get("ada_tanda_tangan"))
 
@@ -192,11 +203,15 @@ def build_one(
     manifest_map: dict[str, dict],
     ocr_aktif: bool = True,
     ocr_halaman: int = 3,
+    pakai_ai: bool = False,
 ) -> dict:
-    """Jalankan pipeline 5 tahap untuk satu PDF dan susun payload sesuai skema."""
+    """Jalankan pipeline 5 tahap untuk satu PDF dan susun payload sesuai skema.
+
+    `pakai_ai=False` (bawaan) berarti TIDAK ADA panggilan ke layanan AI sama sekali:
+    seluruh ekstraksi dikerjakan lokal (teks/OCR + heuristik + normalisasi).
+    """
     inspector = Stage1Inspector()
     preprocessor = Stage2Preprocessor(target_dpi=300)
-    extractor = Stage3VisionExtractor(settings.GEMINI_API_KEY)
     qr_detector = Stage4QrDetector()
     validator = Stage5PostValidator()
 
@@ -246,9 +261,14 @@ def build_one(
         pages_rasterized.append(meta["page_count"])
 
     # --- Stage 3: ekstraksi semantik -------------------------------------------
+    # AI TIDAK dipakai secara bawaan. Aktifkan hanya bila memang dibutuhkan
+    # dengan --pakai-ai (lihat catatan di bawah fungsi main).
+    kunci_ai = settings.GEMINI_API_KEY if pakai_ai else ""
+    extractor = Stage3VisionExtractor(kunci_ai)
     extracted = extractor.extract(
         text=full_text,
         pil_image=images[0] if images else None,
+        meta={"is_scanned": meta["is_scanned"], "page_count": meta["page_count"]},
     )
 
     # --- Stage 4: QR / TTE ------------------------------------------------------
@@ -280,6 +300,11 @@ def build_one(
 
     excerpt = full_text[:TEXT_EXCERPT_CHARS] or None
 
+    # Jenis dokumen & wilayah: menentukan field mana yang WAJAR ada di dokumen ini
+    # (RKAS tidak punya nomor surat) dan apakah dokumen ini masuk acuan Kota Makassar.
+    klas = klasifikasi(full_text, pdf_path.name)
+    wil = deteksi_wilayah(full_text)
+
     return {
         "document_id": None,  # diisi bila diproses lewat API/DB
         "filename": pdf_path.name,
@@ -287,6 +312,16 @@ def build_one(
         "file_size_bytes": meta["file_size_bytes"],
         "page_count": meta["page_count"],
         "is_scanned": meta["is_scanned"],
+        "doc_type": {
+            "jenis": klas.jenis,
+            "label": klas.label,
+            "keyakinan": klas.keyakinan,
+        },
+        "wilayah": {
+            "kode": wil.kode,
+            "nama": wil.nama,
+        },
+        "field_relevan": klas.field_relevan,
         "manifest": binding,
         "pipeline": {
             "stage1_inspector": {
@@ -352,6 +387,8 @@ def main() -> int:
     parser.add_argument("--no-ocr", action="store_true", help="Matikan OCR untuk dokumen scan")
     parser.add_argument("--ocr-halaman", type=int, default=3,
                         help="Jumlah halaman awal yang di-OCR (0 = semua halaman)")
+    parser.add_argument("--pakai-ai", action="store_true",
+                        help="Izinkan AI Vision dipanggil (bawaan: TIDAK, 100%% lokal)")
     args = parser.parse_args()
 
     ocr_aktif = not args.no_ocr
@@ -404,7 +441,13 @@ def main() -> int:
             continue
         try:
             payload = finalize(
-                build_one(pdf, manifest_map, ocr_aktif=ocr_aktif, ocr_halaman=args.ocr_halaman),
+                build_one(
+                    pdf,
+                    manifest_map,
+                    ocr_aktif=ocr_aktif,
+                    ocr_halaman=args.ocr_halaman,
+                    pakai_ai=args.pakai_ai,
+                ),
                 gt_map.get(pdf.name, {}),
             )
             with open(out_file, "w", encoding="utf-8") as f:

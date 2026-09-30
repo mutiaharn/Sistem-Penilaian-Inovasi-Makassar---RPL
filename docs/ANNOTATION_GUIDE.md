@@ -111,6 +111,28 @@ tetap pilih `TERPENUHI`/`TIDAK_TERPENUHI` dan jelaskan keraguannya di `alasan`.
 
 ---
 
+### 4.4 Batasan acuan: hanya Kota Makassar
+
+Keputusan tim: **ground truth hanya memakai dokumen Kota Makassar.** Korpus memuat
+dokumen dari daerah lain — terdeteksi dari **isi** dokumen, bukan nama berkas (nama
+berkas dari portal selalu memuat "kota_makassar" walau isinya daerah lain):
+
+| Berkas | Entitas terdeteksi | Perlakuan |
+|---|---|---|
+| `…c93b5421.pdf` | KABUPATEN GOWA | tidak dipakai sebagai acuan |
+| `…8c364b5e.pdf` | KABUPATEN MOROWALI | sudah dikeluarkan dari `ground_truth.json` |
+| `…3371a005.pdf` | KABUPATEN MAMUJU | tidak dipakai sebagai acuan |
+
+Dokumen-dokumen itu tetap ada di dataset (berguna sebagai uji ketahanan sistem), hanya
+**tidak dihitung** dalam akurasi. Deteksi berjalan otomatis lewat `deteksi_wilayah()`,
+hasilnya tercatat di field `wilayah` pada setiap record, dan daftarnya ditampilkan saat
+menjalankan `eval_extraction.py` maupun di `REPORT_JENIS_DOKUMEN.md`.
+
+Praktiknya saat mengisi lembar verifikasi: bila menemukan dokumen dari daerah lain,
+cukup tulis catatan di kolom `catatan` — jangan paksakan mengisi nilainya.
+
+---
+
 ## 5. Beban kerja & pembagian
 
 Jumlah label per inovasi = 19 indikator × 3 parameter = **57 baris** (indikator ke-20

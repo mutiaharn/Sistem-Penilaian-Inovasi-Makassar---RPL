@@ -52,7 +52,8 @@ class PipelineRunner:
             logger.info(f"[Stage 3] Semantic extraction...")
             extracted: ExtractedMetadata = self.extractor.extract(
                 text=meta["extracted_text"],
-                pil_image=candidate_images[0] if candidate_images else None
+                pil_image=candidate_images[0] if candidate_images else None,
+                meta={"is_scanned": meta["is_scanned"], "page_count": meta["page_count"]},
             )
 
             # Stage 4: Heuristic QR & Barcode Detection

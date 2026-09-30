@@ -139,7 +139,29 @@ Satu berkas = satu PDF bukti. Bentuknya dibagi tiga blok dengan pembagian tugas 
 metadata          <- OUTPUT MESIN. Boleh berisi string kosong. JANGAN diisi manual.
 field_tidak_ada   <- ALASAN setiap field yang kosong pada metadata
 verified          <- NILAI YANG SUDAH DIPASTIKAN BENAR (label / ground truth)
+doc_type          <- JENIS dokumen; menentukan field mana yang wajar ada
+wilayah           <- ASAL DAERAH dokumen (acuan ground truth: Kota Makassar)
+field_relevan     <- daftar field yang berlaku untuk jenis dokumen ini
 ```
+
+### Sesuaikan dengan dokumennya
+
+Tidak semua berkas bukti adalah surat. RKAS tidak punya nomor surat; manual book tidak
+punya NIP pejabat. Mengukur "kelengkapan" tanpa memperhatikan hal ini menghasilkan angka
+yang menyesatkan — terukur, **132 dari 328 sel (40,2%) memang tidak relevan**.
+
+Karena itu setiap record memuat `doc_type` dan `field_relevan`, dan alasannya ditulis
+apa adanya:
+
+```json
+"doc_type": { "jenis": "anggaran", "label": "Dokumen Anggaran (DPA/RKA/RKAS)", "keyakinan": 0.8 },
+"field_relevan": ["instansi", "tanggal_surat"],
+"field_tidak_ada": {
+  "nomor_surat": "tidak berlaku untuk jenis dokumen ini (Dokumen Anggaran (DPA/RKA/RKAS)) - bukan kegagalan ekstraksi"
+}
+```
+
+Akurasi **hanya** dihitung pada field yang ada di `field_relevan`.
 
 ### Aturan: tidak ada `null`
 

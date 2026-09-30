@@ -39,7 +39,13 @@ menimpa keputusan verifikator — alasan rancangan ini ada di `docs/DATA_MODEL.m
 | Dashboard pemantauan (statistik, tabel hasil ekstraksi, upload) | ✅ jalan | `app/templates/index.html` |
 | Katalog indikator & parameter (19 indikator × 3 parameter) | ✅ data siap | `data/reference/indikator_2026.json` |
 | Skema JSON + skrip pembangun dataset | ✅ jalan | `data/schemas/`, `scripts/build_dataset_json.py` |
-| Dataset JSON 41 berkas bukti (tanpa `null`) | ✅ jalan | `data/datasets/evidence/` — 9 berkas sudah `TERVERIFIKASI`, 17 belum diverifikasi, 15 scan belum terbaca |
+| Dataset JSON 41 berkas bukti (tanpa `null`) | ✅ jalan | `data/datasets/evidence/` — memuat `doc_type`, `wilayah`, `field_relevan`, dan blok `verified` |
+| Klasifikasi jenis dokumen (11 jenis) | ✅ jalan | `app/pipeline/doc_classifier.py` — menentukan field mana yang **wajar** ada di tiap jenis dokumen |
+| OCR lokal offline (di dalam `.venv`) | ✅ jalan | `app/pipeline/ocr.py` (rapidocr); 8 berkas scan kini terbaca |
+| Normalisasi derau OCR | ✅ jalan | `app/pipeline/text_normalizer.py` (spasi hilang, `Dacrah`→`Daerah`) |
+| Penjaga privasi AI Vision | ✅ jalan | `app/pipeline/vision_ai.py` — dokumen digital-native tidak pernah dikirim |
+| Metrik evaluasi jujur (exact match, kosong = salah) | ✅ jalan | `app/evaluation/metrics.py` + `scripts/eval_extraction.py` |
+| Alat anotasi (lembar CSV) | ✅ jalan | `scripts/make_review_sheet.py` + `apply_review_sheet.py` |
 | Model data domain penilaian (usulan, indikator, bukti, keputusan, audit) | 🚧 baru kerangka | `app/database/assessment_models.py` |
 | **Mesin penilaian indikator (AI penilai parameter)** | ❌ belum | Belum ada kode. Ini pekerjaan utama berikutnya. |
 | **Dasbor Verifikasi Evaluasi (HITL)** | ❌ belum | Panel indikator + keputusan Lolos/Revisi/Tolak belum ada |
@@ -204,6 +210,7 @@ docker compose up -d --build
 | `python scripts/build_dataset_json.py --limit 3` | Ubah 3 PDF pertama menjadi JSON (uji cepat) |
 | `python scripts/build_dataset_json.py` | Ubah semua PDF menjadi dataset JSON |
 | `python scripts/report_dataset_gaps.py` | Laporan: field mana yang kosong dan mengapa |
+| `python scripts/report_doc_types.py` | Laporan: jenis dokumen, wilayah, dan relevansi field |
 | `python scripts/eval_extraction.py --simpan` | **Akurasi ekstraksi** dengan metrik jujur (exact match, kosong = salah) |
 | `python scripts/make_review_sheet.py --status BELUM_DIVERIFIKASI` | Buat lembar verifikasi CSV untuk anotator |
 | `python scripts/apply_review_sheet.py --masuk <berkas>.csv --anotator MAF` | Impor lembar yang sudah diisi → blok `verified` + ground truth |
@@ -298,6 +305,18 @@ Dicatat jujur supaya tidak terulang dan supaya bisa ditelusuri saat pengujian:
     sehingga dokumen campuran (halaman 1 gambar, sisanya teks) bisa salah ditandai.
     Contoh: `kabkota-2026-08-31-kota_makassar-dabaa261.pdf` ditandai scan tetapi
     metadata-nya justru terbaca lengkap dengan confidence 100%.
+12. **Sebagian besar kolom metadata tidak berlaku untuk dokumen non-surat.** Terukur:
+    **132 dari 328 sel (40,2%) tidak relevan** untuk jenis dokumennya — nomor surat pada
+    RKAS/DPA, NIP pada manual book. Karena itu akurasi **wajib** dihitung hanya pada
+    field yang relevan (sudah diterapkan di `metrics.py` lewat `field_relevan`).
+    Tanpa penyesuaian ini, angka akurasi akan menghukum pipeline atas hal yang tidak ada.
+13. **Ground truth hanya Kota Makassar** (keputusan tim). Dokumen dari Kab. Gowa,
+    Kab. Morowali, dan Kab. Mamuju tetap ada di korpus tetapi **tidak** dipakai sebagai
+    acuan; daftarnya muncul di `REPORT_JENIS_DOKUMEN.md` dan saat menjalankan
+    `eval_extraction.py`.
+14. **Model AI Vision jangan di-pin ke nomor versi.** `gemini-2.5-flash` ditolak
+    (HTTP 404, "no longer available to new users"). Sistem memakai alias
+    `gemini-flash-latest`; ganti hanya lewat `GEMINI_MODEL` di `.env`.
 
 ## Roadmap
 

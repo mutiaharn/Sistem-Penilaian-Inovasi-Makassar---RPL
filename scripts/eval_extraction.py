@@ -27,16 +27,25 @@ from app.evaluation.metrics import evaluasi, laporan_teks, nilai_benar
 
 LAPORAN = settings.DATASETS_DIR / "EVAL_EKSTRAKSI.md"
 
+# Dokumen yang dikeluarkan dari evaluasi karena bukan Kota Makassar.
+# Diisi saat pemuatan; dilaporkan supaya terlihat, bukan disembunyikan.
+DIKECUALIKAN: list[str] = []
+
 
 def muat_dokumen() -> list[dict]:
-    """Gabungkan dataset dengan cadangan ground_truth.json bila verified masih kosong."""
+    """Gabungkan dataset dengan cadangan ground_truth.json bila verified masih kosong.
+
+    Dokumen dari luar Kota Makassar sengaja DIKELUARKAN: ground truth proyek ini
+    hanya Kota Makassar (keputusan tim), supaya angka akurasi tidak tercampur
+    karakteristik daerah lain.
+    """
     cadangan = {}
     gt_path = settings.BASE_DIR / "app" / "evaluation" / "ground_truth.json"
     if gt_path.exists():
         with open(gt_path, "r", encoding="utf-8") as f:
             cadangan = json.load(f)
 
-    # Jenis dokumen (dari report_doc_types.py) -> field yang relevan saja yang dinilai
+    # Jenis dokumen + wilayah (dari report_doc_types.py)
     jenis: dict = {}
     cache = settings.DATASETS_DIR / "doc_types.json"
     if cache.exists():
@@ -47,10 +56,13 @@ def muat_dokumen() -> list[dict]:
     for file in sorted(settings.extract_dir.glob("*.json")):
         with open(file, "r", encoding="utf-8") as f:
             dok = json.load(f)
+        info = jenis.get(dok["filename"]) or {}
+        if info.get("wilayah") == "luar_kota_makassar":
+            DIKECUALIKAN.append(dok["filename"])
+            continue
         if not nilai_benar(dok)["sumber"] and dok.get("filename") in cadangan:
             dok["_ground_truth"] = cadangan[dok["filename"]]
-        info = jenis.get(dok["filename"])
-        if info and info.get("field_relevan"):
+        if info.get("field_relevan"):
             dok["_field_relevan"] = info["field_relevan"]
         dokumen.append(dok)
     return dokumen
@@ -99,6 +111,11 @@ def main() -> int:
 
     teks = laporan_teks(ringkasan, "Akurasi Ekstraksi IDP (metrik jujur)")
     print(teks)
+    if DIKECUALIKAN:
+        print(f"Dikecualikan (bukan Kota Makassar): {len(DIKECUALIKAN)} berkas")
+        for nama in DIKECUALIKAN:
+            print(f"  - {nama}")
+        print()
 
     if args.simpan:
         md = ["# Akurasi Ekstraksi IDP", "",

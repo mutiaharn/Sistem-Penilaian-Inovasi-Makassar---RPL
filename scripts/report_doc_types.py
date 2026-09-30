@@ -21,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from pypdf import PdfReader
 
 from app.core.config import settings
-from app.pipeline.doc_classifier import FIELD_SURAT, klasifikasi
+from app.pipeline.doc_classifier import FIELD_SURAT, deteksi_wilayah, klasifikasi
 
 LAPORAN = settings.DATASETS_DIR / "REPORT_JENIS_DOKUMEN.md"
 
@@ -48,6 +48,7 @@ def main() -> int:
     for path in berkas:
         teks = teks_penuh(path)
         k = klasifikasi(teks, path.name)
+        w = deteksi_wilayah(teks)
         dataset = settings.extract_dir / f"{path.stem}.json"
         mesin: dict = {}
         if dataset.exists():
@@ -61,6 +62,8 @@ def main() -> int:
             "label": k.label,
             "keyakinan": k.keyakinan,
             "panjang_teks": len(teks),
+            "wilayah": w.kode,
+            "wilayah_nama": w.nama,
             "field_relevan": k.field_relevan,
             "field_terisi": terisi,
             "field_relevan_terisi": relevan_terisi,
@@ -69,6 +72,8 @@ def main() -> int:
         })
 
     sebaran = Counter(h["jenis"] for h in hasil)
+    sebaran_wilayah = Counter(h["wilayah"] for h in hasil)
+    luar_makassar = [h for h in hasil if h["wilayah"] == "luar_kota_makassar"]
     tanpa_teks = sum(1 for h in hasil if h["panjang_teks"] < 30)
 
     total_sel_relevan = sum(len(h["field_relevan"]) for h in hasil)
@@ -107,6 +112,8 @@ def main() -> int:
                     "jenis": h["jenis"],
                     "label": h["label"],
                     "keyakinan": h["keyakinan"],
+                    "wilayah": h["wilayah"],
+                    "wilayah_nama": h["wilayah_nama"],
                     "field_relevan": h["field_relevan"],
                 }
                 for h in hasil
@@ -122,6 +129,15 @@ def main() -> int:
 
     print(f"Berkas diperiksa        : {len(hasil)}")
     print(f"Tanpa lapisan teks      : {tanpa_teks}")
+    print()
+    print("Sebaran wilayah:")
+    for kode, n in sebaran_wilayah.most_common():
+        print(f"  {n:>3}  {kode}")
+    if luar_makassar:
+        print(f"  -> {len(luar_makassar)} dokumen dari luar Kota Makassar "
+              f"(dikeluarkan dari ground truth sesuai keputusan tim):")
+        for h in luar_makassar:
+            print(f"       {h['filename'][:52]:<52} {h['wilayah_nama']}")
     print()
     print("Sebaran jenis dokumen:")
     for jenis, n in sebaran.most_common():
@@ -143,6 +159,21 @@ def main() -> int:
     lines.append(f"- Sel metadata tidak relevan untuk jenis dokumennya: "
                  f"**{total_kosong} dari {total_sel_surat} ({ringkasan['persen_sel_tidak_relevan']}%)**")
     lines.append("")
+    lines.append("## Sebaran wilayah (acuan ground truth: Kota Makassar)")
+    lines.append("")
+    lines.append("| Wilayah | Jumlah |")
+    lines.append("|---|---|")
+    for kode, n in sebaran_wilayah.most_common():
+        lines.append(f"| `{kode}` | {n} |")
+    lines.append("")
+    if luar_makassar:
+        lines.append("Dokumen dari luar Kota Makassar (tidak dipakai sebagai ground truth):")
+        lines.append("")
+        lines.append("| Berkas | Entitas terdeteksi |")
+        lines.append("|---|---|")
+        for h in luar_makassar:
+            lines.append(f"| `{h['filename']}` | {h['wilayah_nama']} |")
+        lines.append("")
     lines.append("## Sebaran jenis dokumen")
     lines.append("")
     lines.append("| Jenis | Jumlah | Sel relevan | Terisi |")

@@ -5,17 +5,20 @@
   "description": "Format keluaran scripts/build_dataset_json.py. Satu file = satu PDF. TIDAK ADA nilai null: field yang kosong diisi string kosong dan alasannya dicatat di field_tidak_ada. Nilai yang sudah dipastikan benar disimpan terpisah di blok `verified` supaya output mesin dan label manusia tidak tercampur.",
   "type": "object",
   "required": [
-    "document_id",
-    "filename",
-    "sha256",
-    "page_count",
-    "is_scanned",
-    "manifest",
-    "pipeline",
-    "metadata",
-    "field_tidak_ada",
-    "verified",
-    "text_excerpt"
+  "document_id",
+  "filename",
+  "sha256",
+  "page_count",
+  "is_scanned",
+  "doc_type",
+  "wilayah",
+  "field_relevan",
+  "manifest",
+  "pipeline",
+  "metadata",
+  "field_tidak_ada",
+  "verified",
+  "text_excerpt"
   ],
   "additionalProperties": false,
   "properties": {
@@ -30,6 +33,38 @@
     "is_scanned": {
       "type": "boolean",
       "description": "true = halaman 1 tanpa lapisan teks (kemungkinan scan). Perlu diperiksa manual: dokumen campuran bisa keliru ditandai."
+    },
+    "doc_type": {
+      "type": "object",
+      "description": "Jenis dokumen. Menentukan field mana yang WAJAR ada: RKAS tidak punya nomor surat, manual book tidak punya NIP.",
+      "required": ["jenis", "label", "keyakinan"],
+      "properties": {
+        "jenis": {
+          "type": "string",
+          "enum": ["surat_dinas", "surat_pernyataan", "keputusan", "peraturan", "anggaran",
+                   "manual_book", "sop", "laporan", "sertifikat", "berita_acara",
+                   "bukti_media", "tidak_diketahui"]
+        },
+        "label": { "type": "string" },
+        "keyakinan": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "wilayah": {
+      "type": "object",
+      "description": "Asal daerah dokumen. Ground truth proyek hanya Kota Makassar; yang lain dilaporkan apa adanya.",
+      "required": ["kode", "nama"],
+      "properties": {
+        "kode": {
+          "type": "string",
+          "enum": ["kota_makassar", "luar_kota_makassar", "tidak_diketahui"]
+        },
+        "nama": { "type": "string", "description": "Nama entitas terdeteksi, mis. 'KABUPATEN GOWA'" }
+      }
+    },
+    "field_relevan": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Field yang berlaku untuk jenis dokumen ini. Field di luar daftar ini TIDAK dihitung sebagai kesalahan ekstraksi."
     },
     "manifest": {
       "type": "object",

@@ -23,25 +23,25 @@ JENIS: dict[str, dict] = {
         "pola": [r"\bsurat\s+undangan\b", r"\bundangan\b", r"\bnota\s+dinas\b",
                  r"\bpemberitahuan\b", r"\bsurat\s+tugas\b", r"^\s*hal\s*:", r"perihal\s*:"],
         "field_relevan": ["nomor_surat", "instansi", "perihal", "tanggal_surat",
-                          "nama_pejabat", "jabatan_pejabat", "nip_pejabat"],
+                          "nama_pejabat", "jabatan_pejabat", "nip_pejabat", "verification_url"],
     },
     "surat_pernyataan": {
         "label": "Surat Pernyataan / Keterangan",
         "pola": [r"surat\s+pernyataan", r"yang\s+bertanda\s+tangan\s+di\s+bawah\s+ini"],
         "field_relevan": ["nomor_surat", "instansi", "perihal", "tanggal_surat",
-                          "nama_pejabat", "jabatan_pejabat", "nip_pejabat"],
+                          "nama_pejabat", "jabatan_pejabat", "nip_pejabat", "verification_url"],
     },
     "keputusan": {
         "label": "Keputusan (SK/SKB)",
         "pola": [r"keputusan\s+kepala", r"\bsurat\s+keputusan\b", r"\bsk\b", r"menimbang\s*:", r"mengingat\s*:"],
         "field_relevan": ["nomor_surat", "instansi", "perihal", "tanggal_surat",
-                          "nama_pejabat", "jabatan_pejabat", "nip_pejabat"],
+                          "nama_pejabat", "jabatan_pejabat", "nip_pejabat", "verification_url"],
     },
     "peraturan": {
         "label": "Peraturan (Perwali/Perda/Perbup)",
         "pola": [r"peraturan\s+wali\s+kota", r"peraturan\s+daerah", r"peraturan\s+bupati",
                  r"peraturan\s+menteri", r"lembaran\s+daerah"],
-        "field_relevan": ["nomor_surat", "instansi", "perihal", "tanggal_surat"],
+        "field_relevan": ["nomor_surat", "instansi", "perihal", "tanggal_surat", "verification_url"],
     },
     "anggaran": {
         "label": "Dokumen Anggaran (DPA/RKA/RKAS)",
@@ -78,7 +78,7 @@ JENIS: dict[str, dict] = {
         "label": "Berita Acara",
         "pola": [r"berita\s+acara", r"risalah"],
         "field_relevan": ["nomor_surat", "instansi", "perihal", "tanggal_surat",
-                          "nama_pejabat", "nip_pejabat"],
+                          "nama_pejabat", "nip_pejabat", "verification_url"],
     },
     "bukti_media": {
         "label": "Bukti Media / Tangkapan Layar / Dokumentasi",
@@ -95,6 +95,45 @@ JENIS: dict[str, dict] = {
 
 FIELD_SURAT = ["nomor_surat", "instansi", "perihal", "tanggal_surat",
                "nama_pejabat", "jabatan_pejabat", "nip_pejabat", "verification_url"]
+
+# Wilayah yang dipakai sebagai acuan proyek (ground truth hanya Kota Makassar).
+WILAYAH_ACUAN = "kota_makassar"
+
+# Nama kabupaten/kota lain yang terbukti muncul di korpus bukti.
+_ENTITAS = re.compile(
+    r"PEMERINTAH\s+(?:DAERAH\s+)?(KOTA|KABUPATEN|PEMKOT|PEMKAB)\s+([A-Z][A-Z\s]{2,24})",
+    re.IGNORECASE,
+)
+
+
+@dataclass
+class HasilWilayah:
+    kode: str          # kota_makassar | luar_kota_makassar | tidak_diketahui
+    nama: str          # nama entitas yang terdeteksi, mis. "KABUPATEN GOWA"
+    bukti: str         # potongan teks yang menjadi dasar
+
+
+def deteksi_wilayah(teks: str) -> HasilWilayah:
+    """Tentukan apakah dokumen ini milik Kota Makassar atau daerah lain.
+
+    Dipakai untuk menjaga ground truth tetap bersih: hanya dokumen Kota Makassar
+    yang dipakai sebagai acuan. Sinyal diambil dari ISI dokumen, bukan nama berkas
+    (nama berkas dari portal selalu memuat 'kota_makassar' walau isinya daerah lain).
+    """
+    isi = (teks or "").upper()
+    if not isi.strip():
+        return HasilWilayah("tidak_diketahui", "", "tidak ada teks")
+
+    for m in _ENTITAS.finditer(isi):
+        jenis, nama = m.group(1).upper(), " ".join(m.group(2).split())
+        entitas = f"{jenis} {nama}".strip()
+        if "MAKASSAR" in nama:
+            return HasilWilayah(WILAYAH_ACUAN, entitas, m.group(0).strip())
+        return HasilWilayah("luar_kota_makassar", entitas, m.group(0).strip())
+
+    if "MAKASSAR" in isi:
+        return HasilWilayah(WILAYAH_ACUAN, "KOTA MAKASSAR", "(nama Makassar tanpa pola PEMERINTAH KOTA/KABUPATEN)")
+    return HasilWilayah("tidak_diketahui", "", "tidak ada nama daerah yang dikenali")
 
 
 @dataclass

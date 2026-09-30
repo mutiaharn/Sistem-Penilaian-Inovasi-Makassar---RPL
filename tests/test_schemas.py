@@ -84,6 +84,12 @@ def test_contoh_payload_extraction_lolos_validasi(schemas):
         "file_size_bytes": 1024,
         "page_count": 1,
         "is_scanned": False,
+        "doc_type": {"jenis": "surat_dinas", "label": "Surat Dinas / Undangan / Nota Dinas", "keyakinan": 0.65},
+        "wilayah": {"kode": "kota_makassar", "nama": "KOTA MAKASSAR"},
+        "field_relevan": [
+            "nomor_surat", "instansi", "perihal", "tanggal_surat",
+            "nama_pejabat", "jabatan_pejabat", "nip_pejabat", "verification_url",
+        ],
         "manifest": {"inovasi_id": "", "indicator_id": "", "evidence_tag": ""},
         "pipeline": {
             "stage1_inspector": {"words_page_1": 120, "is_scanned": False, "text_pages_read": 1},

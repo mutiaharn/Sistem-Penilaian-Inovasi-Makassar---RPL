@@ -44,6 +44,16 @@ def kebijakan() -> str:
     return os.getenv("GEMINI_VISION_POLICY", "scanned_only").strip().lower()
 
 
+def mode_ai() -> str:
+    """Kapan AI boleh dipanggil: off | jika_perlu (bawaan) | selalu.
+
+    Terpisah dari kebijakan privasi: `kebijakan()` menentukan BOLEH atau tidak,
+    `mode_ai()` menentukan PERLU atau tidak. Bawaannya `jika_perlu`, artinya AI
+    hanya dihubungi bila heuristik lokal gagal mengisi field inti.
+    """
+    return os.getenv("GEMINI_AI_MODE", "jika_perlu").strip().lower()
+
+
 def ada_kunci() -> bool:
     return bool(settings.GEMINI_API_KEY)
 
@@ -55,6 +65,9 @@ def boleh_kirim(meta: dict) -> tuple[bool, str]:
     dan log, termasuk saat permintaan DITOLAK.
     """
     pol = kebijakan()
+    mode = mode_ai()
+    if mode == "off":
+        return False, "GEMINI_AI_MODE=off: pemanggilan AI dimatikan"
     if pol == "off":
         return False, "GEMINI_VISION_POLICY=off: pengiriman ke API dimatikan"
     if not ada_kunci():

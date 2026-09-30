@@ -21,7 +21,7 @@ class Settings(BaseModel):
     
     # Gemini Flash AI Studio API Key (Free tier)
     GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
-    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-flash-latest")
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
 
     # Kebijakan privasi pengiriman ke AI Vision: scanned_only | off | all

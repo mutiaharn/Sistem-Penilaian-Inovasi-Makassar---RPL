@@ -5,6 +5,22 @@
   "file_size_bytes": 377154,
   "page_count": 1,
   "is_scanned": true,
+  "doc_type": {
+    "jenis": "peraturan",
+    "label": "Peraturan (Perwali/Perda/Perbup)",
+    "keyakinan": 0.8
+  },
+  "wilayah": {
+    "kode": "tidak_diketahui",
+    "nama": ""
+  },
+  "field_relevan": [
+    "nomor_surat",
+    "instansi",
+    "perihal",
+    "tanggal_surat",
+    "verification_url"
+  ],
   "manifest": {
     "inovasi_id": "",
     "indicator_id": "",
@@ -25,12 +41,14 @@
     },
     "stage3_extraction": {
       "engine": "smart_heuristics",
+      "text_source": "ocr",
+      "ocr_engine": "rapidocr",
       "field_confidence": {
-        "nomor_surat": 0.0,
-        "instansi": 0.0,
-        "perihal": 0.0,
+        "nomor_surat": 0.8,
+        "instansi": 0.8,
+        "perihal": 0.6,
         "tanggal_surat": 0.0,
-        "nip_pejabat": 0.0
+        "nip_pejabat": 0.9
       }
     },
     "stage4_qr": {
@@ -38,38 +56,30 @@
       "detector": ""
     },
     "stage5_validation": {
-      "is_valid_nip": false,
-      "confidence_score": 0.05,
+      "is_valid_nip": true,
+      "confidence_score": 0.75,
       "needs_manual_review": true,
       "validation_flags": [
-        "Missing or incomplete Nomor Surat",
-        "Missing Instansi",
-        "Missing Perihal",
         "Missing or invalid date"
       ]
     }
   },
   "metadata": {
-    "nomor_surat": "",
-    "instansi": "",
-    "perihal": "",
+    "nomor_surat": "62.06/422/SDN7AK/IX/2025",
+    "instansi": "PEMERINTAH KABUPATEN TOJOUNA-UNA DINAS PENDIDIKAN PEMUDADANOLAHRAGA",
+    "perihal": "Inovasi Daerah; Peraturan Menteri Dalam Negeri Republik Indonesia Nomor 104 tahun 2018 tentang",
     "tanggal_surat": "",
     "nama_pejabat": "",
-    "jabatan_pejabat": "",
-    "nip_pejabat": "",
+    "jabatan_pejabat": "Kepala Sekolah",
+    "nip_pejabat": "197201122000122003",
     "verification_url": "",
     "ada_stempel_basah": false,
     "ada_tanda_tangan": false
   },
-  "text_excerpt": "",
+  "text_excerpt": "PEMERINTAHKABUPATENTOJOUNA-UNA\nDINASPENDIDIKANPEMUDADANOLAHRAGA\nSEKOLAHDASARNEGERI7AMPANAKOTA\nJIn.SamratulangiNo.83KEL.Malotong(0464)21962KodePos94683Email:sdnegeri7ampanakoto@gmail.com\nSURATPERNYATAAN\nNOMOR:62.06/422/SDN7AK/IX/2025\nDalamrangka pelaksanaanPeraturan Pemerintah Nomor38 Tahun 2017 tentangInovasi\nDaerah; Peraturan Menteri Dalam Negeri Republik Indonesia Nomor 104 tahun 2018 tentang\nPenilaian danPemberianPenghargaan dan/atau Insentif Inovasi Daerah sertaPeraturan Bupati Tojo\nUna-Una No 54 Tahun 2025 tentang Inovasi Daerah, dengan ini saya yang bertanda tangan di bawah\nini:\nNama\n:Rahmawati Sadi,S.Pd.SD.,M.Pd\nPangkat dan Golongan\n:PembinaTkt1/IVb\nNIP\n：19720112 200012 2003\nJabatan\n:Kepala Sekolah\nDengan ini menyatakan bahwa telah melakukan replikasi“Inovasi PelayananPublik/InovasiTata\nKelolaPemerintahanDaerah/Inovasibentuklainnyasesuaibidongurusanpemerintahanyangmenjadi\nUna-Una.\nAdapunInovasiyangdireplikasi,sebagaiberikut:\nSatuanKerjaPemilik\nNo.\nNama\nInovasi\nInovasi\n1.\nGenting (Agen Anti Bullying)\nUPTSPFSDInpresTalloTua2\nDemikianSuratPernyataanini dibuatuntukdipergunakansebagaimanamestinya.\nAmpanaKota,06Oktober2025\nKEPALASDNEGERI7AMPANAKOTA,\nKawatiSadi,S.Pd.SD.,M.Pd",
   "field_tidak_ada": {
-    "nomor_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat pernyataan, berita acara, lampiran, dan sertifikat sering tanpa nomor",
-    "instansi": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: kop surat tidak terbaca / dokumen tanpa kop",
-    "perihal": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: banyak nota dinas dan lampiran tidak menuliskan perihal",
     "tanggal_surat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: tanggal tidak selalu tercetak (mis. lampiran, rekapitulasi)",
-    "nama_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: dokumen tanpa blok tanda tangan (lampiran, tangkapan layar) tidak memuat nama",
-    "jabatan_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: jabatan tidak selalu ditulis di bawah tanda tangan",
-    "nip_pejabat": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: surat non-kepegawaian atau naskah lama sering tidak mencantumkan NIP",
+    "nama_pejabat": "tidak berlaku untuk jenis dokumen ini (Peraturan (Perwali/Perda/Perbup)) - bukan kegagalan ekstraksi",
     "verification_url": "dokumen hasil scan tanpa lapisan teks - belum ada OCR. Catatan: hanya dokumen ber-TTE/QR yang punya URL verifikasi"
   },
   "verified": {

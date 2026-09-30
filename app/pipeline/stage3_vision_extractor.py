@@ -9,6 +9,8 @@ from PIL import Image
 from pydantic import BaseModel
 from typing import Optional
 
+from app.core.config import settings
+
 logger = logging.getLogger("idp.stage3")
 
 # Kata yang menandakan potongan ALAMAT/kop, bukan nomor naskah dinas.
@@ -71,17 +73,80 @@ class Stage3VisionExtractor:
     def __init__(self, gemini_api_key: str = ""):
         self.api_key = gemini_api_key
 
-    def extract(self, text: str, pil_image: Optional[Image.Image] = None) -> ExtractedMetadata:
-        """Attempt extraction using Gemini API if key is available, else use smart heuristics."""
-        if self.api_key and pil_image:
-            try:
-                res = self._extract_via_gemini_vision(pil_image, text)
-                if res and res.nomor_surat:
-                    return res
-            except Exception as e:
-                logger.warning(f"Gemini API extraction failed ({e}), falling back to smart heuristics.")
+    def extract(
+        self,
+        text: str,
+        pil_image: Optional[Image.Image] = None,
+        meta: Optional[dict] = None,
+    ) -> ExtractedMetadata:
+        """Ekstraksi metadata - SELALU mencoba lokal lebih dulu.
 
-        return self._extract_via_heuristics(text, pil_image)
+        Urutan yang dipakai (agar AI tidak dipanggil bila belum perlu):
+          1. Heuristik lokal (gratis, offline) - dijalankan lebih dulu, selalu.
+          2. Bila hasilnya sudah memadai -> selesai, TIDAK ada panggilan jaringan.
+          3. Bila masih kurang DAN diizinkan kebijakan privasi -> baru AI Vision.
+          4. Bila AI gagal / tidak diizinkan -> pakai hasil heuristik apa adanya.
+        """
+        heuristik = self._extract_via_heuristics(text, pil_image)
+
+        if not self._butuh_ai(heuristik):
+            return heuristik
+        if not self.api_key or pil_image is None:
+            return heuristik
+        if not self._boleh_pakai_ai(meta):
+            return heuristik
+
+        try:
+            hasil_ai = self._extract_via_gemini_vision(pil_image, text)
+            if hasil_ai and self._lebih_lengkap(hasil_ai, heuristik):
+                return hasil_ai
+        except Exception as e:  # noqa: BLE001
+            logger.warning(
+                f"AI Vision gagal ({self._pesan_aman(e)}); memakai hasil heuristik lokal."
+            )
+        return heuristik
+
+    def _butuh_ai(self, hasil: ExtractedMetadata) -> bool:
+        """Apakah hasil lokal masih kurang, sehingga AI layak dipanggil?
+
+        Hanya dianggap kurang bila field INTI kosong: nomor surat atau instansi.
+        Selama heuristik sudah memberi keduanya, AI tidak dipanggil sama sekali -
+        ini yang membuat pemakaian API tetap minimal.
+        """
+        kurang = [f for f in ("nomor_surat", "instansi") if not getattr(hasil, f)]
+        if kurang:
+            logger.info(f"Hasil lokal kurang pada {kurang} -> AI Vision dipertimbangkan")
+            return True
+        return False
+
+    @staticmethod
+    def _lebih_lengkap(hasil_ai: ExtractedMetadata, hasil_lokal: ExtractedMetadata) -> bool:
+        """AI dipakai hanya bila benar-benar menambah informasi."""
+        field = ("nomor_surat", "instansi", "perihal", "tanggal_surat",
+                 "nama_pejabat", "jabatan_pejabat", "nip_pejabat")
+        skor_ai = sum(1 for f in field if getattr(hasil_ai, f))
+        skor_lokal = sum(1 for f in field if getattr(hasil_lokal, f))
+        return skor_ai > skor_lokal
+
+    def _boleh_pakai_ai(self, meta: Optional[dict]) -> bool:
+        """Tanya penjaga privasi sebelum mengirim apa pun ke luar perangkat."""
+        from app.pipeline.vision_ai import boleh_kirim
+
+        if not meta:
+            logger.info("AI Vision dilewati: metadata dokumen tidak diberikan (fail-safe, diproses lokal)")
+            return False
+        boleh, alasan = boleh_kirim(meta)
+        if not boleh:
+            logger.info(f"AI Vision dilewati: {alasan}")
+        return boleh
+
+    @staticmethod
+    def _pesan_aman(exc: Exception) -> str:
+        """Buang kemungkinan kunci/kredensial dari pesan error sebelum dicatat."""
+        pesan = str(exc)
+        pesan = re.sub(r"(key=|api[_-]?key[\"'=:\s]+)[A-Za-z0-9._\-]{8,}", r"\1<disamarkan>", pesan, flags=re.IGNORECASE)
+        pesan = re.sub(r"AQ\.[A-Za-z0-9._\-]{10,}", "<disamarkan>", pesan)
+        return pesan[:200]
 
     def _extract_via_gemini_vision(self, pil_image: Image.Image, context_text: str) -> ExtractedMetadata:
         """Call Gemini Flash Free Tier API with image & strict schema."""
@@ -107,7 +172,7 @@ class Stage3VisionExtractor:
             "}"
         )
 
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={self.api_key}"
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{settings.GEMINI_MODEL}:generateContent"
         payload = {
             "contents": [{
                 "parts": [
@@ -125,7 +190,12 @@ class Stage3VisionExtractor:
             }
         }
 
-        resp = requests.post(url, json=payload, timeout=30)
+        # Kunci dikirim lewat header, BUKAN query string: query string bocor ke log
+        # server dan ke pesan error (pernah terjadi: kunci tercetak di log aplikasi).
+        resp = requests.post(
+            url, json=payload, timeout=30,
+            headers={"x-goog-api-key": self.api_key},
+        )
         resp.raise_for_status()
         data = resp.json()
         raw_content = data["candidates"][0]["content"]["parts"][0]["text"]
