@@ -7,8 +7,8 @@ Pipeline *Intelligent Document Processing* (IDP) + mesin penilaian indikator ber
 dengan arsitektur **Human-in-the-Loop**: AI mengusulkan, manusia memutuskan.
 
 > **Statusnya apa sekarang?** Ekstraksi dokumen (pipeline 5 tahap) sudah jalan dan
-> sudah diuji pada 33 berkas bukti Kota Makassar (dari 41 berkas awal — 8 dokumen luar
-> daerah dipindahkan ke `data/raw/evidence/luar_daerah/`). Mesin penilaian indikator dan
+> sudah diuji pada **28 berkas = 24 dokumen unik** bukti Kota Makassar (dari 41 berkas
+> awal — 8 dokumen luar daerah dan 6 dokumen draf template dipindahkan keluar). Mesin penilaian indikator dan
 > dasbor verifikasi masih dalam pengerjaan. Baca [Status implementasi](#status-implementasi)
 > sebelum mulai bekerja — jangan berasumsi fitur yang tertulis di SRS sudah ada.
 
@@ -34,7 +34,7 @@ menimpa keputusan verifikator — alasan rancangan ini ada di `docs/DATA_MODEL.m
 
 | Komponen | Status | Keterangan |
 |---|---|---|
-| Pipeline IDP 5 tahap (inspector, CV 300 DPI, ekstraksi, QR/TTE, validasi) | ✅ jalan | Teruji pada 33 PDF bukti nyata |
+| Pipeline IDP 5 tahap (inspector, CV 300 DPI, ekstraksi, QR/TTE, validasi) | ✅ jalan | Teruji pada 28 berkas bukti nyata (PDF **dan** PNG), 0 panggilan API |
 | Database & fallback PostgreSQL → SQLite | ✅ jalan | `storage/idp_local.db` untuk pengembangan lokal |
 | Benchmark multi-iterasi + metrik P/R/F1 | ✅ jalan | Lihat catatan di [Masalah yang diketahui](#masalah-yang-diketahui) |
 | Dashboard pemantauan (statistik, tabel hasil ekstraksi, upload) | ✅ jalan | `app/templates/index.html` |

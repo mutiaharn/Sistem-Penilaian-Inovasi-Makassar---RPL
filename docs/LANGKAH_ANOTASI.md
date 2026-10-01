@@ -30,8 +30,8 @@ Sistem sudah mengekstrak metadata dari PDF bukti secara otomatis. Yang belum ada
 Anda satu-satunya anotator. Pekerjaan Anda: **memeriksa dan mengisi 8 kolom** untuk setiap
 dokumen.
 
-**Penting — korpus sebenarnya lebih kecil dari yang terlihat.** Dari 33 berkas, hanya
-**26 dokumen unik**: 7 berkas adalah salinan dokumen yang sama (satu SK discan 4 kali,
+**Penting — korpus sebenarnya lebih kecil dari yang terlihat.** Dari 28 berkas, hanya
+**24 dokumen unik**: 4 berkas adalah salinan dokumen yang sama (satu SK discan 4 kali,
 satu berkas terunduh 2 kali). Salinan sudah ditandai otomatis (field `duplikat_dari`) dan
 **tidak perlu Anda anotasi dua kali** — lembar verifikasi sudah mengeluarkannya.
 
