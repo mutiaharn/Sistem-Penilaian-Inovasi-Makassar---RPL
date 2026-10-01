@@ -2,7 +2,7 @@
 Audit nilai ekstraksi terhadap ISI dokumen (tidak butuh anotasi manusia).
 
 Kenapa alat ini ada: akurasi ekstraksi hanya bisa dihitung pada dokumen yang sudah
-dianotasi (8 dari 33). Untuk 24 dokumen sisanya tidak ada acuan, jadi tidak ada angka
+dianotasi (6 dari 28). Untuk 22 dokumen sisanya tidak ada acuan, jadi tidak ada angka
 akurasi. Namun masih ada pertanyaan yang BISA dijawab tanpa label:
 
     "Nilai yang dikeluarkan mesin itu benar-benar ada di dokumennya, atau dikarang?"
