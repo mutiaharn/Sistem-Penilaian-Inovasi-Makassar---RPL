@@ -20,10 +20,10 @@ export default function Login() {
   };
 
   return (
-    <main className="min-h-screen w-full flex bg-white text-slate-800 font-sans antialiased">
+    <main className="min-h-screen w-full flex bg-[#F8FAFC] lg:bg-white text-slate-800 font-sans p-0 lg:p-3 xl:p-4">
       
-      {/* ================= PANEL KIRI: FORMULIR LOGIN ================= */}
-      <section className="w-full lg:w-1/2 flex flex-col justify-center px-10 sm:px-16 md:px-24 lg:px-20 xl:px-28 py-10">
+      {/* bagian kiri - LOGIN */}
+      <section className="w-full lg:w-1/2 flex flex-col justify-center px-8 sm:px-16 md:px-20 lg:px-14 xl:px-24 py-10 bg-white">
         <div className="w-full max-w-[420px] mx-auto">
           
           {/* Header Judul */}
@@ -45,6 +45,7 @@ export default function Login() {
               </label>
               
               <div className="grid grid-cols-2 gap-2.5">
+
                 {/* Tombol Verifikator BRIDA */}
                 <button
                   type="button"
@@ -171,10 +172,10 @@ export default function Login() {
       </section>
 
 
-{/* ================= PANEL KANAN: FOTO & BRANDING ================= */}
-      <section className="hidden lg:flex lg:w-1/2 relative bg-[#A61F1B] items-center justify-center p-12 xl:p-16 overflow-hidden">
+      {/* bagian kanan - GAMBAR */}
+      <section className="hidden lg:flex lg:w-1/2 relative rounded-xl xl:rounded-2xl overflow-hidden shadow-sm items-center justify-center p-12 xl:p-16">
         
-        {/* Gambar Latar Hasil Ekspor Figma */}
+        {/* Gambar Latar Belakang */}
         <img
           src="/images/bg-kantor.png"
           alt="Latar Belakang BRIDA"
@@ -187,18 +188,18 @@ export default function Login() {
           }}
         />
 
-        {/* Logo BRIDA Pojok Kanan Atas (Lebih Besar & Proporsional) */}
-        <div className="absolute top-10 right-12 z-20 flex items-center">
+        {/* Logo BRIDA Pojok Kanan Atas */}
+        <div className="absolute top-5 right-10 z-10 flex items-center">
           <img
             src="/images/logo-brida-white.png"
             alt="Logo BRIDA Kota Makassar"
-            className="h-34 xl:h-36 w-auto object-contain drop-shadow-md"
+            className="h-38 xl:h-40 w-auto object-contain drop-shadow-sm"
           />
         </div>
 
-        {/* Blok Teks Utama: Berada di Posisi Tengah Layar */}
+        {/* Blok Teks Utama di Tengah Panel */}
         <div className="relative z-10 w-full max-w-xl">
-          <h2 className="font-poppins text-3xl xl:text-4xl font-extrabold text-white leading-[1.2] tracking-tight">
+          <h2 className="font-poppins text-3xl xl:text-4xl font-extrabold text-white leading-[1.5] tracking-tight">
             Sistem Verifikasi &amp; <br />
             Penilaian Berkas Inovasi
           </h2>
